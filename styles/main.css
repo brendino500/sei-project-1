@@ -42,30 +42,37 @@ body {
 
 /* TETRIMINOS SHAPES */
 
-shape i 
-background-color: ##DFC7C1;
-border: #ABABAB;
+.grid. div.iTetromino {
+  background-color: ##DFC7C1;
+  border: 1px #ABABAB;
+} 
 
-shape o
-background-color: #F4DCD6;
-border: #ABABAB;
+.grid div.oTetromino {
+  background-color: #F4DCD6;
+  border: 1px #ABABAB;
+}
 
-shape t
-background-color: #B2D9EA
-border: #ABABAB;
+.grid div.tTetromino {
+  background-color: #B2D9EA;
+  border: 1px #ABABAB;
+}
 
-shape s
-background-color: #619196
-border: #ABABAB;
+.grid div.sTetromino {
+  background-color: #619196;
+  border: 1px #ABABAB;
+}
 
-shape z
-background-color: #FCF0CF
-border: #ABABAB;
+.grid div.zTetromino {
+  background-color: #FCF0CF;
+  border: 1px #ABABAB;
+}
 
-shape j
-background-color: #F1CDB0
-border: #ABABAB;
+.grid div.jTetromino {
+  background-color: #F1CDB0;
+  border: 1px #ABABAB;
+}
 
-shape l
-background-color: #84B4C8
-border: #ABABAB;
+.grid div.lTetromino {
+  background-color: #84B4C8;
+  border: 1px #ABABAB;
+}
