@@ -6,6 +6,7 @@
 #619196
 #FCF0CF
 #F1CDB0
+#ABABAB  <-- border
  */
 
 
@@ -26,8 +27,8 @@ body {
   flex-wrap: wrap;
   height: 100%;
   justify-content: center;
-  height: 400px;
-  width: 350px;
+  height: 300px;
+  width: 300px;
 }
 
 .grid div {
@@ -36,3 +37,35 @@ body {
   height: 9%;
   width: 9%;
 }
+
+
+
+/* TETRIMINOS SHAPES */
+
+shape i 
+background-color: ##DFC7C1;
+border: #ABABAB;
+
+shape o
+background-color: #F4DCD6;
+border: #ABABAB;
+
+shape t
+background-color: #B2D9EA
+border: #ABABAB;
+
+shape s
+background-color: #619196
+border: #ABABAB;
+
+shape z
+background-color: #FCF0CF
+border: #ABABAB;
+
+shape j
+background-color: #F1CDB0
+border: #ABABAB;
+
+shape l
+background-color: #84B4C8
+border: #ABABAB;
