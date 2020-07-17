@@ -22,21 +22,20 @@ function init() {
   let currentLevel = 0
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
-  const tetrominos = [iTetromino, tTetromino, sTetromino, oTetromino, sTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
+  const tetrominos = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
 
 
 
 
   // * TETRIMINOS SHAPE
 
-  const iTetromino 
-  const tTetromino
-  const sTetromino
-  const oTetromino
-  const sTetromino
-  const zTetromino
-  const jTetromino
-  const lTetromino
+  const iTetromino = 0
+  const tTetromino = 0
+  const sTetromino = 0
+  const oTetromino = 0
+  const zTetromino = 0
+  const jTetromino = 0
+  const lTetromino = 0
 
 
   // * FUNCTIONS
@@ -107,19 +106,8 @@ function init() {
     highScore = playerScore
   } else 
 
-
-
-
-}
   
-
-
-
-
-
-
-
-
+}
 
 window.addEventListener('DOMContentLoaded', init)
 
@@ -137,3 +125,4 @@ function countDownFrom(num) {
 }
 
 countDownFrom(10)
+
