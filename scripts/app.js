@@ -23,8 +23,7 @@ function init() {
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   const tetrominos = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
-
-
+  const randomTetromino = 0
 
 
   // * TETRIMINOS SHAPE
@@ -51,7 +50,12 @@ function init() {
 
   createGrid()
 
-  //GENERATE RANDOM TETRIMINOS
+  //GENERATE RANDOM TETROMINOS
+  function getRandomTetromino() {
+    randomTetromino = Math.floor(Math.random() * tetrominos.length)
+    console.log(randomTetromino)
+
+  }
 
 
 
@@ -96,8 +100,55 @@ function init() {
     currentLevel++
   }
 
+
   // POINT SCORING 
-  
+  // !! THIS NEEDS NEATENING UP. LOOK OVER THE CODE AND WORK OUT A MORE SIMPLE VERSION 
+  if (currentLevel <= 1) {
+    if (multipleLines === 1) {
+      playerScore += 100
+    } else if (multipleLines === 2) {
+      playerScore += 200
+    } else if (multipleLines === 3) {
+      playerScore += 300
+    } else 
+      playerScore += 400
+  } else if (currentLevel > 1 || currentLevel <= 3) {
+    if (multipleLines === 1) {
+      playerScore += 200
+    } else if (multipleLines === 2) {
+      playerScore += 800
+    } else if (multipleLines === 3) {
+      playerScore += 1800
+    } else 
+      playerScore += 4000
+  } else if (currentLevel > 3 || currentLevel <= 5) {
+    if (multipleLines === 1) {
+      playerScore += 300
+    } else if (multipleLines === 2) {
+      playerScore += 1200
+    } else if (multipleLines === 3) {
+      playerScore += 2700
+    } else 
+      playerScore += 6000
+  } else if (currentLevel > 5 || currentLevel <= 7) {
+    if (multipleLines === 1) {
+      playerScore += 400
+    } else if (multipleLines === 2) {
+      playerScore += 1600
+    } else if (multipleLines === 3) {
+      playerScore += 3600
+    } else 
+      playerScore += 8000
+  } else {
+    if (multipleLines === 1) {
+      playerScore += 500
+    } else if (multipleLines === 2) {
+      playerScore += 2000
+    } else if (multipleLines === 3) {
+      playerScore += 4500
+    } else 
+      playerScore += 10000
+  }
 
 
 
@@ -106,7 +157,7 @@ function init() {
     highScore = playerScore
   } else 
 
-  
+
 }
 
 window.addEventListener('DOMContentLoaded', init)
