@@ -7,12 +7,15 @@
 #FCF0CF
 #F1CDB0
 #ABABAB  <-- border
+font-family: 'Rubik', sans-serif;
  */
 
 
 
 body {
   background-color: antiquewhite;
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
 }
 
 .grid-wrapper {
