@@ -1,5 +1,4 @@
 function init() {
-
   // * DOM ELEMENTS
 
   const grid = document.querySelector('.grid')
@@ -16,6 +15,30 @@ function init() {
   const numberOfCells = width * height
 
 
+  // * GAME VARIABLES
+
+  let linesCleared = 0
+  let multipleLines = 0   // <-- multiplier for lines cleared
+  let currentLevel = 0
+  let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
+  let playerScore = 0
+  const tetrominos = [iTetromino, tTetromino, sTetromino, oTetromino, sTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
+
+
+
+
+  // * TETRIMINOS SHAPE
+
+  const iTetromino 
+  const tTetromino
+  const sTetromino
+  const oTetromino
+  const sTetromino
+  const zTetromino
+  const jTetromino
+  const lTetromino
+
+
   // * FUNCTIONS
 
   function createGrid() {  // <-- creating cells
@@ -28,6 +51,8 @@ function init() {
   }
 
   createGrid()
+
+  //GENERATE RANDOM TETRIMINOS
 
 
 
@@ -58,21 +83,30 @@ function init() {
   // ?? Level 8+    1 line = 500  2 lines = 2000  3 lines = 4500  4 lines = 10000   50 cleared lines
   // ?? Clear 5 lines to get onto next level
 
-  let linesCleared = 0
-  let currentLevel = 0
 
+  // CHANGING LEVELS
   if (linesCleared <= 10) {
     currentLevel++
-  } else if (linesCleared > 10 || linesCleared <= 20) {
+  } else if (linesCleared <= 20) {
     currentLevel++
-  } else if (linesCleared > 10 || linesCleared <= 20) {
+  } else if (linesCleared <= 30) {
     currentLevel++
-  } else if (linesCleared > 20 || linesCleared <= 30) {
+  } else if (linesCleared <= 40) {
     currentLevel++
-  } else if (linesCleared > 30 || linesCleared <= 40) {
+  } else {
     currentLevel++
-  } else (linesCleared > 40)
-  return currentLevel++
+  }
+
+  // POINT SCORING 
+  
+
+
+
+  // STORING HIGH SCORE
+  if (playerScore > highScore) {
+    highScore = playerScore
+  } else 
+
 
 
 
