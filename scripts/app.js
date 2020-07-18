@@ -129,19 +129,43 @@ function init() {
   // ENTER KEY - 13
   // SPACE KEY - 32
 
+
+
+  // * MANIPULATE THIS FUNCTION SO THAT EACH KEY HAS IT'S OWN FUNCTION
+
+  const x = tetrominoPosition % width
+  const y = Math.floor(tetrominoPosition / width)
+  function moveLeft() {
+    if (x > 0) {
+      tetrominoPosition--
+    }
+  }
+
+  function moveRight() {
+    if (x < width - 1) {
+      tetrominoPosition++
+    }
+  }
+
+  function moveDown() {
+    if (y < width - 1) {
+      tetrominoPosition += width
+    }
+  }
+
   function handleKeysUp(e) {
     cells[tetrominoPosition].classList.remove(currentTetrominoClass)   // <-- removes tetromino from previous position
     const x = tetrominoPosition % width
     const y = Math.floor(tetrominoPosition / width)
     switch (e.keyCode) {
       case 39:
-        if (x < width - 1) {
-          tetrominoPosition++
+        if (x > 0) {
+          tetrominoPosition--
         }
         break
       case 37:
-        if (x > 0) {
-          tetrominoPosition--
+        if (x < width - 1) {
+          tetrominoPosition++
         }
         break
       case 40:
