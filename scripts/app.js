@@ -116,6 +116,15 @@ function init() {
   }
   startGame()
 
+  // *  RANDOMBLY SELECT ONE TETRIMINO
+  // *  MAKE TETRIMINO FALL FROM START POSITION UNTIL LAST ROW  CELL NO. 190-199
+  // *  STARTING SPEED INTERVAL AT 1000  
+  // *
+  // *  ADD 10 POINTS EVERYTIME THE TETRIMINO FALLS INTO NEXT ROW
+  // *  
+  // *  MAKE TETRIMINO IN FIXED POSITION ON LAST ROW
+  // * 
+
 
 
 
@@ -161,7 +170,7 @@ function init() {
     //* FAST DOWN
   }
 
-  
+
 
   function handleKeysUp(e) {
     cells[tetrominoPosition].classList.remove(currentTetrominoClass)   // <-- removes tetromino from previous position
