@@ -27,11 +27,6 @@
 
 
 
-
-
-
-
-
 function init() {
   // * DOM ELEMENTS
 
@@ -66,7 +61,7 @@ function init() {
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   // const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino']     // <-- different tetrominos
-  let tetrominoPosition = 0
+  let tetrominoPosition = 4
   let currentTetrominoClass = getRandomClassTetromino()
   let timerId = null
   let timeRemaining = 10
@@ -93,23 +88,17 @@ function init() {
     const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino'] 
     return tetrominos[Math.floor(Math.random() * tetrominos.length)]
   }
-  currentTetrominoClass = getRandomClassTetromino()
-  console.log(currentTetrominoClass)
+  // currentTetrominoClass = getRandomClassTetromino()
+  // console.log(currentTetrominoClass)
 
 
 
   // GAME TIMINGS    *********************************************************
   // CURRENTLY TETROMINOS APPEAR AT RANDOM.  MAKE THEM FALL ONE CELL AT A TIME
   function startGame() {
-    const timerId = setInterval(() => {
+    setInterval(() => {
       cells[tetrominoPosition].classList.remove(currentTetrominoClass)
-      if (totalCount > 9) {
-        clearInterval(timerId)
-        return
-      }
-      cells[tetrominoPosition].classList.remove(currentTetrominoClass)
-      tetrominoPosition = Math.floor(Math.random() * numberOfCells)
-      totalCount++
+      tetrominoPosition += 10
       currentTetrominoClass = getRandomClassTetromino()
       cells[tetrominoPosition].classList.add(currentTetrominoClass)
     }, 1000)
@@ -125,7 +114,12 @@ function init() {
   // *  MAKE TETRIMINO IN FIXED POSITION ON LAST ROW
   // * 
 
-
+  // function startGameV2() {
+  //   const timerId = setInterval(() => {
+  //     tetrominoPosition = 4
+  //     currentTetrominoClass = getRandomClassTetromino()
+  //   }, 1000)
+  // }
 
 
 
@@ -142,33 +136,33 @@ function init() {
 
   // * MANIPULATE THIS FUNCTION SO THAT EACH KEY HAS IT'S OWN FUNCTION
 
-  const x = tetrominoPosition % width
-  const y = Math.floor(tetrominoPosition / width)
-  function moveLeft() {
-    if (x > 0) {
-      tetrominoPosition--
-    }
-  }
+  // const x = tetrominoPosition % width
+  // const y = Math.floor(tetrominoPosition / width)
+  // function moveLeft() {
+  //   if (x > 0) {
+  //     tetrominoPosition--
+  //   }
+  // }
 
-  function moveRight() {
-    if (x < width - 1) {
-      tetrominoPosition++
-    }
-  }
+  // function moveRight() {
+  //   if (x < width - 1) {
+  //     tetrominoPosition++
+  //   }
+  // }
 
-  function moveDown() {
-    if (y < width - 1) {
-      tetrominoPosition += width
-    }
-  }
+  // function moveDown() {
+  //   if (y < width - 1) {
+  //     tetrominoPosition += width
+  //   }
+  // }
 
-  function enterBtn() {
-    //* STARTS GAME
-  }
+  // function enterBtn() {
+  //   //* STARTS GAME
+  // }
 
-  function spacebar() {
-    //* FAST DOWN
-  }
+  // function spacebar() {
+  //   //* FAST DOWN
+  // }
 
 
 
@@ -177,12 +171,12 @@ function init() {
     const x = tetrominoPosition % width
     const y = Math.floor(tetrominoPosition / width)
     switch (e.keyCode) {
-      case 39:
+      case 37:
         if (x > 0) {
           tetrominoPosition--
         }
         break
-      case 37:
+      case 39:
         if (x < width - 1) {
           tetrominoPosition++
         }
@@ -202,18 +196,6 @@ function init() {
 
   // * EVENT LISTENER
   document.addEventListener('keyup', handleKeysUp)
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
