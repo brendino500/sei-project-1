@@ -80,3 +80,8 @@ body {
   background-color: #84B4C8;
   border: 1px #ABABAB;
 }
+
+.grid div.fixedTetromino {
+  background-color: black;
+  border: 1px black;
+}

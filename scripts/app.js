@@ -44,7 +44,6 @@ function init() {
   const height = 20
   const numberOfCells = width * height
 
-
   // * TETRIMINOS SHAPE
 
   const iTetromino = [4, 14, 24, 34]
@@ -68,9 +67,9 @@ function init() {
     startPosition: [4, 14, 24, 25]
   }
 
-  function showTetromino() {
-    cells[tetrominoPosition].classList.add(currentTetrominoClass)
-  }
+  // function showTetromino() {
+  //   cells[tetrominoPosition].classList.add(currentTetrominoClass)
+  // }
 
 
 
@@ -78,7 +77,7 @@ function init() {
 
   let linesCleared = 0
   let multipleLines = 0   // <-- multiplier for lines cleared
-  let currentLevel = 7
+  let currentLevel = 0
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   // const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino']     // <-- different tetrominos
@@ -101,7 +100,6 @@ function init() {
   }
 
   createGrid()
-  showTetromino()
 
   //GENERATE RANDOM TETROMINOS    *********************************************************
   function getRandomClassTetromino() {
@@ -115,19 +113,21 @@ function init() {
 
   // GAME TIMINGS    *********************************************************
   // CURRENTLY TETROMINOS APPEAR AT RANDOM.  MAKE THEM FALL ONE CELL AT A TIME
-  // function startGame() {
-  //   setInterval(() => {
-  //     cells[tetrominoPosition].classList.remove(currentTetrominoClass)
-  //     tetrominoPosition += 10
-  //     cells[tetrominoPosition].classList.add(currentTetrominoClass)
-  //     if (tetrominoPosition >= 190 && tetrominoPosition < 200) {
-  //       // FIX IT IN PLACE
-  //       cells.classList.add(currentTetrominoClass)    //<--- THIS IS NOT RIGHT
-  //     }
-  //   }, 1000)
-  // }
-  // startGame()
-  // console.log(playerScore)
+  function startGame() {
+    const timerId = setInterval(() => {
+      cells[tetrominoPosition].classList.remove(currentTetrominoClass)
+      tetrominoPosition += 10
+      cells[tetrominoPosition].classList.add(currentTetrominoClass)
+      if (tetrominoPosition >= numberOfCells || tetrominoPosition > (numberOfCells - width - 1)) {
+        clearInterval(timerId)
+        cells[tetrominoPosition].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
+        tetrominoPosition = 4 
+        startGame()
+      }
+    }, 300)
+  }
+  startGame()
+  console.log(playerScore)
 
   // *  RANDOMBLY SELECT ONE TETRIMINO
   // *  MAKE TETRIMINO FALL FROM START POSITION UNTIL LAST ROW  CELL NO. 190-199
