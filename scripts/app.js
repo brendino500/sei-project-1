@@ -153,6 +153,16 @@ function init() {
     }
   }
 
+  function enterBtn() {
+    //* STARTS GAME
+  }
+
+  function spacebar() {
+    //* FAST DOWN
+  }
+
+  
+
   function handleKeysUp(e) {
     cells[tetrominoPosition].classList.remove(currentTetrominoClass)   // <-- removes tetromino from previous position
     const x = tetrominoPosition % width
