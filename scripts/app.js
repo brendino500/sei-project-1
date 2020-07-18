@@ -57,16 +57,14 @@ function init() {
 
   let linesCleared = 0
   let multipleLines = 0   // <-- multiplier for lines cleared
-  let currentLevel = 0
+  let currentLevel = 7
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   // const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino']     // <-- different tetrominos
   let tetrominoPosition = 4
   let currentTetrominoClass = getRandomClassTetromino()
-  let timerId = null
-  let timeRemaining = 10
-  let totalCount = 0
   const startingPosition = 5    // <-- Starting position for the top of the grid. Needs to descend. 
+  let dropSpeed = 1000
 
 
 
@@ -101,9 +99,14 @@ function init() {
       tetrominoPosition += 10
       currentTetrominoClass = getRandomClassTetromino()
       cells[tetrominoPosition].classList.add(currentTetrominoClass)
-    }, 1000)
+      if (tetrominoPosition >= 190 && tetrominoPosition < 200) {
+        // FIX IT IN PLACE
+        cells.classList.add(currentTetrominoClass)    //<--- THIS IS NOT RIGHT
+      }
+    }, 10000)
   }
   startGame()
+  console.log(playerScore)
 
   // *  RANDOMBLY SELECT ONE TETRIMINO
   // *  MAKE TETRIMINO FALL FROM START POSITION UNTIL LAST ROW  CELL NO. 190-199
@@ -114,14 +117,6 @@ function init() {
   // *  MAKE TETRIMINO IN FIXED POSITION ON LAST ROW
   // * 
 
-  // function startGameV2() {
-  //   const timerId = setInterval(() => {
-  //     tetrominoPosition = 4
-  //     currentTetrominoClass = getRandomClassTetromino()
-  //   }, 1000)
-  // }
-
-
 
 
   // LINK UP ARROW KEYS FOR FUNCTIONALITY   ********************************************************* 
@@ -131,7 +126,6 @@ function init() {
   // ARROWN LEFT - 37
   // ENTER KEY - 13
   // SPACE KEY - 32
-
 
 
   // * MANIPULATE THIS FUNCTION SO THAT EACH KEY HAS IT'S OWN FUNCTION
@@ -224,6 +218,26 @@ function init() {
   }
 
 
+  // CHANGE OF SPEED FOR EACH LEVEL **************************************************************
+  // MAKE INTO FUNCTION 
+  if (currentLevel <= 1) {
+    dropSpeed = 1000
+  } else if (currentLevel === 2) {
+    dropSpeed = 900
+  } else if (currentLevel === 3) {
+    dropSpeed = 800
+  } else if (currentLevel === 4) {
+    dropSpeed = 700
+  } else if (currentLevel === 5) {
+    dropSpeed = 600
+  } else if (currentLevel === 6) {
+    dropSpeed = 500
+  } else if (currentLevel === 7) {
+    dropSpeed = 400
+  } else {
+    dropSpeed = 300
+  }
+  
   // ROLLING NUMBER OF LINES CLEARED   ***************************************************************
 
 
