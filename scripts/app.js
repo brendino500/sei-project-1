@@ -34,6 +34,10 @@ function init() {
   // const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino']     // <-- different tetrominos
   let tetrominoPosition = 0
   let currentTetrominoClass = getRandomClassTetromino()
+  let timerId = null
+  let timeRemaining = 10
+  let totalCount = 0
+  const startingPosition = 5    // <-- Starting position for the top of the grid. Needs to descend. 
 
 
 
@@ -54,16 +58,39 @@ function init() {
   function getRandomClassTetromino() {
     const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino'] 
     return tetrominos[Math.floor(Math.random() * tetrominos.length)]
-
   }
   currentTetrominoClass = getRandomClassTetromino()
   console.log(currentTetrominoClass)
 
 
 
+  // GAME TIMINGS    *********************************************************
+  // CURRENTLY TETROMINOS APPEAR AT RANDOM.  MAKE THEM FALL ONE CELL AT A TIME
+  function startGame() {
+    const timerId = setInterval(() => {
+      cells[tetrominoPosition].classList.remove(currentTetrominoClass)
+      if (totalCount > 9) {
+        clearInterval(timerId)
+        return
+      }
+      cells[tetrominoPosition].classList.remove(currentTetrominoClass)
+      tetrominoPosition = Math.floor(Math.random() * numberOfCells)
+      totalCount++
+      currentTetrominoClass = getRandomClassTetromino()
+      cells[tetrominoPosition].classList.add(currentTetrominoClass)
+    }, 1000)
+  }
+  startGame()
+
+
+
+
+
+
   // LINK UP ARROW KEYS FOR FUNCTIONALITY   ********************************************************* 
   // For now link up UP, DOWN, LEFT, RIGHT, SPACE (for fast down), ENTER (to play)
 
+    
 
   // * EVENT LISTENER
 
@@ -174,6 +201,7 @@ function init() {
 
 }
 
+
 window.addEventListener('DOMContentLoaded', init)
 
 
@@ -190,4 +218,3 @@ window.addEventListener('DOMContentLoaded', init)
 // }
 
 // countDownFrom(10)
-
