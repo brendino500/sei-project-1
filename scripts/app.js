@@ -15,7 +15,7 @@
 // TODO MAKING THE TETOMINOS FALL DOW IN A STRAIGHT LINE WITH TIMINGS
 // TODO   CAN ADD THE 10 POINTS PER LINE ONCE YOU FIGURE THIS OUT
 // TODO 
-// TODO DIFFERENT FUNCTIONS FOR DIFFERENT LEVELS?
+// TODO DIFFERENT FUNCTIONS FOR DIFFERENT LEVELS?   RECURSION?
 // TODO   EASIER CONTROL/CODE FOR POINTSAND SPEED OF DESCENDING TETROMINOS
 // TODO 
 // TODO FIGURE OUT 
@@ -123,18 +123,42 @@ function init() {
 
   // LINK UP ARROW KEYS FOR FUNCTIONALITY   ********************************************************* 
   // For now link up UP, DOWN, LEFT, RIGHT, SPACE (for fast down), ENTER (to play)
-  // ARROW UP - 38
   // ARROW DOWN - 40
   // ARROW RIGHT - 39
   // ARROWN LEFT - 37
   // ENTER KEY - 13
   // SPACE KEY - 32
 
+  function handleKeysUp(e) {
+    cells[tetrominoPosition].classList.remove(currentTetrominoClass)   // <-- removes tetromino from previous position
+    const x = tetrominoPosition % width
+    const y = Math.floor(tetrominoPosition / width)
+    switch (e.keyCode) {
+      case 39:
+        if (x < width - 1) {
+          tetrominoPosition++
+        }
+        break
+      case 37:
+        if (x > 0) {
+          tetrominoPosition--
+        }
+        break
+      case 40:
+        if (y < width - 1) {
+          tetrominoPosition += width
+        }
+        break
+      default:
+        break  
+    }
+    cells[tetrominoPosition].classList.add(currentTetrominoClass)  // <-- adds tetromino to new position
+  }
 
     
 
   // * EVENT LISTENER
-
+  document.addEventListener('keyup', handleKeysUp)
 
 
 

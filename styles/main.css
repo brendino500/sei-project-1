@@ -19,7 +19,7 @@ body {
 }
 
 .grid-wrapper {
-  height: 90vh;
+  height: 50vh;
   display: flex;
   justify-content: center;
 }
