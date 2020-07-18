@@ -5,7 +5,6 @@ function init() {
   const cells = []     // <-- empty array for cells
 
 
-
   // * GRID VARIABLES
 
   // ? 10 x 20  dimentions of grid
@@ -13,17 +12,6 @@ function init() {
   const width = 10
   const height = 20
   const numberOfCells = width * height
-
-
-  // * GAME VARIABLES
-
-  let linesCleared = 0
-  let multipleLines = 0   // <-- multiplier for lines cleared
-  let currentLevel = 0
-  let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
-  let playerScore = 0
-  const tetrominos = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
-  const randomTetromino = 0
 
 
   // * TETRIMINOS SHAPE
@@ -35,6 +23,18 @@ function init() {
   const zTetromino = 0
   const jTetromino = 0
   const lTetromino = 0
+
+  // * GAME VARIABLES
+
+  let linesCleared = 0
+  let multipleLines = 0   // <-- multiplier for lines cleared
+  let currentLevel = 0
+  let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
+  let playerScore = 0
+  // const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino']     // <-- different tetrominos
+  let tetrominoPosition = 0
+  let currentTetrominoClass = getRandomClassTetromino()
+
 
 
   // * FUNCTIONS
@@ -50,13 +50,19 @@ function init() {
 
   createGrid()
 
-  //GENERATE RANDOM TETROMINOS
-  function getRandomTetromino() {
-    randomTetromino = Math.floor(Math.random() * tetrominos.length)
-    console.log(randomTetromino)
+  //GENERATE RANDOM TETROMINOS    *********************************************************
+  function getRandomClassTetromino() {
+    const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino'] 
+    return tetrominos[Math.floor(Math.random() * tetrominos.length)]
 
   }
+  currentTetrominoClass = getRandomClassTetromino()
+  console.log(currentTetrominoClass)
 
+
+
+  // LINK UP ARROW KEYS FOR FUNCTIONALITY   ********************************************************* 
+  // For now link up UP, DOWN, LEFT, RIGHT, SPACE (for fast down), ENTER (to play)
 
 
   // * EVENT LISTENER
@@ -87,7 +93,7 @@ function init() {
   // ?? Clear 5 lines to get onto next level
 
 
-  // CHANGING LEVELS
+  // CHANGING LEVELS   ***************************************************************
   if (linesCleared <= 10) {
     currentLevel++
   } else if (linesCleared <= 20) {
@@ -101,7 +107,10 @@ function init() {
   }
 
 
-  // POINT SCORING 
+  // ROLLING NUMBER OF LINES CLEARED   ***************************************************************
+
+
+  // POINT SCORING    ****************************************
   // !! THIS NEEDS NEATENING UP. LOOK OVER THE CODE AND WORK OUT A MORE SIMPLE VERSION 
   if (currentLevel <= 1) {
     if (multipleLines === 1) {
@@ -110,8 +119,9 @@ function init() {
       playerScore += 200
     } else if (multipleLines === 3) {
       playerScore += 300
-    } else 
+    } else {
       playerScore += 400
+    }
   } else if (currentLevel > 1 || currentLevel <= 3) {
     if (multipleLines === 1) {
       playerScore += 200
@@ -119,8 +129,9 @@ function init() {
       playerScore += 800
     } else if (multipleLines === 3) {
       playerScore += 1800
-    } else 
+    } else {
       playerScore += 4000
+    }
   } else if (currentLevel > 3 || currentLevel <= 5) {
     if (multipleLines === 1) {
       playerScore += 300
@@ -128,8 +139,9 @@ function init() {
       playerScore += 1200
     } else if (multipleLines === 3) {
       playerScore += 2700
-    } else 
+    } else {
       playerScore += 6000
+    }
   } else if (currentLevel > 5 || currentLevel <= 7) {
     if (multipleLines === 1) {
       playerScore += 400
@@ -137,8 +149,9 @@ function init() {
       playerScore += 1600
     } else if (multipleLines === 3) {
       playerScore += 3600
-    } else 
+    } else {
       playerScore += 8000
+    }
   } else {
     if (multipleLines === 1) {
       playerScore += 500
@@ -146,16 +159,17 @@ function init() {
       playerScore += 2000
     } else if (multipleLines === 3) {
       playerScore += 4500
-    } else 
+    } else {
       playerScore += 10000
+    }
   }
 
 
 
-  // STORING HIGH SCORE
+  // STORING HIGH SCORE   ****************************************
   if (playerScore > highScore) {
     highScore = playerScore
-  } else 
+  } 
 
 
 }
@@ -165,15 +179,15 @@ window.addEventListener('DOMContentLoaded', init)
 
 
 
-// !! RECURSION 
+// // !! RECURSION 
 
-function countDownFrom(num) {
-  console.log(num)
-  if (num === 0) {
-    return 
-  }
-  countDownFrom(num - 1)
-}
+// function countDownFrom(num) {
+//   console.log(num)
+//   if (num === 0) {
+//     return 
+//   }
+//   countDownFrom(num - 1)
+// }
 
-countDownFrom(10)
+// countDownFrom(10)
 

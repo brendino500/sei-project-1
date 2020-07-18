@@ -42,7 +42,9 @@ body {
 }
 
 
-/* TETRIMINOS SHAPES */
+
+
+/* TETRIMINOS SHAPES  ******************************************/
 
 .grid div.iTetromino {
   background-color: ##DFC7C1;
