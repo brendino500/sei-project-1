@@ -169,18 +169,33 @@ function init() {
 
   // GAME TIMINGS    *********************************************************
   // CURRENTLY TETROMINOS APPEAR AT RANDOM.  MAKE THEM FALL ONE CELL AT A TIME
+  // function startGame() {
+  //   const timerId = setInterval(() => {
+
+  //     cells[tetrominoPosition].classList.remove(currentTetrominoClass)
+  //     tetrominoPosition += 10
+  //     cells[tetrominoPosition].classList.add(currentTetrominoClass)
+  //     if (tetrominoPosition >= numberOfCells || tetrominoPosition > (numberOfCells - width - 1)) {
+  //       clearInterval(timerId)
+  //       cells[tetrominoPosition].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
+  //       tetrominoPosition = 4 
+  //       startGame()
+  //       currentTetrominoClass = getRandomClassTetromino()
+  //     }
+  //   }, 300)
+  // }
+
   function startGame() {
     const timerId = setInterval(() => {
 
-      cells[tetrominoPosition].classList.remove(currentTetrominoClass)
-      tetrominoPosition += 10
-      cells[tetrominoPosition].classList.add(currentTetrominoClass)
-      if (tetrominoPosition >= numberOfCells || tetrominoPosition > (numberOfCells - width - 1)) {
+      cells[currentTetromino].classList.remove(currentTetrominoClass)
+      currentTetrominoPosition += 10
+      cells[currentTetromino].classList.add(currentTetrominoClass)
+      if (currentTetromino >= numberOfCells || currentTetromino > (numberOfCells - width - 1)) {
         clearInterval(timerId)
-        cells[tetrominoPosition].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
-        tetrominoPosition = 4 
+        cells[currentTetromino].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
         startGame()
-        currentTetrominoClass = getRandomClassTetromino()
+        currentTetromino = getRandomTetromino()
       }
     }, 300)
   }
