@@ -46,7 +46,10 @@ function init() {
 
   // * TETRIMINOS SHAPE
 
-  const iTetromino = [4, 14, 24, 34]
+  const iTetromino = [
+    [4, 14, 24, 34],
+    [4, 5, 6, 7],
+  ]
 
   const tTetromino = {
     startPosition: [4, 13, 14, 15]
@@ -70,6 +73,7 @@ function init() {
   // function showTetromino() {
   //   cells[tetrominoPosition].classList.add(currentTetrominoClass)
   // }
+  // showTetromino()
 
 
 
@@ -123,6 +127,7 @@ function init() {
         cells[tetrominoPosition].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
         tetrominoPosition = 4 
         startGame()
+        currentTetrominoClass = getRandomClassTetromino()
       }
     }, 300)
   }
