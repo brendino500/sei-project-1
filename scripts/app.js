@@ -87,6 +87,9 @@ function init() {
     [13, 14, 15, 23]
   ]
 
+
+
+
   // function showTetromino() {
   //   cells[tetrominoPosition].classList.add(currentTetrominoClass)
   // }
@@ -101,7 +104,7 @@ function init() {
   let currentLevel = 0
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
-  // const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino']     // <-- different tetrominos
+  // const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
   let tetrominoPosition = 4
   let currentTetrominoClass = getRandomClassTetromino()
   // const startingPosition = 5    // <-- Starting position for the top of the grid. Needs to descend. 
@@ -122,6 +125,18 @@ function init() {
 
   createGrid()
 
+
+  // SHOW TETROMINO   ********************************************
+  function displayTetromino() {
+    const newTetromino = getRandomClassTetromino()
+    tetrominosArray[0][0].forEach(value => {
+      cells[value].classList.add(newTetromino)
+    })
+  }
+      
+  displayTetromino()
+
+
   //GENERATE RANDOM TETROMINOS    *********************************************************
   function getRandomClassTetromino() {
     const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino'] 
@@ -136,7 +151,7 @@ function init() {
   // CURRENTLY TETROMINOS APPEAR AT RANDOM.  MAKE THEM FALL ONE CELL AT A TIME
   // function startGame() {
   //   const timerId = setInterval(() => {
-    
+
   //     cells[tetrominoPosition].classList.remove(currentTetrominoClass)
   //     tetrominoPosition += 10
   //     cells[tetrominoPosition].classList.add(currentTetrominoClass)
