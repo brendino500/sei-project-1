@@ -88,15 +88,6 @@ function init() {
   ]
 
 
-
-
-  // function showTetromino() {
-  //   cells[tetrominoPosition].classList.add(currentTetrominoClass)
-  // }
-  // showTetromino()
-
-
-
   // * GAME VARIABLES
 
   let linesCleared = 0
@@ -104,15 +95,36 @@ function init() {
   let currentLevel = 0
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
-  // const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
+  const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
   let tetrominoPosition = 4
   let currentTetrominoClass = getRandomClassTetromino()
   // const startingPosition = 5    // <-- Starting position for the top of the grid. Needs to descend. 
   let dropSpeed = 1000
+  let currentTetromino = getRandomTetromino()
 
 
 
   // * FUNCTIONS
+  // * FUNCTION NAMES SO FAR AND DESCRIPTION OF WHAT THEY DO
+
+  // createGrid() - Creates tetris grid
+  // displayTetromino() - Checks if tetromino arrays are working
+  // getRandomTetromino() - gets random tetromino
+  // getRandomClassTetromino() - gets random tetromino colour
+  // startGame() - starts the game
+  // moveLeft() - 
+  // moveRight() - 
+  // moveDown() - slow down
+  // moveUp() - rotate tetromino clockwise 90 deg
+  // spacebar() - fast down 
+  // enterBtn() - starts game from keyboard - player input 
+  // handleKeyUp() - specifies player keyboard events
+  // updateHighScore() - updates high score when PLAYER LOSES
+  // changeLevel() - checks if level needs to change
+  // changeSpeed() - checks if speed needs to increase
+
+
+
 
   function createGrid() {  // <-- creating cells
     for (let i = 0; i < numberOfCells; i++) {
@@ -127,14 +139,22 @@ function init() {
 
 
   // SHOW TETROMINO   ********************************************
-  function displayTetromino() {
-    const newTetromino = getRandomClassTetromino()
-    tetrominosArray[0][0].forEach(value => {
-      cells[value].classList.add(newTetromino)
-    })
-  }
+  // function displayTetromino() {
+  //   const newTetromino = getRandomClassTetromino()
+  //   tetrominosArray.forEach(value => {
+  //     cells[value].classList.add(newTetromino)
+  //   })
+  // }
       
-  displayTetromino()
+  // displayTetromino()
+
+  // GENERATE RANDOM TETRIMINO ***************************************************
+  function getRandomTetromino() {
+    tetrominosArray[Math.floor(Math.random() * tetrominosArray.length)]
+  }
+
+  getRandomTetromino()
+  console.log(currentTetromino)
 
 
   //GENERATE RANDOM TETROMINOS    *********************************************************
@@ -264,37 +284,41 @@ function init() {
 
 
   // CHANGING LEVELS   ***************************************************************
-  if (linesCleared <= 10) {
-    currentLevel++
-  } else if (linesCleared <= 20) {
-    currentLevel++
-  } else if (linesCleared <= 30) {
-    currentLevel++
-  } else if (linesCleared <= 40) {
-    currentLevel++
-  } else {
-    currentLevel++
+  function changeLevel() {
+    if (linesCleared <= 10) {
+      currentLevel++
+    } else if (linesCleared <= 20) {
+      currentLevel++
+    } else if (linesCleared <= 30) {
+      currentLevel++
+    } else if (linesCleared <= 40) {
+      currentLevel++
+    } else {
+      currentLevel++
+    }
   }
 
 
   // CHANGE OF SPEED FOR EACH LEVEL **************************************************************
   // MAKE INTO FUNCTION 
-  if (currentLevel <= 1) {
-    dropSpeed = 1000
-  } else if (currentLevel === 2) {
-    dropSpeed = 900
-  } else if (currentLevel === 3) {
-    dropSpeed = 800
-  } else if (currentLevel === 4) {
-    dropSpeed = 700
-  } else if (currentLevel === 5) {
-    dropSpeed = 600
-  } else if (currentLevel === 6) {
-    dropSpeed = 500
-  } else if (currentLevel === 7) {
-    dropSpeed = 400
-  } else {
-    dropSpeed = 300
+  function changeSpeed() {
+    if (currentLevel <= 1) {
+      dropSpeed = 1000
+    } else if (currentLevel === 2) {
+      dropSpeed = 900
+    } else if (currentLevel === 3) {
+      dropSpeed = 800
+    } else if (currentLevel === 4) {
+      dropSpeed = 700
+    } else if (currentLevel === 5) {
+      dropSpeed = 600
+    } else if (currentLevel === 6) {
+      dropSpeed = 500
+    } else if (currentLevel === 7) {
+      dropSpeed = 400
+    } else {
+      dropSpeed = 300
+    }
   }
 
 
@@ -358,10 +382,11 @@ function init() {
 
 
   // STORING HIGH SCORE   ****************************************
-  if (playerScore > highScore) {
-    highScore = playerScore
-  } 
-
+  function updateHighScore() {
+    if (playerScore > highScore) {
+      highScore = playerScore
+    } 
+  }
 
 }
 
