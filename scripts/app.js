@@ -20,11 +20,11 @@
 // TODO   CAN ADD THE 10 POINTS PER LINE ONCE YOU FIGURE THIS OUT
 // TODO 
 // TODO DIFFERENT FUNCTIONS FOR DIFFERENT LEVELS?   RECURSION?
-// TODO   EASIER CONTROL/CODE FOR POINTSAND SPEED OF DESCENDING TETROMINOS
+// TODO   EASIER CONTROL/CODE FOR POINTS AND SPEED OF DESCENDING TETROMINOS
 // TODO 
 // TODO FIGURE OUT 
-// TODO   HOW TO STOP TETROMINO FILLING IN A CLASS
-// TODO   STOP ROTATION AT BORDER
+// TODO   HOW TO STOP TETROMINO FILLING IN A CLASS     .CONTAINS()
+// TODO   STOP ROTATION AT BORDER    
 // TODO 
 // TODO 
 // TODO *****************************************************************************************
@@ -169,6 +169,7 @@ function init() {
   // * THIS FUNCTION DEFINITELY WORKS
   function displayTetromino() {
     currentTetromino.deg0.forEach(value => {
+      console.log(value + currentPosition)
       cells[value + currentPosition].classList.add(currentTetromino.name)
     })
   }
@@ -182,26 +183,40 @@ function init() {
   getRandomTetromino()
   displayTetromino()
 
+  function checkBottomRow() {
+    let isBottomRow = false
+    currentTetromino.deg0.forEach(value => {
+      if (value + currentPosition > cells.length - 1) {
+        isBottomRow = true
+      }
+    })
+    return isBottomRow
+  }
 
-  const timerId = setInterval(descendTetromino, 1000)
+  let timerId = setInterval(descendTetromino, 1000)
 
   // !! NOW THAT TETROMINO IS FALLING IT NEEDS TO KNOW WHEN TO STOP.
   // ! CHANGE SO THAT IT CHECKS IF THE CELL BELOW IS DIV CLASS 'BOTTOM-ROW'. IF BOTTOM ROW, FIX TETROMINO IN PLACE
   function descendTetromino() {
-    removeTetromino()
-    currentPosition += width
-    displayTetromino()
-    if (currentPosition >= numberOfCells || currentPosition > (numberOfCells - width - 1)) {     
+    if (checkBottomRow()) {
+      currentTetromino.deg0.forEach(value => {
+        cells[value + currentPosition].classList.add('fixedTetromino')
+      })
       clearInterval(timerId)                      
-      cells[currentPosition].classList.add('fixedTetromino')
       currentPosition = 0
       getRandomTetromino()
+      displayTetromino()
       descendTetromino()
+    } else {
+      removeTetromino()
+      currentPosition += width
+      playerScore += 10
+      console.log(playerScore)
+      displayTetromino()
     }
   }
 
   descendTetromino()
-  console.log(playerScore)
 
 
 
@@ -345,58 +360,59 @@ function init() {
 
   // POINT SCORING    **********************************************************************************************************************************************
   // !! THIS NEEDS NEATENING UP. LOOK OVER THE CODE AND WORK OUT A MORE SIMPLE VERSION 
-  if (currentLevel <= 1) {
-    if (multipleLines === 1) {
-      playerScore += 100
-    } else if (multipleLines === 2) {
-      playerScore += 200
-    } else if (multipleLines === 3) {
-      playerScore += 300
+  function rowPoints() {
+    if (currentLevel <= 1) {
+      if (multipleLines === 1) {
+        playerScore += 100
+      } else if (multipleLines === 2) {
+        playerScore += 200
+      } else if (multipleLines === 3) {
+        playerScore += 300
+      } else {
+        playerScore += 400
+      }
+    } else if (currentLevel > 1 || currentLevel <= 3) {
+      if (multipleLines === 1) {
+        playerScore += 200
+      } else if (multipleLines === 2) {
+        playerScore += 800
+      } else if (multipleLines === 3) {
+        playerScore += 1800
+      } else {
+        playerScore += 4000
+      }
+    } else if (currentLevel > 3 || currentLevel <= 5) {
+      if (multipleLines === 1) {
+        playerScore += 300
+      } else if (multipleLines === 2) {
+        playerScore += 1200
+      } else if (multipleLines === 3) {
+        playerScore += 2700
+      } else {
+        playerScore += 6000
+      }
+    } else if (currentLevel > 5 || currentLevel <= 7) {
+      if (multipleLines === 1) {
+        playerScore += 400
+      } else if (multipleLines === 2) {
+        playerScore += 1600
+      } else if (multipleLines === 3) {
+        playerScore += 3600
+      } else {
+        playerScore += 8000
+      }
     } else {
-      playerScore += 400
-    }
-  } else if (currentLevel > 1 || currentLevel <= 3) {
-    if (multipleLines === 1) {
-      playerScore += 200
-    } else if (multipleLines === 2) {
-      playerScore += 800
-    } else if (multipleLines === 3) {
-      playerScore += 1800
-    } else {
-      playerScore += 4000
-    }
-  } else if (currentLevel > 3 || currentLevel <= 5) {
-    if (multipleLines === 1) {
-      playerScore += 300
-    } else if (multipleLines === 2) {
-      playerScore += 1200
-    } else if (multipleLines === 3) {
-      playerScore += 2700
-    } else {
-      playerScore += 6000
-    }
-  } else if (currentLevel > 5 || currentLevel <= 7) {
-    if (multipleLines === 1) {
-      playerScore += 400
-    } else if (multipleLines === 2) {
-      playerScore += 1600
-    } else if (multipleLines === 3) {
-      playerScore += 3600
-    } else {
-      playerScore += 8000
-    }
-  } else {
-    if (multipleLines === 1) {
-      playerScore += 500
-    } else if (multipleLines === 2) {
-      playerScore += 2000
-    } else if (multipleLines === 3) {
-      playerScore += 4500
-    } else {
-      playerScore += 10000
+      if (multipleLines === 1) {
+        playerScore += 500
+      } else if (multipleLines === 2) {
+        playerScore += 2000
+      } else if (multipleLines === 3) {
+        playerScore += 4500
+      } else {
+        playerScore += 10000
+      }
     }
   }
-
 
 
   // STORING HIGH SCORE   **********************************************************************************************************************************************
