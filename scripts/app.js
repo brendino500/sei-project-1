@@ -186,18 +186,20 @@ function init() {
   function startGame() {
     displayTetromino()
     const timerId = setInterval(() => {
-      cells[currentTetromino].classList.remove(currentTetromino.name)
+      cells[startingPosition].classList.remove(currentTetromino.name)
       startingPosition += 10
-      cells[currentTetromino].classList.add(currentTetromino.name)
+      playerScore += startingPosition
+      cells[startingPosition].classList.add(currentTetromino.name)
       if (currentTetromino >= numberOfCells || currentTetromino > (numberOfCells - width - 1)) {
         clearInterval(timerId)
-        cells[currentTetromino].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
+        cells[startingPosition].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
         startGame()
         currentTetromino = getRandomTetromino()
       }
-    }, 300)
+    }, 1000)
   }
   startGame()
+  console.log(playerScore)
 
 
   // *  RANDOMBLY SELECT ONE TETRIMINO
@@ -253,29 +255,29 @@ function init() {
 
   // KEYS E FUNCTION ****************************************************************************************************************************************
   function handleKeysUp(e) {
-    cells[tetrominoPosition].classList.remove(currentTetrominoClass)   // <-- removes tetromino from previous position
-    const x = tetrominoPosition % width
-    const y = Math.floor(tetrominoPosition / width)
+    cells[startingPosition].classList.remove(currentTetromino.name)   // <-- removes tetromino from previous position
+    const x = startingPosition % width
+    const y = Math.floor(startingPosition / width)
     switch (e.keyCode) {
       case 37:
         if (x > 0) {
-          tetrominoPosition--
+          startingPosition--
         }
         break
       case 39:
         if (x < width - 1) {
-          tetrominoPosition++
+          startingPosition++
         }
         break
       case 40:
         if (y < width - 1) {
-          tetrominoPosition += width
+          startingPosition += width
         }
         break
       default:
         break  
     }
-    cells[tetrominoPosition].classList.add(currentTetrominoClass)  // <-- adds tetromino to new position
+    cells[startingPosition].classList.add(currentTetromino.name)  // <-- adds tetromino to new position
   }
 
     
