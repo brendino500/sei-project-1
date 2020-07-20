@@ -1,4 +1,4 @@
-// TODO *****************************************************
+// TODO ***************************************************************************************
 // TODO START BUTTON. 
 // TODO   TIMER OF TETROMINOS.
 // TODO 
@@ -25,18 +25,17 @@
 // TODO   STOP ROTATION AT BORDER
 // TODO 
 // TODO 
-// TODO 
-
+// TODO *****************************************************************************************
 
 
 function init() {
-  // * DOM ELEMENTS
+  // * DOM ELEMENTS ****************************************************************************************************************************************
 
   const grid = document.querySelector('.grid')
   const cells = []     // <-- empty array for cells
 
 
-  // * GRID VARIABLES
+  // * GRID VARIABLES ********************************************************************************************************************************************
 
   // ? 10 x 20  dimentions of grid
 
@@ -44,10 +43,10 @@ function init() {
   const height = 20
   const numberOfCells = width * height
 
-  // * TETRIMINOS SHAPE
+  // * TETRIMINOS SHAPE  ****************************************************************************************************************************************
   // * 0 = start position.  1 = 90 deg clockwise.   2 = 180 deg.      3 = 270 deg.
   const iTetromino = {
-    name: iTetromino,
+    name: 'iTetromino',
     deg0: [4, 14, 24, 34],
     deg90: [4, 5, 6, 7],
     deg180: [4, 14, 24, 34],
@@ -55,15 +54,15 @@ function init() {
   }
 
   const tTetromino = {
-    name: tTetromino,
-    deg0:   [4, 13, 14, 15],
-    deg90:  [4, 14, 15, 24],
+    name: 'tTetromino',
+    deg0: [4, 13, 14, 15],
+    deg90: [4, 14, 15, 24],
     deg180: [13, 14, 15, 24],
     deg270: [4, 13, 14, 24]
   }
 
   const sTetromino = {
-    name: sTetromino,
+    name: 'sTetromino',
     deg0: [4, 5, 13, 14],
     deg90: [4, 14, 15, 25],
     deg180: [4, 5, 13, 14],
@@ -71,7 +70,7 @@ function init() {
   }
 
   const oTetromino = {
-    name: oTetromino,
+    name: 'oTetromino',
     deg0: [4, 5, 14, 15],
     deg90: [4, 5, 14, 15],
     deg180: [4, 5, 14, 15],
@@ -79,7 +78,7 @@ function init() {
   }
 
   const zTetromino = {
-    name: zTetromino,
+    name: 'zTetromino',
     deg0: [3, 4, 14, 15],
     deg90: [4, 13, 14, 23],
     deg180: [3, 4, 14, 15],
@@ -87,7 +86,7 @@ function init() {
   }
 
   const jTetromino = {
-    name: jTetromino,
+    name: 'jTetromino',
     deg0: [5, 15, 25, 24],
     deg90: [13, 14, 15, 25],
     deg180: [4, 5, 14, 24],
@@ -95,7 +94,7 @@ function init() {
   }
 
   const lTetromino = {
-    name: lTetromino,
+    name: 'lTetromino',
     deg0: [4, 14, 24, 25],
     deg90: [13, 14, 15, 5],
     deg180: [3, 4, 14, 24],
@@ -145,7 +144,7 @@ function init() {
   // ]
 
 
-  // * GAME VARIABLES
+  // * GAME VARIABLES ****************************************************************************************************************************************
 
   let linesCleared = 0
   let multipleLines = 0   // <-- multiplier for lines cleared
@@ -161,7 +160,7 @@ function init() {
 
 
 
-  // * FUNCTIONS
+  // * FUNCTIONS  ****************************************************************************************************************************************
   // * FUNCTION NAMES SO FAR AND DESCRIPTION OF WHAT THEY DO
 
   // createGrid() - Creates tetris grid
@@ -182,7 +181,7 @@ function init() {
 
 
 
-
+  // CREATE GRID **************************************************************************************************************************
   function createGrid() {  // <-- creating cells
     for (let i = 0; i < numberOfCells; i++) {
       const cell = document.createElement('div')
@@ -195,17 +194,16 @@ function init() {
   createGrid()
 
 
-  // SHOW TETROMINO   ********************************************
+  // SHOW TETROMINO   ****************************************************************************************************************
   function displayTetromino() {
     currentTetromino = getRandomTetromino()
-    currentTetromino[0].forEach(value => {
-      cells[value].classList.add('fixedTetromino')
+    currentTetromino.deg0.forEach(value => {
+      cells[value].classList.add(currentTetromino.name)
     })
   }
-      
   displayTetromino()
 
-  // GENERATE RANDOM TETRIMINO ***************************************************
+  // GENERATE RANDOM TETRIMINO *************************************************************************************
   function getRandomTetromino() {
     return tetrominosArray[Math.floor(Math.random() * tetrominosArray.length)]
   }
@@ -214,7 +212,7 @@ function init() {
   console.log(currentTetromino)
 
 
-  //GENERATE RANDOM TETROMINOS    *********************************************************
+  //GENERATE RANDOM TETROMINOS    *******************************************************************************************
   function getRandomClassTetromino() {
     const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino'] 
     return tetrominos[Math.floor(Math.random() * tetrominos.length)]
@@ -224,7 +222,7 @@ function init() {
 
 
 
-  // GAME TIMINGS    *********************************************************
+  // GAME TIMINGS    *****************************************************************************************************************************
   // CURRENTLY TETROMINOS APPEAR AT RANDOM.  MAKE THEM FALL ONE CELL AT A TIME
   // function startGame() {
   //   const timerId = setInterval(() => {
@@ -270,7 +268,7 @@ function init() {
 
 
 
-  // LINK UP ARROW KEYS FOR FUNCTIONALITY   ********************************************************* 
+  // LINK UP ARROW KEYS FOR FUNCTIONALITY   ******************************************************************************************* 
   // For now link up UP, DOWN, LEFT, RIGHT, SPACE (for fast down), ENTER (to play)
   // ARROW DOWN - 40
   // ARROW RIGHT - 39
@@ -310,7 +308,7 @@ function init() {
   // }
 
 
-
+  // KEYS E FUNCTION ****************************************************************************************************************************************
   function handleKeysUp(e) {
     cells[tetrominoPosition].classList.remove(currentTetrominoClass)   // <-- removes tetromino from previous position
     const x = tetrominoPosition % width
@@ -339,13 +337,13 @@ function init() {
 
     
 
-  // * EVENT LISTENER
+  // * EVENT LISTENER  ****************************************************************************************************************************************
   document.addEventListener('keyup', handleKeysUp)
 
 
 
 
-  // * SCORING LOGIC
+  // * SCORING LOGIC ****************************************************************************************************************************************
 
   // ?? Level 0-1   1 line = 100  2 lines = 400   3 lines = 900   4 lines = 2000    10 cleared lines
   // ?? Level 2-3   1 line = 200  2 lines = 800   3 lines = 1800  4 lines = 4000    20 cleared lines
@@ -355,7 +353,7 @@ function init() {
   // ?? Clear 5 lines to get onto next level
 
 
-  // CHANGING LEVELS   ***************************************************************
+  // CHANGING LEVELS   ***********************************************************************************************************************************
   function changeLevel() {
     if (linesCleared <= 10) {
       currentLevel++
@@ -371,7 +369,7 @@ function init() {
   }
 
 
-  // CHANGE OF SPEED FOR EACH LEVEL **************************************************************
+  // CHANGE OF SPEED FOR EACH LEVEL **********************************************************************************************************************************
   // MAKE INTO FUNCTION 
   function changeSpeed() {
     if (currentLevel <= 1) {
@@ -394,10 +392,10 @@ function init() {
   }
 
 
-  // ROLLING NUMBER OF LINES CLEARED   ***************************************************************
+  // ROLLING NUMBER OF LINES CLEARED   ***********************************************************************************************************************************
 
 
-  // POINT SCORING    ****************************************
+  // POINT SCORING    **********************************************************************************************************************************************
   // !! THIS NEEDS NEATENING UP. LOOK OVER THE CODE AND WORK OUT A MORE SIMPLE VERSION 
   if (currentLevel <= 1) {
     if (multipleLines === 1) {
@@ -453,12 +451,20 @@ function init() {
 
 
 
-  // STORING HIGH SCORE   ****************************************
+  // STORING HIGH SCORE   **********************************************************************************************************************************************
   function updateHighScore() {
     if (playerScore > highScore) {
       highScore = playerScore
     } 
   }
+
+
+
+
+
+
+
+
 }
 
 
