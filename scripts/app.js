@@ -171,6 +171,19 @@ function init() {
   }
 
 
+  // ! TEST TO SEE IF PREVIOUS TWO FUNCTIONS WORK TOGETHER THIS SETINTERVAL **********************************************************************************
+  function testTetrominos() {
+    const timerId = setInterval(() => {
+      displayTetromino()
+      startingPosition += width
+      removeTetromino()
+    }, 1000)
+  }
+  testTetrominos()
+
+  
+
+
   // GAME TIMINGS    ********************************************************************************************************************
   // CURRENTLY TETROMINOS APPEAR AT RANDOM.  MAKE THEM FALL ONE CELL AT A TIME
   // function startGame() {
