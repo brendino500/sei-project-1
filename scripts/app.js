@@ -145,19 +145,17 @@ function init() {
     for (let i = 0; i < numberOfCells; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
-      cell.innerHTML = i        // <-- label the cells
+      cell.innerHTML = i        // !    <-- label the cells
       grid.appendChild(cell)
     }
     for (let i = 210; i <= 219; i++) {
       cells[i].classList.remove('div')
-      cells[i].classList.add('bottom-row')
+      cells[i].classList.add('bottom-row')     // !  <-- this now checks if tetromino hits the bottom row
     }
     
   }
 
   createGrid()
-
-  // CREATE A DIV FOR BOTTOM ROW TO STOP THE 
 
   //  GAME FUNCTIONS    *************************************************************************************************************
 
@@ -191,12 +189,16 @@ function init() {
     removeTetromino()
     currentPosition += width
     displayTetromino()
-    if (currentPosition >= numberOfCells || currentPosition > ((numberOfCells - width) - 1)) {
-      clearInterval(timerId)
-      cells[currentPosition].classList.add('fixedTetromino')
-      currentPosition = 0
-      getRandomTetromino()
-      descendTetromino()
+    if (currentPosition.some(bottom => bottom > 219)) {      // ?? <-- CHANGE SO THAT IT CHECKS IF THE CELL BELOW IS DIV CLASS 'BOTTOM-ROW'
+      return true 
+  } else {
+    return false
+  }
+      // clearInterval(timerId)
+      // cells[currentPosition].classList.add('fixedTetromino')
+      // currentPosition = 0
+      // getRandomTetromino()
+      // descendTetromino()
     }
   }
 
