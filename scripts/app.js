@@ -174,9 +174,9 @@ function init() {
   // ! TEST TO SEE IF PREVIOUS TWO FUNCTIONS WORK TOGETHER THIS SETINTERVAL **********************************************************************************
   function testTetrominos() {
     const timerId = setInterval(() => {
-      displayTetromino()
-      startingPosition += width
       removeTetromino()
+      startingPosition += 10
+      displayTetromino()
     }, 1000)
   }
   testTetrominos()
