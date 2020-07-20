@@ -149,11 +149,6 @@ function init() {
       cell.innerHTML = i        // !    <-- label the cells
       grid.appendChild(cell)
     }
-    for (let i = 210; i <= 219; i++) {
-      cells[i].classList.remove('div')
-      cells[i].classList.add('bottom-row')     // !  <-- this now checks if tetromino hits the bottom row
-    }
-    
   }
 
   createGrid()
@@ -205,7 +200,7 @@ function init() {
   }
 
   function startTimer() {
-    timerId = setInterval(descendTetromino, 1000000)
+    timerId = setInterval(descendTetromino, 500)
   }
 
   // !! NOW THAT TETROMINO IS FALLING IT NEEDS TO KNOW WHEN TO STOP.
