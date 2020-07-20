@@ -115,6 +115,7 @@ function init() {
   let currentPosition = 0  // <-- Starting position for the top of the grid. Needs to descend. 
   // let dropSpeed = 1000
   let currentTetromino = null
+  let timerId = null
 
 
 
@@ -186,14 +187,26 @@ function init() {
   function checkBottomRow() {
     let isBottomRow = false
     currentTetromino.deg0.forEach(value => {
-      if (value + currentPosition > cells.length - 1) {
+      if (value + width + currentPosition > cells.length - 1) {
         isBottomRow = true
       }
     })
     return isBottomRow
   }
 
-  let timerId = setInterval(descendTetromino, 1000)
+  function checkObstacle() {
+    let isBottomRow = false
+    currentTetromino.deg0.forEach(value => {
+      if (value + width + currentPosition > cells.length - 1) {
+        isBottomRow = true
+      }
+    })
+    return isBottomRow
+  }
+
+  function startTimer() {
+    timerId = setInterval(descendTetromino, 1000)
+  }
 
   // !! NOW THAT TETROMINO IS FALLING IT NEEDS TO KNOW WHEN TO STOP.
   // ! CHANGE SO THAT IT CHECKS IF THE CELL BELOW IS DIV CLASS 'BOTTOM-ROW'. IF BOTTOM ROW, FIX TETROMINO IN PLACE
@@ -206,7 +219,7 @@ function init() {
       currentPosition = 0
       getRandomTetromino()
       displayTetromino()
-      descendTetromino()
+      startTimer()
     } else {
       removeTetromino()
       currentPosition += width
@@ -216,7 +229,7 @@ function init() {
     }
   }
 
-  descendTetromino()
+  startTimer()
 
 
 
