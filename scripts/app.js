@@ -112,7 +112,7 @@ function init() {
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
   let startingPosition = 0  // <-- Starting position for the top of the grid. Needs to descend. 
   let dropSpeed = 1000
-  let currentTetromino = getRandomTetromino()
+  let currentTetromino = null
 
 
 
@@ -150,30 +150,29 @@ function init() {
 
   // GENERATE RANDOM TETRIMINO *************************************************************************************
   function getRandomTetromino() {
-    return tetrominosArray[Math.floor(Math.random() * tetrominosArray.length)]
+    currentTetromino = tetrominosArray[Math.floor(Math.random() * tetrominosArray.length)]
   }
   
 
   // SHOW TETROMINO   ****************************************************************************************************************
   // * THIS FUNCTION DEFINITELY WORKS
   function displayTetromino() {
-    currentTetromino = getRandomTetromino()
     currentTetromino.deg0.forEach(value => {
-      cells[value].classList.add(currentTetromino.name)
+      cells[value + startingPosition].classList.add(currentTetromino.name)
     })
   }
 
   // REMOVE TETROMINO   ***************************************************************************************************************
   function removeTetromino() {
     currentTetromino.deg0.forEach(value => {
-      cells[value].classList.remove(currentTetromino.name)   
+      cells[value + startingPosition].classList.remove(currentTetromino.name)   
     })
   }
-
-
+  getRandomTetromino()
+  displayTetromino()
 
   // ! DISCO TETROMINOOOOO!!! DOESN'T DESCEND 
-  const timerId = setInterval(descendTetromino, 300)
+  const timerId = setInterval(descendTetromino, 1000)
 
   function descendTetromino() {
     removeTetromino()
@@ -183,7 +182,6 @@ function init() {
 
 
 
-  startGameAttempt3()
 
   // GAME TIMINGS    ********************************************************************************************************************
   // !! ONLY ONE SQUARE AT A TIME BUT DESCENDING. 
