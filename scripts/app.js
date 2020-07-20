@@ -6,13 +6,15 @@
 // TODO   FOLLOW ORIGINAL SCORE SYSTEM
 // TODO   AS EACH TETROMINO FALLS TO EACH ROW ADD 10 POINTS
 // TODO 
-// TODO CLASSES  FOR EACH TETROMINOS
+//       CLASSES  FOR EACH TETROMINOS
 // TODO 
-// TODO GENERATE RANDOM TETROMINOS
+//       GENERATE RANDOM TETROMINOS
 // TODO 
 // TODO ROTATION OF TETROMINOS
 // TODO 
-// TODO NEED TO DO CHECKS IF DIV BELOW HAS A FIXED TETRIMINO IN PLACE
+// TODO NEED TO DO CHECKS IF DIV BELOW HAS A FIXED TETRIMINO IN PLACE   .CONTAINS()
+// TODO POSSIBLY CHECK FOR DIV ON BOTTOM ROW?    .CONTAINS()
+// TODO 
 // TODO 
 // TODO MAKING THE TETOMINOS FALL DOW IN A STRAIGHT LINE WITH TIMINGS
 // TODO   CAN ADD THE 10 POINTS PER LINE ONCE YOU FIGURE THIS OUT
@@ -40,7 +42,7 @@ function init() {
   // ? 10 x 20  dimentions of grid
 
   const width = 10
-  const height = 20
+  const height = 22
   const numberOfCells = width * height
 
   // * TETRIMINOS SHAPE  ****************************************************************************************************************************************
@@ -110,8 +112,8 @@ function init() {
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
-  let startingPosition = 0  // <-- Starting position for the top of the grid. Needs to descend. 
-  let dropSpeed = 1000
+  let currentPosition = 0  // <-- Starting position for the top of the grid. Needs to descend. 
+  // let dropSpeed = 1000
   let currentTetromino = null
 
 
@@ -120,7 +122,9 @@ function init() {
   // * FUNCTION NAMES SO FAR AND DESCRIPTION OF WHAT THEY DO
 
   // createGrid() - Creates tetris grid
-  // displayTetromino() - Checks if tetromino arrays are working
+  // displayTetromino() - gets tetromino on grid
+  // removeTetromino() - removes tetromino
+  // descendTetromino() - tetromino moves down the grid
   // getRandomTetromino() - gets random tetromino
   // startGame() - starts the game
   // moveLeft() - 
@@ -144,9 +148,18 @@ function init() {
       cell.innerHTML = i        // <-- label the cells
       grid.appendChild(cell)
     }
+    for (let i = 210; i <= 219; i++) {
+      cells[i].classList.remove('div')
+      cells[i].classList.add('bottom-row')
+    }
+    
   }
 
   createGrid()
+
+  // CREATE A DIV FOR BOTTOM ROW TO STOP THE 
+
+  //  GAME FUNCTIONS    *************************************************************************************************************
 
   // GENERATE RANDOM TETRIMINO *************************************************************************************
   function getRandomTetromino() {
@@ -158,76 +171,48 @@ function init() {
   // * THIS FUNCTION DEFINITELY WORKS
   function displayTetromino() {
     currentTetromino.deg0.forEach(value => {
-      cells[value + startingPosition].classList.add(currentTetromino.name)
+      cells[value + currentPosition].classList.add(currentTetromino.name)
     })
   }
 
   // REMOVE TETROMINO   ***************************************************************************************************************
   function removeTetromino() {
     currentTetromino.deg0.forEach(value => {
-      cells[value + startingPosition].classList.remove(currentTetromino.name)   
+      cells[value + currentPosition].classList.remove(currentTetromino.name)   
     })
   }
   getRandomTetromino()
   displayTetromino()
 
-  // ! DISCO TETROMINOOOOO!!! DOESN'T DESCEND 
+
   const timerId = setInterval(descendTetromino, 1000)
 
   function descendTetromino() {
     removeTetromino()
-    startingPosition += width
+    currentPosition += width
     displayTetromino()
+    if (currentPosition >= numberOfCells || currentPosition > ((numberOfCells - width) - 1)) {
+      clearInterval(timerId)
+      cells[currentPosition].classList.add('fixedTetromino')
+      currentPosition = 0
+      getRandomTetromino()
+      descendTetromino()
+    }
   }
 
+  descendTetromino()
+  console.log(playerScore)
 
-
-
-  // GAME TIMINGS    ********************************************************************************************************************
-  // !! ONLY ONE SQUARE AT A TIME BUT DESCENDING. 
-  // function startGameAttempt1() {
-  //   const timerId = setInterval(() => {
-  //     cells[startingPosition].classList.remove(currentTetromino.name)
-  //     startingPosition += 10
-  //     cells[startingPosition].classList.add(currentTetromino.name)
-  //     if (startingPosition >= numberOfCells || startingPosition > (numberOfCells - width - 1)) {
-  //       clearInterval(timerId)
-  //       cells[startingPosition].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
-  //       startingPosition = 4 
-  //       startGame()
-  //       currentTetromino.name = getRandomTetromino()
-  //     }
-  //   }, 300)
-  // }
-  // startGameAttempt1()
-
-  // !! THIS FUNCTION SHOWS TETROMINO AT TOP OF PAGE, BUT ONLY DESCENDS AS INDIVIDUAL SQUARE
-  // function startGameAttempt2() {         
-  //   displayTetromino()
-  //   const timerId = setInterval(() => {
-  //     cells[startingPosition].classList.remove(currentTetromino.name)
-  //     startingPosition += width
-  //     playerScore += startingPosition
-  //     cells[startingPosition].classList.add(currentTetromino.name)
-  //     if (currentTetromino >= numberOfCells || currentTetromino > (numberOfCells - width - 1)) {
-  //       clearInterval(timerId)
-  //       cells[currentTetromino].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
-  //       startGame()
-  //       currentTetromino = getRandomTetromino()
-  //     }
-  //   }, 1000)
-  // }
-  // startGameAttempt2()
-  // console.log(playerScore)
+  // !! NOW THAT TETROMINO IS FALLING IT NEEDS TO KNOW WHEN TO STOP.
 
 
   // *  RANDOMBLY SELECT ONE TETRIMINO
   // *  MAKE TETRIMINO FALL FROM START POSITION UNTIL LAST ROW  CELL NO. 190-199
-  // *  STARTING SPEED INTERVAL AT 1000  
+  // TODO  STARTING SPEED INTERVAL AT 1000  
   // *
-  // *  ADD 10 POINTS EVERYTIME THE TETRIMINO FALLS INTO NEXT ROW
+  // TODO  ADD 10 POINTS EVERYTIME THE TETRIMINO FALLS INTO NEXT ROW
   // *  
-  // *  MAKE TETRIMINO IN FIXED POSITION ON LAST ROW
+  // TODO  MAKE TETRIMINO IN FIXED POSITION ON LAST ROW
   // * 
 
 
@@ -274,29 +259,29 @@ function init() {
 
   // KEYS E FUNCTION ****************************************************************************************************************************************
   function handleKeysUp(e) {
-    cells[startingPosition].classList.remove(currentTetromino.name)   // <-- removes tetromino from previous position
-    const x = startingPosition % width
-    const y = Math.floor(startingPosition / width)
+    cells[currentPosition].classList.remove(currentTetromino.name)   // <-- removes tetromino from previous position
+    const x = currentPosition % width
+    const y = Math.floor(currentPosition / width)
     switch (e.keyCode) {
       case 37:
         if (x > 0) {
-          startingPosition--
+          currentPosition--
         }
         break
       case 39:
         if (x < width - 1) {
-          startingPosition++
+          currentPosition++
         }
         break
       case 40:
         if (y < width - 1) {
-          startingPosition += width
+          currentPosition += width
         }
         break
       default:
         break  
     }
-    cells[startingPosition].classList.add(currentTetromino.name)  // <-- adds tetromino to new position
+    cells[currentPosition].classList.add(currentTetromino.name)  // <-- adds tetromino to new position
   }
 
     
