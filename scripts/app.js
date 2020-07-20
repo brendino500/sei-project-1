@@ -195,23 +195,23 @@ function init() {
   }
 
   function checkObstacle() {
-    let isBottomRow = false
+    let isObstacle = false
     currentTetromino.deg0.forEach(value => {
-      if (value + width + currentPosition > cells.length - 1) {
-        isBottomRow = true
+      if (cells[value + width + currentPosition].classList.contains('fixedTetromino')) {
+        isObstacle = true
       }
     })
-    return isBottomRow
+    return isObstacle
   }
 
   function startTimer() {
-    timerId = setInterval(descendTetromino, 1000)
+    timerId = setInterval(descendTetromino, 1000000)
   }
 
   // !! NOW THAT TETROMINO IS FALLING IT NEEDS TO KNOW WHEN TO STOP.
   // ! CHANGE SO THAT IT CHECKS IF THE CELL BELOW IS DIV CLASS 'BOTTOM-ROW'. IF BOTTOM ROW, FIX TETROMINO IN PLACE
   function descendTetromino() {
-    if (checkBottomRow()) {
+    if (checkBottomRow() || checkObstacle()) {
       currentTetromino.deg0.forEach(value => {
         cells[value + currentPosition].classList.add('fixedTetromino')
       })
