@@ -185,27 +185,25 @@ function init() {
 
   const timerId = setInterval(descendTetromino, 1000)
 
+  // !! NOW THAT TETROMINO IS FALLING IT NEEDS TO KNOW WHEN TO STOP.
+  // ! CHANGE SO THAT IT CHECKS IF THE CELL BELOW IS DIV CLASS 'BOTTOM-ROW'. IF BOTTOM ROW, FIX TETROMINO IN PLACE
   function descendTetromino() {
     removeTetromino()
     currentPosition += width
     displayTetromino()
-    if (currentPosition.some(bottom => bottom > 219)) {      // ?? <-- CHANGE SO THAT IT CHECKS IF THE CELL BELOW IS DIV CLASS 'BOTTOM-ROW'
-      return true 
-  } else {
-    return false
-  }
-      // clearInterval(timerId)
-      // cells[currentPosition].classList.add('fixedTetromino')
-      // currentPosition = 0
-      // getRandomTetromino()
-      // descendTetromino()
+    if (currentPosition >= numberOfCells || currentPosition > (numberOfCells - width - 1)) {     
+      clearInterval(timerId)                      
+      cells[currentPosition].classList.add('fixedTetromino')
+      currentPosition = 0
+      getRandomTetromino()
+      descendTetromino()
     }
   }
 
   descendTetromino()
   console.log(playerScore)
 
-  // !! NOW THAT TETROMINO IS FALLING IT NEEDS TO KNOW WHEN TO STOP.
+
 
 
   // *  RANDOMBLY SELECT ONE TETRIMINO
@@ -232,11 +230,12 @@ function init() {
 
   // const x = tetrominoPosition % width
   // const y = Math.floor(tetrominoPosition / width)
-  // function moveLeft() {
-  //   if (x > 0) {
-  //     tetrominoPosition--
-  //   }
-  // }
+  function moveLeft() {  //! <-- move left. If there is a wall, stop it somehow?  KEYCODE 37
+    removeTetromino()        
+    currentTetromino.some(index => (currentPosition + index) % width === 0) ? true : false
+    currentPosition--
+    displayTetromino()
+  }
 
   // function moveRight() {
   //   if (x < width - 1) {
@@ -266,9 +265,7 @@ function init() {
     const y = Math.floor(currentPosition / width)
     switch (e.keyCode) {
       case 37:
-        if (x > 0) {
-          currentPosition--
-        }
+        moveLeft()
         break
       case 39:
         if (x < width - 1) {
