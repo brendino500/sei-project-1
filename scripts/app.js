@@ -102,48 +102,6 @@ function init() {
   }
 
 
-  // const iTetromino = [
-  //   [4, 14, 24, 34],
-  //   [4, 5, 6, 7]
-  // ]
-
-  // const tTetromino = [
-  //   [4, 13, 14, 15],
-  //   [4, 14, 15, 24],
-  //   [13, 14, 15, 24],
-  //   [4, 13, 14, 24]
-  // ]
-
-  // const sTetromino = [
-  //   [4, 5, 13, 14],
-  //   [4, 14, 15, 25]
-  // ]
-
-  // const oTetromino = [
-  //   [4, 5, 14, 15]
-  // ]
-
-  // const zTetromino = [
-  //   [3, 4, 14, 15],
-  //   [4, 13, 14, 23]
-  // ]
-
-  // const jTetromino = [
-  //   [5, 15, 25, 24],
-  //   [13, 14, 15, 25],
-  //   [4, 5, 14, 24],
-  //   [3, 13, 14, 15]
-  // ]
-
-  
-  // const lTetromino = [
-  //   [4, 14, 24, 25],
-  //   [13, 14, 15, 5],
-  //   [3, 4, 14, 24],
-  //   [13, 14, 15, 23]
-  // ]
-
-
   // * GAME VARIABLES ****************************************************************************************************************************************
 
   let linesCleared = 0
@@ -152,7 +110,7 @@ function init() {
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
-  let currentTetrominoClass = getRandomClassTetromino()
+  // const currentTetrominoClass = getRandomClassTetromino()
   // const startingPosition = 5    // <-- Starting position for the top of the grid. Needs to descend. 
   let dropSpeed = 1000
   let currentTetromino = getRandomTetromino()
@@ -207,19 +165,6 @@ function init() {
   function getRandomTetromino() {
     return tetrominosArray[Math.floor(Math.random() * tetrominosArray.length)]
   }
-
-  getRandomTetromino()
-  console.log(currentTetromino)
-
-
-  //GENERATE RANDOM TETROMINOS    *******************************************************************************************
-  function getRandomClassTetromino() {
-    const tetrominos = ['iTetromino', 'tTetromino', 'sTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'lTetromino'] 
-    return tetrominos[Math.floor(Math.random() * tetrominos.length)]
-  }
-  // currentTetrominoClass = getRandomClassTetromino()
-  // console.log(currentTetrominoClass)
-
 
 
   // GAME TIMINGS    *****************************************************************************************************************************
