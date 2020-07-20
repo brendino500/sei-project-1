@@ -110,7 +110,7 @@ function init() {
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
-  let startingPosition = 5    // <-- Starting position for the top of the grid. Needs to descend. 
+  let startingPosition = []  // <-- Starting position for the top of the grid. Needs to descend. 
   let dropSpeed = 1000
   let currentTetromino = getRandomTetromino()
 
@@ -172,16 +172,14 @@ function init() {
 
 
   // ! TEST TO SEE IF PREVIOUS TWO FUNCTIONS WORK TOGETHER THIS SETINTERVAL **********************************************************************************
-  function testTetrominos() {
-    const timerId = setInterval(() => {
-      removeTetromino()
-      startingPosition += 10
-      displayTetromino()
-    }, 1000)
+  function testTetrominoMovement() {
+    displayTetromino()
+    startingPosition.forEach(val => {
+      cells[val] += width
+    })
+    removeTetromino()
   }
-  testTetrominos()
 
-  
 
 
   // GAME TIMINGS    ********************************************************************************************************************
@@ -274,7 +272,7 @@ function init() {
 
   // KEYS E FUNCTION ****************************************************************************************************************************************
   function handleKeysUp(e) {
-    cells[startingPosition].classList.remove(currentTetromino.name)   // <-- removes tetromino from previous position
+    cells[currentTetromino].classList.remove(currentTetromino.name)   // <-- removes tetromino from previous position
     const x = startingPosition % width
     const y = Math.floor(startingPosition / width)
     switch (e.keyCode) {
