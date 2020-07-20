@@ -110,8 +110,7 @@ function init() {
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
-  // const currentTetrominoClass = getRandomClassTetromino()
-  // const startingPosition = 5    // <-- Starting position for the top of the grid. Needs to descend. 
+  let startingPosition = 5    // <-- Starting position for the top of the grid. Needs to descend. 
   let dropSpeed = 1000
   let currentTetromino = getRandomTetromino()
   let tetrominoPosition = 4
@@ -159,7 +158,6 @@ function init() {
       cells[value].classList.add(currentTetromino.name)
     })
   }
-  displayTetromino()
 
   // GENERATE RANDOM TETRIMINO *************************************************************************************
   function getRandomTetromino() {
@@ -186,11 +184,11 @@ function init() {
   // }
 
   function startGame() {
+    displayTetromino()
     const timerId = setInterval(() => {
-
-      cells[currentTetromino].classList.remove(currentTetrominoClass)
-      currentTetrominoPosition += 10
-      cells[currentTetromino].classList.add(currentTetrominoClass)
+      cells[currentTetromino].classList.remove(currentTetromino.name)
+      startingPosition += 10
+      cells[currentTetromino].classList.add(currentTetromino.name)
       if (currentTetromino >= numberOfCells || currentTetromino > (numberOfCells - width - 1)) {
         clearInterval(timerId)
         cells[currentTetromino].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
