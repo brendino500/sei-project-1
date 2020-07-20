@@ -46,46 +46,103 @@ function init() {
 
   // * TETRIMINOS SHAPE
   // * 0 = start position.  1 = 90 deg clockwise.   2 = 180 deg.      3 = 270 deg.
-  const iTetromino = [
-    [4, 14, 24, 34],
-    [4, 5, 6, 7]
-  ]
+  const iTetromino = {
+    name: iTetromino,
+    deg0: [4, 14, 24, 34],
+    deg90: [4, 5, 6, 7],
+    deg180: [4, 14, 24, 34],
+    deg270: [4, 5, 6, 7]
+  }
 
-  const tTetromino = [
-    [4, 13, 14, 15],
-    [4, 14, 15, 24],
-    [13, 14, 15, 24],
-    [4, 13, 14, 24]
-  ]
+  const tTetromino = {
+    name: tTetromino,
+    deg0:   [4, 13, 14, 15],
+    deg90:  [4, 14, 15, 24],
+    deg180: [13, 14, 15, 24],
+    deg270: [4, 13, 14, 24]
+  }
 
-  const sTetromino = [
-    [4, 5, 13, 14],
-    [4, 14, 15, 25]
-  ]
+  const sTetromino = {
+    name: sTetromino,
+    deg0: [4, 5, 13, 14],
+    deg90: [4, 14, 15, 25],
+    deg180: [4, 5, 13, 14],
+    deg270: [4, 14, 15, 25]
+  }
 
-  const oTetromino = [
-    [4, 5, 14, 15]
-  ]
+  const oTetromino = {
+    name: oTetromino,
+    deg0: [4, 5, 14, 15],
+    deg90: [4, 5, 14, 15],
+    deg180: [4, 5, 14, 15],
+    deg270: [4, 5, 14, 15]
+  }
 
-  const zTetromino = [
-    [3, 4, 14, 15],
-    [4, 13, 14, 23]
-  ]
+  const zTetromino = {
+    name: zTetromino,
+    deg0: [3, 4, 14, 15],
+    deg90: [4, 13, 14, 23],
+    deg180: [3, 4, 14, 15],
+    deg270: [4, 13, 14, 23]
+  }
 
-  const jTetromino = [
-    [5, 15, 25, 24],
-    [13, 14, 15, 25],
-    [4, 5, 14, 24],
-    [3, 13, 14, 15]
-  ]
+  const jTetromino = {
+    name: jTetromino,
+    deg0: [5, 15, 25, 24],
+    deg90: [13, 14, 15, 25],
+    deg180: [4, 5, 14, 24],
+    deg270: [3, 13, 14, 15]
+  }
+
+  const lTetromino = {
+    name: lTetromino,
+    deg0: [4, 14, 24, 25],
+    deg90: [13, 14, 15, 5],
+    deg180: [3, 4, 14, 24],
+    deg270: [13, 14, 15, 23]
+  }
+
+
+  // const iTetromino = [
+  //   [4, 14, 24, 34],
+  //   [4, 5, 6, 7]
+  // ]
+
+  // const tTetromino = [
+  //   [4, 13, 14, 15],
+  //   [4, 14, 15, 24],
+  //   [13, 14, 15, 24],
+  //   [4, 13, 14, 24]
+  // ]
+
+  // const sTetromino = [
+  //   [4, 5, 13, 14],
+  //   [4, 14, 15, 25]
+  // ]
+
+  // const oTetromino = [
+  //   [4, 5, 14, 15]
+  // ]
+
+  // const zTetromino = [
+  //   [3, 4, 14, 15],
+  //   [4, 13, 14, 23]
+  // ]
+
+  // const jTetromino = [
+  //   [5, 15, 25, 24],
+  //   [13, 14, 15, 25],
+  //   [4, 5, 14, 24],
+  //   [3, 13, 14, 15]
+  // ]
 
   
-  const lTetromino = [
-    [4, 14, 24, 25],
-    [13, 14, 15, 5],
-    [3, 4, 14, 24],
-    [13, 14, 15, 23]
-  ]
+  // const lTetromino = [
+  //   [4, 14, 24, 25],
+  //   [13, 14, 15, 5],
+  //   [3, 4, 14, 24],
+  //   [13, 14, 15, 23]
+  // ]
 
 
   // * GAME VARIABLES
