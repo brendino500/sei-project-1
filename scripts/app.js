@@ -110,7 +110,7 @@ function init() {
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
-  let startingPosition = []  // <-- Starting position for the top of the grid. Needs to descend. 
+  let startingPosition = 4  // <-- Starting position for the top of the grid. Needs to descend. 
   let dropSpeed = 1000
   let currentTetromino = getRandomTetromino()
 
@@ -122,7 +122,6 @@ function init() {
   // createGrid() - Creates tetris grid
   // displayTetromino() - Checks if tetromino arrays are working
   // getRandomTetromino() - gets random tetromino
-  // getRandomClassTetromino() - gets random tetromino colour
   // startGame() - starts the game
   // moveLeft() - 
   // moveRight() - 
@@ -156,6 +155,7 @@ function init() {
   
 
   // SHOW TETROMINO   ****************************************************************************************************************
+  // * THIS FUNCTION DEFINITELY WORKS
   function displayTetromino() {
     currentTetromino = getRandomTetromino()
     currentTetromino.deg0.forEach(value => {
@@ -172,35 +172,36 @@ function init() {
 
 
   // ! TEST TO SEE IF PREVIOUS TWO FUNCTIONS WORK TOGETHER THIS SETINTERVAL **********************************************************************************
-  function testTetrominoMovement() {
-    displayTetromino()
-    startingPosition.forEach(val => {
-      cells[val] += width
-    })
-    removeTetromino()
-  }
+  // function testTetrominoMovement() { 
+  //   displayTetromino()
+  //   startingPosition += width
+  //   removeTetromino()
+  // }
+
+  // testTetrominoMovement()
 
 
 
   // GAME TIMINGS    ********************************************************************************************************************
-  // CURRENTLY TETROMINOS APPEAR AT RANDOM.  MAKE THEM FALL ONE CELL AT A TIME
-  // function startGame() {
-  //   const timerId = setInterval(() => {
+  // !! ONLY ONE SQUARE AT A TIME BUT DESCENDING. 
+  function startGame() {
+    const timerId = setInterval(() => {
+      cells[startingPosition].classList.remove(currentTetromino.name)
+      startingPosition += 10
+      cells[startingPosition].classList.add(currentTetromino.name)
+      if (startingPosition >= numberOfCells || startingPosition > (numberOfCells - width - 1)) {
+        clearInterval(timerId)
+        cells[startingPosition].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
+        startingPosition = 4 
+        startGame()
+        currentTetromino.name = getRandomTetromino()
+      }
+    }, 300)
+  }
+  
 
-  //     cells[tetrominoPosition].classList.remove(currentTetrominoClass)
-  //     tetrominoPosition += 10
-  //     cells[tetrominoPosition].classList.add(currentTetrominoClass)
-  //     if (tetrominoPosition >= numberOfCells || tetrominoPosition > (numberOfCells - width - 1)) {
-  //       clearInterval(timerId)
-  //       cells[tetrominoPosition].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
-  //       tetrominoPosition = 4 
-  //       startGame()
-  //       currentTetrominoClass = getRandomClassTetromino()
-  //     }
-  //   }, 300)
-  // }
-
-  // function startGame() {
+  // !! THIS FUNCTION SHOWS TETROMINO AT TOP OF PAGE, BUT ONLY DESCENDS AS INDIVIDUAL SQUARE
+  // function startGame() {         
   //   displayTetromino()
   //   const timerId = setInterval(() => {
   //     cells[startingPosition].classList.remove(currentTetromino.name)
@@ -272,7 +273,7 @@ function init() {
 
   // KEYS E FUNCTION ****************************************************************************************************************************************
   function handleKeysUp(e) {
-    cells[currentTetromino].classList.remove(currentTetromino.name)   // <-- removes tetromino from previous position
+    cells[startingPosition].classList.remove(currentTetromino.name)   // <-- removes tetromino from previous position
     const x = startingPosition % width
     const y = Math.floor(startingPosition / width)
     switch (e.keyCode) {
