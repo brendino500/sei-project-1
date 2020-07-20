@@ -110,7 +110,7 @@ function init() {
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
-  let startingPosition = 4  // <-- Starting position for the top of the grid. Needs to descend. 
+  let startingPosition = 0  // <-- Starting position for the top of the grid. Needs to descend. 
   let dropSpeed = 1000
   let currentTetromino = getRandomTetromino()
 
@@ -171,37 +171,40 @@ function init() {
   }
 
 
-  // ! TEST TO SEE IF PREVIOUS TWO FUNCTIONS WORK TOGETHER THIS SETINTERVAL **********************************************************************************
-  // function testTetrominoMovement() { 
-  //   displayTetromino()
-  //   startingPosition += width
-  //   removeTetromino()
-  // }
 
-  // testTetrominoMovement()
+  // ! DISCO TETROMINOOOOO!!! DOESN'T DESCEND 
+  const timerId = setInterval(descendTetromino, 300)
+
+  function descendTetromino() {
+    removeTetromino()
+    startingPosition += width
+    displayTetromino()
+  }
 
 
+
+  startGameAttempt3()
 
   // GAME TIMINGS    ********************************************************************************************************************
   // !! ONLY ONE SQUARE AT A TIME BUT DESCENDING. 
-  function startGame() {
-    const timerId = setInterval(() => {
-      cells[startingPosition].classList.remove(currentTetromino.name)
-      startingPosition += 10
-      cells[startingPosition].classList.add(currentTetromino.name)
-      if (startingPosition >= numberOfCells || startingPosition > (numberOfCells - width - 1)) {
-        clearInterval(timerId)
-        cells[startingPosition].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
-        startingPosition = 4 
-        startGame()
-        currentTetromino.name = getRandomTetromino()
-      }
-    }, 300)
-  }
-  
+  // function startGameAttempt1() {
+  //   const timerId = setInterval(() => {
+  //     cells[startingPosition].classList.remove(currentTetromino.name)
+  //     startingPosition += 10
+  //     cells[startingPosition].classList.add(currentTetromino.name)
+  //     if (startingPosition >= numberOfCells || startingPosition > (numberOfCells - width - 1)) {
+  //       clearInterval(timerId)
+  //       cells[startingPosition].classList.add('fixedTetromino')  // ? FIXES IT TO THE BOTTOM (FOR NOW)
+  //       startingPosition = 4 
+  //       startGame()
+  //       currentTetromino.name = getRandomTetromino()
+  //     }
+  //   }, 300)
+  // }
+  // startGameAttempt1()
 
   // !! THIS FUNCTION SHOWS TETROMINO AT TOP OF PAGE, BUT ONLY DESCENDS AS INDIVIDUAL SQUARE
-  // function startGame() {         
+  // function startGameAttempt2() {         
   //   displayTetromino()
   //   const timerId = setInterval(() => {
   //     cells[startingPosition].classList.remove(currentTetromino.name)
@@ -216,7 +219,7 @@ function init() {
   //     }
   //   }, 1000)
   // }
-  // startGame()
+  // startGameAttempt2()
   // console.log(playerScore)
 
 
