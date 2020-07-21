@@ -56,6 +56,7 @@ function init() {
 
   // * TETRIMINOS SHAPE  ****************************************************************************************************************************************
   // * 0 = start position.  1 = 90 deg clockwise.   2 = 180 deg.      3 = 270 deg.
+  //! BUG!!!! SOME NUMBERS ARE WRONG. DRAW OUT TETROMINOS AND GET THESE RIGHT WITH RIGHT AXIS. 
   const iTetromino = {
     name: 'iTetromino',
     deg0: [4, 14, 24, 34],
@@ -259,6 +260,7 @@ function init() {
     timerId = setInterval(descendTetromino, 300)
   } 
 
+  //! BUG !!!!   DOESN'T FIX SHAPES IN CERTAIN ROTATIONS
   function descendTetromino() {
     if (checkBottomRow() || checkObstacle() && checkTopRow()) {
       currentTetromino[currentRotation].forEach(value => {
@@ -330,6 +332,7 @@ function init() {
     }
   }
 
+  //! BUG!!!!   SOME ROTATIONS SKIP. CHECK AGAIN
   function rotate() {
     removeTetromino()
     console.log(currentRotation)
