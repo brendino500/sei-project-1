@@ -12,21 +12,30 @@
 // TODO 
 // TODO ROTATION OF TETROMINOS
 // TODO 
-// TODO NEED TO DO CHECKS IF DIV BELOW HAS A FIXED TETRIMINO IN PLACE   .CONTAINS()
-// TODO POSSIBLY CHECK FOR DIV ON BOTTOM ROW?    .CONTAINS()
+//       NEED TO DO CHECKS IF DIV BELOW HAS A FIXED TETRIMINO IN PLACE   .CONTAINS()
+//       POSSIBLY CHECK FOR DIV ON BOTTOM ROW?    .CONTAINS()
 // TODO 
 // TODO 
-// TODO MAKING THE TETOMINOS FALL DOW IN A STRAIGHT LINE WITH TIMINGS
-// TODO   CAN ADD THE 10 POINTS PER LINE ONCE YOU FIGURE THIS OUT
+//       MAKING THE TETOMINOS FALL DOW IN A STRAIGHT LINE WITH TIMINGS
+//         CAN ADD THE 10 POINTS PER LINE ONCE YOU FIGURE THIS OUT
 // TODO 
 // TODO DIFFERENT FUNCTIONS FOR DIFFERENT LEVELS?   RECURSION?
 // TODO   EASIER CONTROL/CODE FOR POINTS AND SPEED OF DESCENDING TETROMINOS
 // TODO 
 // TODO FIGURE OUT 
-// TODO   HOW TO STOP TETROMINO FILLING IN A CLASS     .CONTAINS()
+//      HOW TO STOP TETROMINO FILLING IN A CLASS     .CONTAINS()
 // TODO   STOP ROTATION AT BORDER    
 // TODO 
+// TODO FIX THE BUG WHICH HIGHLIGHTS A SQUARE AT CELL 0 AND CHANGES COLOUR. THERE IS A FLOATER
+// TODO    SQUARE WHICH FOLLOWS THE TETROMINO. --> currentPosition 
 // TODO 
+// TODO DO A CHECK FOR TOP ROW. AT THE MOMENT THE TETROMINOS WILL JUST FALL ONTOP. NEVER ENDING LOOP.
+// TODO    SAME AS BOTTOM ROW.     THIS WILL END THE GAME.     .CONTAINS()
+// TODO
+// TODO
+// TODO
+// TODO
+// TODO
 // TODO *****************************************************************************************
 
 
@@ -112,7 +121,7 @@ function init() {
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
-  let currentPosition = 0  // <-- Starting position for the top of the grid. Needs to descend. 
+  let currentPosition = null  // <-- Starting position for the top of the grid. Needs to descend. 
   // let dropSpeed = 1000
   let currentTetromino = null
   let timerId = null
@@ -192,7 +201,7 @@ function init() {
   function checkObstacle() {
     let isObstacle = false
     currentTetromino.deg0.forEach(value => {
-      if (cells[value + width + currentPosition].classList.contains('fixedTetromino')) {
+      if (cells[value + width + currentPosition].classList.contains('fixed-tetromino')) {
         isObstacle = true
       }
     })
@@ -200,7 +209,7 @@ function init() {
   }
 
   function startTimer() {
-    timerId = setInterval(descendTetromino, 500)
+    timerId = setInterval(descendTetromino, 1000)
   }
 
   // !! NOW THAT TETROMINO IS FALLING IT NEEDS TO KNOW WHEN TO STOP.
@@ -208,7 +217,7 @@ function init() {
   function descendTetromino() {
     if (checkBottomRow() || checkObstacle()) {
       currentTetromino.deg0.forEach(value => {
-        cells[value + currentPosition].classList.add('fixedTetromino')
+        cells[value + currentPosition].classList.add('fixed-tetromino')
       })
       clearInterval(timerId)                      
       currentPosition = 0
@@ -225,18 +234,6 @@ function init() {
   }
 
   startTimer()
-
-
-
-
-  // *  RANDOMBLY SELECT ONE TETRIMINO
-  // *  MAKE TETRIMINO FALL FROM START POSITION UNTIL LAST ROW  CELL NO. 190-199
-  // TODO  STARTING SPEED INTERVAL AT 1000  
-  // *
-  // TODO  ADD 10 POINTS EVERYTIME THE TETRIMINO FALLS INTO NEXT ROW
-  // *  
-  // TODO  MAKE TETRIMINO IN FIXED POSITION ON LAST ROW
-  // * 
 
 
 
