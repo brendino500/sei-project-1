@@ -122,7 +122,7 @@ function init() {
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
   let currentPosition = null  // <-- Starting position for the top of the grid. Needs to descend. 
-  let currentRotation = ['deg0', 'deg90', 'deg180', 'deg270']
+  let currentRotation = 'deg0'
   // let dropSpeed = 1000
   let currentTetromino = null
   let timerId = null
@@ -179,7 +179,7 @@ function init() {
   // SHOW TETROMINO   ****************************************************************************************************************
   // * THIS FUNCTION DEFINITELY WORKS
   function displayTetromino() {
-    currentTetromino.deg0.forEach(value => {
+    currentTetromino[currentRotation].forEach(value => {
       cells[value + currentPosition].classList.add(currentTetromino.name)
     })
   }
@@ -197,7 +197,7 @@ function init() {
   // CHECKS FOR TETROMINO   ****************************************************************************************************
   function checkBottomRow() {
     let isBottomRow = false
-    currentTetromino.deg0.forEach(value => {
+    currentTetromino[currentRotation].forEach(value => {
       if (value + width + currentPosition > cells.length - 1) {
         isBottomRow = true
       }
@@ -207,7 +207,7 @@ function init() {
 
   function checkObstacle() {
     let isObstacle = false
-    currentTetromino.deg0.forEach(value => {
+    currentTetromino[currentRotation].forEach(value => {
       if (cells[value + width + currentPosition].classList.contains('fixed-tetromino')) {
         isObstacle = true
       }
@@ -217,7 +217,7 @@ function init() {
 
   function checkTopRow() {
     let isTopRow = false
-    currentTetromino.deg0.forEach(value => {
+    currentTetromino[currentRotation].forEach(value => {
       if (value + currentPosition > 0 ) {
         isTopRow = true
       }
@@ -226,7 +226,7 @@ function init() {
   }
 
   function checkBelow() {
-    if (currentTetromino.deg0.some(value => (cells[value + currentPosition + width].classList.contains('fixed-tetromino')))) {
+    if (currentTetromino[currentRotation].some(value => (cells[value + currentPosition + width].classList.contains('fixed-tetromino')))) {
       return false
     } else {
       return true
@@ -234,9 +234,9 @@ function init() {
   }
 
   function checkRight() {
-    if (currentTetromino.deg0.some(value => ((value + currentPosition + 1) % 10 === 0))) {
+    if (currentTetromino[currentRotation].some(value => ((value + currentPosition + 1) % 10 === 0))) {
       return false
-    } else if (currentTetromino.deg0.some(value => (cells[value + currentPosition + 1].classList.contains('fixed-tetromino')))) {
+    } else if (currentTetromino[currentRotation].some(value => (cells[value + currentPosition + 1].classList.contains('fixed-tetromino')))) {
       return false
     } else {
       return true
@@ -244,9 +244,9 @@ function init() {
   }
 
   function checkLeft() {
-    if (currentTetromino.deg0.some(value => ((value + currentPosition) % 10 === 0))) {
+    if (currentTetromino[currentRotation].some(value => ((value + currentPosition) % 10 === 0))) {
       return false
-    } else if (currentTetromino.deg0.some(value => (cells[value + currentPosition - 1].classList.contains('fixed-tetromino')))) {
+    } else if (currentTetromino[currentRotation].some(value => (cells[value + currentPosition - 1].classList.contains('fixed-tetromino')))) {
       return false
     } else {
       return true
@@ -261,7 +261,7 @@ function init() {
 
   function descendTetromino() {
     if (checkBottomRow() || checkObstacle() && checkTopRow()) {
-      currentTetromino.deg0.forEach(value => {
+      currentTetromino[currentRotation].forEach(value => {
         cells[value + currentPosition].classList.add('fixed-tetromino')
       })
       clearInterval(timerId)                      
