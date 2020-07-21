@@ -4,13 +4,13 @@
 // TODO 
 // TODO SCORING SYSTEM
 // TODO   FOLLOW ORIGINAL SCORE SYSTEM
-// TODO   AS EACH TETROMINO FALLS TO EACH ROW ADD 10 POINTS
+//        AS EACH TETROMINO FALLS TO EACH ROW ADD 10 POINTS
 // TODO 
 //       CLASSES  FOR EACH TETROMINOS
 // TODO 
 //       GENERATE RANDOM TETROMINOS
 // TODO 
-// TODO ROTATION OF TETROMINOS
+//       ROTATION OF TETROMINOS
 // TODO 
 //       NEED TO DO CHECKS IF DIV BELOW HAS A FIXED TETRIMINO IN PLACE   .CONTAINS()
 //       POSSIBLY CHECK FOR DIV ON BOTTOM ROW?    .CONTAINS()
@@ -56,13 +56,13 @@ function init() {
 
   // * TETRIMINOS SHAPE  ****************************************************************************************************************************************
   // * 0 = start position.  1 = 90 deg clockwise.   2 = 180 deg.      3 = 270 deg.
-  //! BUG!!!! SOME NUMBERS ARE WRONG. DRAW OUT TETROMINOS AND GET THESE RIGHT WITH RIGHT AXIS. 
+
   const iTetromino = {
-    name: 'iTetromino',
-    deg0: [4, 14, 24, 34],
-    deg90: [4, 5, 6, 7],
-    deg180: [4, 14, 24, 34],
-    deg270: [4, 5, 6, 7]
+    name: 'iTetromino', 
+    deg0: [4, 5, 6, 7],
+    deg90: [6, 16, 26, 36],
+    deg180: [24, 25, 26, 27],
+    deg270: [5, 15, 25, 35]
   }
 
   const tTetromino = {
@@ -92,25 +92,25 @@ function init() {
   const zTetromino = {
     name: 'zTetromino',
     deg0: [3, 4, 14, 15],
-    deg90: [4, 13, 14, 23],
+    deg90: [5, 14, 15, 24],
     deg180: [3, 4, 14, 15],
-    deg270: [4, 13, 14, 23]
+    deg270: [5, 14, 15, 24]
   }
 
-  const jTetromino = {
+  const jTetromino = { 
     name: 'jTetromino',
-    deg0: [5, 15, 25, 24],
-    deg90: [13, 14, 15, 25],
-    deg180: [4, 5, 14, 24],
-    deg270: [3, 13, 14, 15]
+    deg0: [4, 14, 15, 16],
+    deg90: [5, 6, 15, 25],
+    deg180: [14, 15, 16, 26],
+    deg270: [5, 15, 24, 25]
   }
 
-  const lTetromino = {
+  const lTetromino = {      
     name: 'lTetromino',
-    deg0: [4, 14, 24, 25],
-    deg90: [13, 14, 15, 5],
-    deg180: [3, 4, 14, 24],
-    deg270: [13, 14, 15, 23]
+    deg0: [14, 15, 16, 6],
+    deg90: [5, 15, 25, 26],
+    deg180: [14, 15, 16, 24],
+    deg270: [4, 5, 15, 25]
   }
 
 
@@ -260,7 +260,6 @@ function init() {
     timerId = setInterval(descendTetromino, 300)
   } 
 
-  //! BUG !!!!   DOESN'T FIX SHAPES IN CERTAIN ROTATIONS
   function descendTetromino() {
     if (checkBottomRow() || checkObstacle() && checkTopRow()) {
       currentTetromino[currentRotation].forEach(value => {
@@ -332,7 +331,6 @@ function init() {
     }
   }
 
-  //! BUG!!!!   SOME ROTATIONS SKIP. CHECK AGAIN
   function rotate() {
     removeTetromino()
     console.log(currentRotation)
@@ -343,7 +341,7 @@ function init() {
     } else if (currentRotation === 'deg180') {
       return currentRotation = 'deg270'
     } else if (currentRotation === 'deg270') {
-      return currentRotation = 'deg90'
+      return currentRotation = 'deg0'
     }
     displayTetromino()
   }
