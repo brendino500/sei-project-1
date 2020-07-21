@@ -225,6 +225,14 @@ function init() {
     return isTopRow
   }
 
+  function checkBelow() {
+    if (currentTetromino.deg0.some(value => (cells[value + currentPosition + width].classList.contains('fixed-tetromino')))) {
+      return false
+    } else {
+      return true
+    }
+  }
+
 
   function checkRight() {
     if (currentTetromino.deg0.some(value => ((value + currentPosition + 1) % 10 === 0))) {
@@ -247,7 +255,7 @@ function init() {
   }
 
   function startTimer() {
-    timerId = setInterval(descendTetromino,400)
+    timerId = setInterval(descendTetromino, 300)
   } 
 
   function descendTetromino() {
@@ -294,7 +302,7 @@ function init() {
   // * MANIPULATE THIS FUNCTION SO THAT EACH KEY HAS IT'S OWN FUNCTION
   // * SOME() METHOD TESTS WHETER AT LEAST ONE ELEMENT IN THE ARRAY PASSES THE TEST. RETURNS BOOLEAN
 
-  function moveLeft() {  //! NEEDS TO CHECK IF LEFT/RIGHT HAS FIXED TETROMINO
+  function moveLeft() { 
     if (checkLeft()) {
       console.log(checkLeft())
       removeTetromino()
@@ -312,11 +320,13 @@ function init() {
     }
   }
 
-  // function moveDown() {
-  //   if (y < width - 1) {
-  //     tetrominoPosition += width
-  //   }
-  // }
+  function moveDown() {
+    if (checkBelow()) {
+      removeTetromino()
+      currentPosition += width
+      displayTetromino()
+    }
+  }
 
   // function enterKey() {
   //*   STARTS GAME
@@ -342,9 +352,7 @@ function init() {
         moveRight()
         break
       case 40:
-        if (y < width - 1) {
-          currentPosition += width
-        }
+        moveDown()
         break
       default:
         break  
