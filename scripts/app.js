@@ -210,11 +210,6 @@ function init() {
     currentTetromino.deg0.forEach(value => {
       if (cells[value + width + currentPosition].classList.contains('fixed-tetromino')) {
         isObstacle = true
-      // } else if (cells[value + currentPosition + 1].classList.contains('fixed-tetromino')) {
-      //   isObstacle = true
-      // } else if (cells[value + currentPosition - 1].classList.contains('fixed-tetromino')) {
-      //   isObstacle = true
-      // }
       }
     })
     return isObstacle
@@ -230,37 +225,30 @@ function init() {
     return isTopRow
   }
 
-  //TODO MAKE A CHECK IF RIGHT CELL HAS A FIXED TETROMINO
+
   function checkRight() {
     if (currentTetromino.deg0.some(value => ((value + currentPosition + 1) % 10 === 0))) {
       return false
     } else if (currentTetromino.deg0.some(value => (cells[value + currentPosition + 1].classList.contains('fixed-tetromino')))) {
       return false
-    } else
+    } else {
       return true
+    }
   }
-  // } else if (currentTetromino.deg0.some(value => {
-  //   console.log(cells[value + currentPosition])
-  //   return (cells[value + currentPosition].classList.contains('fixed-tetromino'))
-  // }
-  
-  // } 
-  //   return false
-  // } else
-  //   return true
-  
 
-  //TODO MAKE A CHECK IF LEFT CELL HAS A FIXED TETROMINO
   function checkLeft() {
     if (currentTetromino.deg0.some(value => ((value + currentPosition) % 10 === 0))) {
       return false
-    } else 
+    } else if (currentTetromino.deg0.some(value => (cells[value + currentPosition - 1].classList.contains('fixed-tetromino')))) {
+      return false
+    } else {
       return true
+    }
   }
 
   function startTimer() {
-    timerId = setInterval(descendTetromino, 400)
-  }
+    timerId = setInterval(descendTetromino,400)
+  } 
 
   function descendTetromino() {
     if (checkBottomRow() || checkObstacle() && checkTopRow()) {
