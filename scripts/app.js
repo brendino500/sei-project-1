@@ -134,9 +134,8 @@ function init() {
   // createGrid() - Creates tetris grid
   // displayTetromino() - gets tetromino on grid
   // removeTetromino() - removes tetromino
-  // descendTetromino() - tetromino moves down the grid
+  // descendTetromino() - tetromino moves down the grid   STARTS GAME
   // getRandomTetromino() - gets random tetromino
-  // startGame() - starts the game
   // moveLeft() - 
   // moveRight() - 
   // moveDown() - slow down
@@ -147,6 +146,8 @@ function init() {
   // updateHighScore() - updates high score when PLAYER LOSES
   // changeLevel() - checks if level needs to change
   // changeSpeed() - checks if speed needs to increase
+  // startTimer() - timer for function and speed. 
+  // gameEnd()
 
 
 
@@ -188,6 +189,8 @@ function init() {
   getRandomTetromino()
   displayTetromino()
 
+
+  // CHECKS FOR TETROMINO   ****************************************************************************************************
   function checkBottomRow() {
     let isBottomRow = false
     currentTetromino.deg0.forEach(value => {
@@ -219,7 +222,7 @@ function init() {
   }
 
   function startTimer() {
-    timerId = setInterval(descendTetromino, 400)
+    timerId = setInterval(descendTetromino, 1000)
   }
 
   // !! NOW THAT TETROMINO IS FALLING IT NEEDS TO KNOW WHEN TO STOP.
@@ -245,6 +248,12 @@ function init() {
 
   startTimer()
 
+  // GAME ENDS FUNCTION. LINKS UP WITH checkTopRow(). IF THAT IS FULFILLED THEN THE SHAPES NEED TO STOP.
+  // POSSIBLY A WINDOW ALERT TO TELL PLAYER SCORE?
+  gameEnd() {
+    
+  }
+
 
 
   // LINK UP ARROW KEYS FOR FUNCTIONALITY   ******************************************************************************************* 
@@ -257,9 +266,8 @@ function init() {
 
 
   // * MANIPULATE THIS FUNCTION SO THAT EACH KEY HAS IT'S OWN FUNCTION
+  // * SOME() METHOD TESTS WHETER AT LEAST ONE ELEMENT IN THE ARRAY PASSES THE TEST. RETURNS BOOLEAN
 
-  // const x = tetrominoPosition % width
-  // const y = Math.floor(tetrominoPosition / width)
   function moveLeft() {  //! <-- move left. If there is a wall, stop it somehow?  KEYCODE 37
     removeTetromino()        
     currentTetromino.some(index => (currentPosition + index) % width === 0) ? true : false
@@ -279,12 +287,14 @@ function init() {
   //   }
   // }
 
-  // function enterBtn() {
-  //   //* STARTS GAME
+  // function enterKey() {
+  //*   STARTS GAME
+  //*   WITH THE ENTER KEY IT WILL ENVOKE descendTetromino()
   // }
 
   // function spacebar() {
-  //   //* FAST DOWN
+  //*  FAST DOWN
+  //*   NEEDS TO CHECK IF DIVS WITH 'FIXEDTETROMINO' IN ADVANCED AND THEN PLACE SHAPE ON ROW ABOVE.
   // }
 
 
