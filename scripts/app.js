@@ -224,16 +224,18 @@ function init() {
   }
 
   function checkRight() {
-    if (currentTetromino.deg0.some(value => ((value + 1) % 10 === 0))) {
+    if (currentTetromino.deg0.some(value => ((value + currentPosition + 1) % 10 === 0))) {
       return false
     } else 
       return true
   }
 
+
+
   //! ACTUALLY PREVENTING TETROMINO FROM MOVING LEFT.
   //! COLOURED SQUARE APPEARS ON 10's ROW
   function checkLeft() {
-    if (currentTetromino.deg0.some(value => (value % 10 === 0))) {
+    if (currentTetromino.deg0.some(value => ((value + currentPosition) % 10 === 0))) {
       return false
     } else 
       return true
@@ -288,21 +290,24 @@ function init() {
   // * MANIPULATE THIS FUNCTION SO THAT EACH KEY HAS IT'S OWN FUNCTION
   // * SOME() METHOD TESTS WHETER AT LEAST ONE ELEMENT IN THE ARRAY PASSES THE TEST. RETURNS BOOLEAN
 
-  function moveLeft() {  //! <-- move left. If there is a wall, stop it somehow?  KEYCODE 37    NEEDS TO DO LEFT AND RIGHT CHECK
+  function moveLeft() {  //! <-- move left. If there is a wall, stop it somehow?  KEYCODE 37    NEEDS TO DO LEFT AND RIGHT CHECK AGAINST BOARDER CELL NUMBERS 
     if (checkLeft()) {
-      removeTetromino()        
+      console.log(checkLeft())
+      removeTetromino()
       currentPosition--
       displayTetromino()
     }
   }
 
   function moveRight() {
+    console.log(checkRight())
     if (checkRight()) {
       removeTetromino()
       currentPosition++
       displayTetromino()
     }
   }
+  
 
   // function moveDown() {
   //   if (y < width - 1) {
@@ -475,17 +480,14 @@ function init() {
 
 
 
-
+  
 }
 
 
 
 window.addEventListener('DOMContentLoaded', init)
 
-
-
-
-// // !! RECURSION 
+// RECURSION
 
 // function countDownFrom(num) {
 //   console.log(num)
