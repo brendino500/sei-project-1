@@ -136,6 +136,10 @@ function init() {
   // removeTetromino() - removes tetromino
   // descendTetromino() - tetromino moves down the grid   STARTS GAME
   // getRandomTetromino() - gets random tetromino
+  // checkBottomRow() - check for bottom row
+  // checkObstacle() - check if next row has class 'fixed'
+  // checkRight() - check if tetromino can move right
+  // checkLeft() - check if tetromino can move left
   // moveLeft() - 
   // moveRight() - 
   // moveDown() - slow down
@@ -181,7 +185,6 @@ function init() {
   }
 
   // REMOVE TETROMINO   ***************************************************************************************************************
-  // !! BUG - WHEN TETROMINO MOVES, THE PREVIOUS CELLS OF WHERE IT WAS BEFORE IS NOT REMOVED.
   function removeTetromino() {
     currentTetromino.deg0.forEach(value => {
       cells[value + currentPosition].classList.remove(currentTetromino.name)   
@@ -192,7 +195,6 @@ function init() {
 
 
   // CHECKS FOR TETROMINO   ****************************************************************************************************
-  // TODO FINISH CHECKS FOR LEFT AND RIGHT. CURRENTLY THE TETROMINO DOES NOT HAVE A BOARDER
   function checkBottomRow() {
     let isBottomRow = false
     currentTetromino.deg0.forEach(value => {
@@ -230,10 +232,6 @@ function init() {
       return true
   }
 
-
-
-  //! ACTUALLY PREVENTING TETROMINO FROM MOVING LEFT.
-  //! COLOURED SQUARE APPEARS ON 10's ROW
   function checkLeft() {
     if (currentTetromino.deg0.some(value => ((value + currentPosition) % 10 === 0))) {
       return false
@@ -242,9 +240,8 @@ function init() {
   }
 
   function startTimer() {
-    timerId = setInterval(descendTetromino, 1000)
+    timerId = setInterval(descendTetromino, 400)
   }
-
 
   function descendTetromino() {
     if (checkBottomRow() || checkObstacle() && checkTopRow()) {
@@ -259,7 +256,7 @@ function init() {
     } else {
       removeTetromino()
       currentPosition += width
-      playerScore += 10
+      playerScore += 1
       console.log(playerScore)
       displayTetromino()
     }
@@ -290,7 +287,7 @@ function init() {
   // * MANIPULATE THIS FUNCTION SO THAT EACH KEY HAS IT'S OWN FUNCTION
   // * SOME() METHOD TESTS WHETER AT LEAST ONE ELEMENT IN THE ARRAY PASSES THE TEST. RETURNS BOOLEAN
 
-  function moveLeft() {  //! <-- move left. If there is a wall, stop it somehow?  KEYCODE 37    NEEDS TO DO LEFT AND RIGHT CHECK AGAINST BOARDER CELL NUMBERS 
+  function moveLeft() {  //! NEEDS TO CHECK IF LEFT/RIGHT HAS FIXED TETROMINO
     if (checkLeft()) {
       console.log(checkLeft())
       removeTetromino()
@@ -307,7 +304,6 @@ function init() {
       displayTetromino()
     }
   }
-  
 
   // function moveDown() {
   //   if (y < width - 1) {
@@ -327,7 +323,6 @@ function init() {
 
 
   // KEYS E FUNCTION ****************************************************************************************************************************************
-  //! CURRENTLY THE SQUARE HAS A BOUNDRY BUT NOT THE SHAPE.
   function handleKeysUp(e) {
     cells[currentPosition].classList.remove(currentTetromino.name)   // <-- removes tetromino from previous position
     const x = currentPosition % width
