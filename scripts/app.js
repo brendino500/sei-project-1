@@ -192,6 +192,7 @@ function init() {
 
 
   // CHECKS FOR TETROMINO   ****************************************************************************************************
+  // TODO FINISH CHECKS FOR LEFT AND RIGHT. CURRENTLY THE TETROMINO DOES NOT HAVE A BOARDER
   function checkBottomRow() {
     let isBottomRow = false
     currentTetromino.deg0.forEach(value => {
@@ -222,14 +223,21 @@ function init() {
     return isTopRow
   }
 
+  function checkRight() {
+    if (currentTetromino.deg0.some(value => ((value + 1) % 10 === 0))) {
+      return false
+    } else 
+      return true
+  }
+
   //! ACTUALLY PREVENTING TETROMINO FROM MOVING LEFT.
   //! COLOURED SQUARE APPEARS ON 10's ROW
-  // function checkLeft() {
-  //   if (currentTetromino.deg0.some(value => (value % 10 === 0))) {
-  //     return true
-  //   } else 
-  //     return false
-  // }
+  function checkLeft() {
+    if (currentTetromino.deg0.some(value => (value % 10 === 0))) {
+      return false
+    } else 
+      return true
+  }
 
   function startTimer() {
     timerId = setInterval(descendTetromino, 1000)
@@ -280,19 +288,21 @@ function init() {
   // * MANIPULATE THIS FUNCTION SO THAT EACH KEY HAS IT'S OWN FUNCTION
   // * SOME() METHOD TESTS WHETER AT LEAST ONE ELEMENT IN THE ARRAY PASSES THE TEST. RETURNS BOOLEAN
 
-  // function moveLeft() {  //! <-- move left. If there is a wall, stop it somehow?  KEYCODE 37    NEEDS TO DO LEFT AND RIGHT CHECK
-  //   if (checkLeft()) {
-  //     removeTetromino()        
-  //     currentPosition--
-  //     displayTetromino()
-  //   }
-  // }
+  function moveLeft() {  //! <-- move left. If there is a wall, stop it somehow?  KEYCODE 37    NEEDS TO DO LEFT AND RIGHT CHECK
+    if (checkLeft()) {
+      removeTetromino()        
+      currentPosition--
+      displayTetromino()
+    }
+  }
 
-  // function moveRight() {
-  //   if (x < width - 1) {
-  //     tetrominoPosition++
-  //   }
-  // }
+  function moveRight() {
+    if (checkRight()) {
+      removeTetromino()
+      currentPosition++
+      displayTetromino()
+    }
+  }
 
   // function moveDown() {
   //   if (y < width - 1) {
@@ -319,14 +329,10 @@ function init() {
     const y = Math.floor(currentPosition / width)
     switch (e.keyCode) {
       case 37:
-        if (x > 0) {
-          currentPosition--
-        }
+        moveLeft()
         break
       case 39:
-        if (x < width - 1) {
-          currentPosition++
-        }
+        moveRight()
         break
       case 40:
         if (y < width - 1) {
