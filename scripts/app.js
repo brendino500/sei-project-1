@@ -122,6 +122,7 @@ function init() {
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
   let currentPosition = null  // <-- Starting position for the top of the grid. Needs to descend. 
+  let currentRotation = ['deg0', 'deg90', 'deg180', 'deg270']
   // let dropSpeed = 1000
   let currentTetromino = null
   let timerId = null
@@ -143,7 +144,8 @@ function init() {
   // moveLeft() - 
   // moveRight() - 
   // moveDown() - slow down
-  // moveUp() - rotate tetromino clockwise 90 deg
+  // fastDown() - appears right at bottom of grid where it will fit
+  // rotate() - rotate tetromino clockwise 90 deg
   // spacebar() - fast down 
   // enterBtn() - starts game from keyboard - player input 
   // handleKeyUp() - specifies player keyboard events
@@ -173,20 +175,18 @@ function init() {
   function getRandomTetromino() {
     currentTetromino = tetrominosArray[Math.floor(Math.random() * tetrominosArray.length)]
   }
-  
 
   // SHOW TETROMINO   ****************************************************************************************************************
   // * THIS FUNCTION DEFINITELY WORKS
   function displayTetromino() {
     currentTetromino.deg0.forEach(value => {
-      console.log(value + currentPosition)
       cells[value + currentPosition].classList.add(currentTetromino.name)
     })
   }
 
   // REMOVE TETROMINO   ***************************************************************************************************************
   function removeTetromino() {
-    currentTetromino.deg0.forEach(value => {
+    currentTetromino[currentRotation].forEach(value => {
       cells[value + currentPosition].classList.remove(currentTetromino.name)   
     })
   }
@@ -233,7 +233,6 @@ function init() {
     }
   }
 
-
   function checkRight() {
     if (currentTetromino.deg0.some(value => ((value + currentPosition + 1) % 10 === 0))) {
       return false
@@ -254,6 +253,8 @@ function init() {
     }
   }
 
+
+  // GAME FUNCTIONS  *****************************************************************************************************
   function startTimer() {
     timerId = setInterval(descendTetromino, 300)
   } 
@@ -295,6 +296,7 @@ function init() {
   // ARROW DOWN - 40
   // ARROW RIGHT - 39
   // ARROWN LEFT - 37
+  // ARROW UP - 38
   // ENTER KEY - 13
   // SPACE KEY - 32
 
@@ -328,22 +330,37 @@ function init() {
     }
   }
 
+  function rotate() {
+    removeTetromino()
+    console.log(currentRotation)
+    if (currentRotation === 'deg0') {
+      return currentRotation = 'deg90'
+    } else if (currentRotation === 'deg90') {
+      return currentRotation = 'deg180'
+    } else if (currentRotation === 'deg180') {
+      return currentRotation = 'deg270'
+    } else if (currentRotation === 'deg270') {
+      return currentRotation = 'deg90'
+    }
+    displayTetromino()
+  }
+
   // function enterKey() {
   //*   STARTS GAME
   //*   WITH THE ENTER KEY IT WILL ENVOKE descendTetromino()
   // }
 
-  // function spacebar() {
   //*  FAST DOWN
   //*   NEEDS TO CHECK IF DIVS WITH 'FIXEDTETROMINO' IN ADVANCED AND THEN PLACE SHAPE ON ROW ABOVE.
-  // }
+  function fastDown() {
+
+  }
+
 
 
   // KEYS E FUNCTION ****************************************************************************************************************************************
   function handleKeysUp(e) {
     cells[currentPosition].classList.remove(currentTetromino.name)   // <-- removes tetromino from previous position
-    const x = currentPosition % width
-    const y = Math.floor(currentPosition / width)
     switch (e.keyCode) {
       case 37:
         moveLeft()
@@ -353,6 +370,11 @@ function init() {
         break
       case 40:
         moveDown()
+        break
+      case 38:
+        rotate()
+        break
+      case 32:      //! <-- fast down
         break
       default:
         break  
