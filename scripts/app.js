@@ -208,14 +208,24 @@ function init() {
     return isObstacle
   }
 
+  function checkTopRow() {
+    let isTopRow = false
+    currentTetromino.deg0.forEach(value => {
+      if (value + currentPosition > 0 ) {
+        isTopRow = true
+      }
+    })
+    return isTopRow
+  }
+
   function startTimer() {
-    timerId = setInterval(descendTetromino, 1000)
+    timerId = setInterval(descendTetromino, 400)
   }
 
   // !! NOW THAT TETROMINO IS FALLING IT NEEDS TO KNOW WHEN TO STOP.
   // ! CHANGE SO THAT IT CHECKS IF THE CELL BELOW IS DIV CLASS 'BOTTOM-ROW'. IF BOTTOM ROW, FIX TETROMINO IN PLACE
   function descendTetromino() {
-    if (checkBottomRow() || checkObstacle()) {
+    if (checkBottomRow() || checkObstacle() && checkTopRow()) {
       currentTetromino.deg0.forEach(value => {
         cells[value + currentPosition].classList.add('fixed-tetromino')
       })

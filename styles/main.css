@@ -81,6 +81,11 @@ body {
   border: 1px #ABABAB;
 }
 
-.grid div.fixed-tetromino {
-  background-color: #118F7D
+
+/* To keep the fixed tetromino the same colour, leave this empty  */
+.grid div.fixed-tetromino {    
+  background-color: #619196
 }
+
+
+
