@@ -9,6 +9,15 @@
 #ABABAB  <-- border
 #118F7D Fixed tetromino
 font-family: 'Rubik', sans-serif;
+
+#E0BE40
+#9D2D84
+#E040BC
+#2D9D96
+#40E0D0
+#9D862D
+
+
  */
 
 
@@ -48,44 +57,44 @@ body {
 /* TETRIMINOS SHAPES  ******************************************/
 
 .grid div.iTetromino {
-  background-color: #DFC7C1;
+  background-color: #E0BE40;
   border: 1px #ABABAB;
 } 
 
 .grid div.oTetromino {
-  background-color: #F4DCD6;
+  background-color: #9D2D84;
   border: 1px #ABABAB;
 }
 
 .grid div.tTetromino {
-  background-color: #B2D9EA;
+  background-color: #E040BC;
   border: 1px #ABABAB;
 }
 
 .grid div.sTetromino {
-  background-color: #619196;
+  background-color: #2D9D96;
   border: 1px #ABABAB;
 }
 
 .grid div.zTetromino {
-  background-color: #FCF0CF;
+  background-color: #40E0D0;
   border: 1px #ABABAB;
 }
 
 .grid div.jTetromino {
-  background-color: #F1CDB0;
+  background-color: #9D862D;
   border: 1px #ABABAB;
 }
 
 .grid div.lTetromino {
-  background-color: #84B4C8;
+  background-color: white;
   border: 1px #ABABAB;
 }
 
 
 /* To keep the fixed tetromino the same colour, leave this empty  */
 .grid div.fixed-tetromino {    
-  background-color: 
+  background-color:  
 }
 
 
