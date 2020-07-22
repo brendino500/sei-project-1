@@ -3,7 +3,8 @@
 // TODO   TIMER OF TETROMINOS.
 // TODO 
 // TODO SCORING SYSTEM
-// TODO   FOLLOW ORIGINAL SCORE SYSTEM
+// TODO  IMPLEMENT SCORE SYSTEM. ADD IN CORRECT PLACES
+//       FOLLOW ORIGINAL SCORE SYSTEM
 //        AS EACH TETROMINO FALLS TO EACH ROW ADD 10 POINTS
 // TODO 
 //       CLASSES  FOR EACH TETROMINOS
@@ -21,23 +22,22 @@
 // TODO 
 // TODO DIFFERENT FUNCTIONS FOR DIFFERENT LEVELS?   RECURSION?
 // TODO   EASIER CONTROL/CODE FOR POINTS AND SPEED OF DESCENDING TETROMINOS
-// TODO 
-// TODO FIGURE OUT 
+// TODO  
 //      HOW TO STOP TETROMINO FILLING IN A CLASS     .CONTAINS()
-// TODO   STOP ROTATION AT BORDER    
+//         STOP ROTATION AT BORDER    
 // TODO 
-// TODO FIX THE BUG WHICH HIGHLIGHTS A SQUARE AT CELL 0 AND CHANGES COLOUR. THERE IS A FLOATER
-// TODO    SQUARE WHICH FOLLOWS THE TETROMINO. --> currentPosition 
+//      FIX THE BUG WHICH HIGHLIGHTS A SQUARE AT CELL 0 AND CHANGES COLOUR. THERE IS A FLOATER
+//        SQUARE WHICH FOLLOWS THE TETROMINO. --> currentPosition 
 // TODO 
 // TODO DO A CHECK FOR TOP ROW. AT THE MOMENT THE TETROMINOS WILL JUST FALL ONTOP. NEVER ENDING LOOP.
-// TODO    SAME AS BOTTOM ROW.     THIS WILL END THE GAME.     .CONTAINS()
+// TODO          THIS WILL END THE GAME.     .CONTAINS()
 // TODO
 // TODO CHECK IF BOTTOM ROW IS FULL - CHECK IF WHOLE ROW HAS 'fixed-tetromino'.    .every() 
 // TODO   REMOVE ROW AND ADD A WHOLE NEW ROW AT THE TOP?
 // TODO             OR
 // TODO   REMOVE 'fixed-tetromino' DIVS AND ALL DIVS ABOVE TO + width
 // TODO 
-// TODO 
+// TODO  HOW TO DO A FAST DOWN. CHECK IF LOWER TETROMINOS HAVE A 'fixed-tetromino' AND DROP TO ROW ABOVE.
 // TODO 
 // TODO 
 // TODO *****************************************************************************************
@@ -50,7 +50,7 @@ function init() {
   const cells = []     // <-- empty array for cells
 
 
-  // * GRID VARIABLES ********************************************************************************************************************************************
+  // * GRID VARIABLES ***********************************************************************************************************************************
 
   // ? 10 x 20  dimentions of grid
 
@@ -59,10 +59,6 @@ function init() {
   const numberOfCells = width * height
 
   // * TETRIMINOS SHAPE  ****************************************************************************************************************************************
-  // * 0 = start position.  1 = 90 deg clockwise.   2 = 180 deg.      3 = 270 deg.
-
-
-  // TODO MAKE ALL TETROMINOS START ON 0
   const iTetromino = {
     name: 'iTetromino', 
     deg0: [0, 1, 2, 3],
@@ -137,6 +133,7 @@ function init() {
 
 
 
+
   // * FUNCTIONS  ****************************************************************************************************************************************
   // * FUNCTION NAMES SO FAR AND DESCRIPTION OF WHAT THEY DO
 
@@ -186,7 +183,6 @@ function init() {
   }
 
   // SHOW TETROMINO   ****************************************************************************************************************
-  // * THIS FUNCTION DEFINITELY WORKS
   function displayTetromino() {
     currentTetromino[currentRotation].forEach(value => {
       cells[value + currentPosition].classList.add(currentTetromino.name)
@@ -266,23 +262,23 @@ function init() {
   // CHECKS FOR FULL ROW AND CLEAR ROW   ******************************************************************************************
   // TODO CHECKS IF ROW IS FULL. IF SO REMOVE ROW AND MOVE ADJACENT ROWS DOWN.
   // !! EVERY RETURNS BOOLEAN
-  function isRowFull() {
-    for (let i = 0; i <= 9; i++) {
-      if (rowNumber[i].every(value => (cells[value].classList.contains('fixed-tetromino')))) {
-        return true
-      } else {
-        return false
-      }
-    }
-  } 
+  // function isRowFull() {
+  //   for (let i = 0; i <= rowNumber.length; i++) {
+  //     if (rowNumber[i].every(value => (cells[value].classList.contains('fixed-tetromino')))) {
+  //       return true
+  //     } else {
+  //       return false
+  //     }
+  //   }
+  // } 
   
-  function clearRow() {
-    if (isRowFull()) {
-      rowNumber[].forEach(value => {
-        cells[value].classList.remove('fixed-tetromino')
-      })
-    }
-  }
+  // function clearRow() {
+  //   if (isRowFull()) {
+  //     rowNumber.forEach(value => {
+  //       cells[value].classList.remove('fixed-tetromino')
+  //     })
+  //   }
+  // }
 
 
   // GAME FUNCTIONS  *******************************************************************************************************************
@@ -308,7 +304,7 @@ function init() {
     }
   }
 
-  startTimer()
+  // startTimer()
 
 
   // END GAME FUNCTIONS *******************************************************************************************************
@@ -325,7 +321,7 @@ function init() {
 
 
   // LINK UP ARROW KEYS FOR FUNCTIONALITY   ******************************************************************************************* 
-  // TODO FUNCTIONALITY FOR THESE TWO KEYS
+  // TODO      FUNCTIONALITY FOR THESE TWO KEYS
   // ENTER KEY - 13
   // SPACE KEY - 32
 
@@ -401,6 +397,9 @@ function init() {
         break
       case 38:
         rotate()
+        break
+      case 13:
+        startTimer()    //! <-- this works, but need to fix bug. Tetromino displays without pressing the enter key
         break
       case 32:      //! <-- fast down.  SPACE BAR
         break
