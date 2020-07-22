@@ -63,58 +63,58 @@ function init() {
 
   const iTetromino = {
     name: 'iTetromino', 
-    deg0: [4, 5, 6, 7],
-    deg90: [6, 16, 26, 36],
-    deg180: [24, 25, 26, 27],
-    deg270: [5, 15, 25, 35]
+    deg0: [0, 1, 2, 3],
+    deg90: [2, 12, 22, 32],
+    deg180: [20, 21, 22, 23],
+    deg270: [1, 11, 21, 31]
   }
 
   const tTetromino = {
     name: 'tTetromino',
-    deg0: [4, 13, 14, 15],
-    deg90: [4, 14, 15, 24],
-    deg180: [13, 14, 15, 24],
-    deg270: [4, 13, 14, 24]
+    deg0: [1, 10, 11, 12],
+    deg90: [1, 11, 12, 21],
+    deg180: [10, 11, 12, 21],
+    deg270: [1, 10, 11, 21]
   }
 
   const sTetromino = {
     name: 'sTetromino',
-    deg0: [4, 5, 13, 14],
-    deg90: [4, 14, 15, 25],
-    deg180: [4, 5, 13, 14],
-    deg270: [4, 14, 15, 25]
+    deg0: [1, 2, 10, 11],
+    deg90: [1, 11, 12, 22],
+    deg180: [1, 2, 10, 11],
+    deg270: [1, 11, 12, 22]
   }
 
   const oTetromino = {
     name: 'oTetromino',
-    deg0: [4, 5, 14, 15],
-    deg90: [4, 5, 14, 15],
-    deg180: [4, 5, 14, 15],
-    deg270: [4, 5, 14, 15]
+    deg0: [1, 2, 11, 12],
+    deg90: [1, 2, 11, 12],
+    deg180: [1, 2, 11, 12],
+    deg270: [1, 2, 11, 12]
   }
 
   const zTetromino = {
     name: 'zTetromino',
-    deg0: [3, 4, 14, 15],
-    deg90: [5, 14, 15, 24],
-    deg180: [3, 4, 14, 15],
-    deg270: [5, 14, 15, 24]
+    deg0: [0, 1, 11, 12],
+    deg90: [2, 11, 12, 21],
+    deg180: [0, 1, 11, 12],
+    deg270: [2, 11, 12, 21]
   }
 
   const jTetromino = { 
     name: 'jTetromino',
-    deg0: [4, 14, 15, 16],
-    deg90: [5, 6, 15, 25],
-    deg180: [14, 15, 16, 26],
-    deg270: [5, 15, 24, 25]
+    deg0: [0, 10, 11, 12],
+    deg90: [1, 2, 11, 21],
+    deg180: [10, 11, 12, 22],
+    deg270: [1, 11, 21, 20]
   }
 
   const lTetromino = {      
     name: 'lTetromino',
-    deg0: [14, 15, 16, 6],
-    deg90: [5, 15, 25, 26],
-    deg180: [14, 15, 16, 24],
-    deg270: [4, 5, 15, 25]
+    deg0: [2, 10, 11, 12],
+    deg90: [1, 11, 21, 22],
+    deg180: [10, 11, 12, 20],
+    deg270: [0, 1, 11, 21]
   }
 
 
@@ -126,7 +126,7 @@ function init() {
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
-  let currentPosition = null  // <-- Starting position for the top of the grid. Needs to descend. 
+  let currentPosition = 4  // <-- Starting position for the top of the grid. Needs to descend. 
   let currentRotation = 'deg0'
   // let dropSpeed = 1000
   let currentTetromino = null
