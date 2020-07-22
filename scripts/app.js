@@ -57,6 +57,7 @@ function init() {
   const width = 10
   const height = 22
   const numberOfCells = width * height
+  let rowFull = []
 
   // * TETRIMINOS SHAPE  ****************************************************************************************************************************************
   // * 0 = start position.  1 = 90 deg clockwise.   2 = 180 deg.      3 = 270 deg.
@@ -263,7 +264,11 @@ function init() {
 
   // TODO CHECKS IF ROW IS FULL. IF SO REMOVE ROW AND MOVE ADJACENT ROWS DOWN.
   function isRowFull() {
-
+    for (let i = 0; i < rowFull.length; i++) {
+      if (rowFull[i].every(value => value.classList.contains('fixed-tetromino'))) {
+        CLEAR   .push
+      }
+    }
   }
 
 
