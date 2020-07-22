@@ -32,10 +32,14 @@
 // TODO DO A CHECK FOR TOP ROW. AT THE MOMENT THE TETROMINOS WILL JUST FALL ONTOP. NEVER ENDING LOOP.
 // TODO    SAME AS BOTTOM ROW.     THIS WILL END THE GAME.     .CONTAINS()
 // TODO
-// TODO
-// TODO
-// TODO
-// TODO
+// TODO CHECK IF BOTTOM ROW IS FULL - CHECK IF WHOLE ROW HAS 'fixed-tetromino'.    .every() 
+// TODO   REMOVE ROW AND ADD A WHOLE NEW ROW AT THE TOP?
+// TODO             OR
+// TODO   REMOVE 'fixed-tetromino' DIVS AND ALL DIVS ABOVE TO + width
+// TODO 
+// TODO 
+// TODO 
+// TODO 
 // TODO *****************************************************************************************
 
 
@@ -252,6 +256,11 @@ function init() {
     } else {
       return true
     }
+  }
+
+  // TODO CHECKS IF ROW IS FULL. IF SO REMOVE ROW AND MOVE ADJACENT ROWS DOWN.
+  function isRowFull() {
+
   }
 
 
