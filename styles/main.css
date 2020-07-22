@@ -16,7 +16,7 @@ font-family: 'Rubik', sans-serif;
 #2D9D96
 #40E0D0
 #9D862D
-
+#2D6D9D
 
  */
 
@@ -87,14 +87,14 @@ body {
 }
 
 .grid div.lTetromino {
-  background-color: white;
+  background-color: #2D6D9D;
   border: 1px #ABABAB;
 }
 
 
 /* To keep the fixed tetromino the same colour, leave this empty  */
 .grid div.fixed-tetromino {    
-  background-color: 
+  background-color: goldenrod
 }
 
 

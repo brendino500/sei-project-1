@@ -177,7 +177,6 @@ function init() {
   // let dropSpeed = 1000
   let currentTetromino = null
   let timerId = null
-  let rowNumber = [[210, 211, 212, 213, 214, 215, 216, 217, 218, 219]]
 
 
 
@@ -195,6 +194,8 @@ function init() {
   // checkRight() - check if tetromino can move right
   // checkLeft() - check if tetromino can move left
   // isRowFull() - 
+  // clearRow() -
+  // shiftGridDown() - moves the remaining tetrominos down the grid
   // moveLeft() - 
   // moveRight() - 
   // moveDown() - slow down
@@ -308,23 +309,34 @@ function init() {
 
 
   // CHECKS FOR FULL ROW AND CLEAR ROW   ******************************************************************************************
-  // TODO CHECKS IF ROW IS FULL. IF SO REMOVE ROW AND MOVE ADJACENT ROWS DOWN.
-  // !! EVERY RETURNS BOOLEAN
+  // CHECKING EVERY ROW
+  // ! BUG !!!!!!!!!!!!!!!
   function isRowFull() {
-    for (let i = 0; i <= rowNumber.length - 1; i++) {
-      if (rowNumber[i].every(value => (cells[value].classList.contains('fixed-tetromino')))) {
-        clearRow(rowNumber[i])
-      } else {
-        return false
+    for (let i = cells.length - 1; i >= 0; i--) {
+      if (i % 10 === 0) {
+        const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9]
+        if (row.every(value => (cells[value].classList.contains('fixed-tetromino')))) {
+          clearRow(row)
+        }
       }
     }
   } 
-
   
+  //! BUG !!!!!!!!!!!!!!!
   function clearRow(rowToClear) {
-    console.log(rowToClear)
     rowToClear.forEach(value => {
       cells[value].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
+    })
+    shiftGridDown()
+  }
+
+  //! BUG !!!!!!!!!!!!!!!
+  function shiftGridDown() {
+    cells.forEach((value, index) => {
+      if (cells[index].classList.contains('fixed-tetromino')) {
+        cells[index].classList.remove('fixed-tetromino')
+        cells[index + width].classList.add('fixed-tetromino')
+      }
     })
   }
 
@@ -338,6 +350,7 @@ function init() {
   function descendTetromino() {
     if (checkBottomRow() || checkObstacle() && checkTopRow()) {
       currentTetromino[currentRotation].forEach(value => {
+        cells[value + currentPosition].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
         cells[value + currentPosition].classList.add('fixed-tetromino')
       })
       clearInterval(timerId)                      
