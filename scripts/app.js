@@ -61,6 +61,8 @@ function init() {
   // * TETRIMINOS SHAPE  ****************************************************************************************************************************************
   // * 0 = start position.  1 = 90 deg clockwise.   2 = 180 deg.      3 = 270 deg.
 
+
+  // TODO MAKE ALL TETROMINOS START ON 0
   const iTetromino = {
     name: 'iTetromino', 
     deg0: [0, 1, 2, 3],
@@ -126,7 +128,7 @@ function init() {
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
-  let currentPosition = 4  // <-- Starting position for the top of the grid. Needs to descend. 
+  let currentPosition = 3  // <-- Starting position for the top of the grid. Needs to descend. 
   let currentRotation = 'deg0'
   // let dropSpeed = 1000
   let currentTetromino = null
@@ -230,6 +232,7 @@ function init() {
     return isTopRow
   }
 
+  //! BUG BUG BUG!!! DOESN'T REGISTER HIGHEST VALUE CELL NUMBER. WILL GO THROUGH TETROMINO AND FIX. 
   function checkBelow() {
     if (currentTetromino[currentRotation].some(value => (cells[value + currentPosition + width].classList.contains('fixed-tetromino')))) {
       return false
@@ -272,10 +275,10 @@ function init() {
   function descendTetromino() {
     if (checkBottomRow() || checkObstacle() && checkTopRow()) {
       currentTetromino[currentRotation].forEach(value => {
-        cells[value + currentPosition].classList.add('fixed-tetromino')
+        cells[value + currentPosition + 1].classList.add('fixed-tetromino')
       })
       clearInterval(timerId)                      
-      currentPosition = 4
+      currentPosition = 3
       getRandomTetromino()
       displayTetromino()
       startTimer()
@@ -333,6 +336,7 @@ function init() {
   }
 
   function moveDown() {
+    console.log(checkBelow())
     if (checkBelow()) {
       removeTetromino()
       currentPosition += width
@@ -387,9 +391,11 @@ function init() {
       case 32:      //! <-- fast down
         break
       default:
+        console.log('invalid key')
         break  
     }
-    cells[currentPosition].classList.add(currentTetromino.name)  // <-- adds tetromino to new position
+    //! BUG FIXED HOWEVER THIS LINE COMES UP WITH AN ERROR
+    cells[currentTetromino].classList.add(currentTetromino.name)  // <-- adds tetromino to new position
   }
 
     
