@@ -216,7 +216,7 @@ function init() {
   function checkObstacle() {
     let isObstacle = false
     currentTetromino[currentRotation].forEach(value => {
-      if (cells[value + width + currentPosition].classList.contains('fixed-tetromino')) {
+      if (cells[value + width + currentPosition + 1].classList.contains('fixed-tetromino')) {
         isObstacle = true
       }
     })
@@ -233,14 +233,6 @@ function init() {
     return isTopRow
   }
 
-  //! BUG BUG BUG!!! DOESN'T REGISTER HIGHEST VALUE CELL NUMBER. WILL GO THROUGH TETROMINO AND FIX. 
-  function checkBelow() {
-    if (currentTetromino[currentRotation].some(value => (cells[value + currentPosition + width].classList.contains('fixed-tetromino')))) {
-      return false
-    } else {
-      return true
-    }
-  }
 
   function checkRight() {
     if (currentTetromino[currentRotation].some(value => ((value + currentPosition + 1) % 10 === 0))) {
@@ -264,10 +256,6 @@ function init() {
 
   // TODO CHECKS IF ROW IS FULL. IF SO REMOVE ROW AND MOVE ADJACENT ROWS DOWN.
   function isRowFull() {
-    for (let i = 0; i < rowFull.length; i++) {
-      if (rowFull[i].every(value => value.classList.contains('fixed-tetromino'))) {
-        CLEAR   .push
-      }
     }
   }
 
@@ -288,11 +276,9 @@ function init() {
       displayTetromino()
       startTimer()
     } else {
-      removeTetromino()
-      currentPosition += width
+      moveDown()
       playerScore += 1
       console.log(playerScore)
-      displayTetromino()
     }
   }
 
@@ -341,8 +327,7 @@ function init() {
   }
 
   function moveDown() {
-    console.log(checkBelow())
-    if (checkBelow()) {
+    if (!checkObstacle() && !checkBottomRow()) {
       removeTetromino()
       currentPosition += width
       displayTetromino()
@@ -379,7 +364,6 @@ function init() {
 
   // KEYS E FUNCTION ****************************************************************************************************************************************
   function handleKeysUp(e) {
-    cells[currentPosition].classList.remove(currentTetromino.name)   // <-- removes tetromino from previous position
     switch (e.keyCode) {
       case 37:
         moveLeft()
@@ -399,8 +383,6 @@ function init() {
         console.log('invalid key')
         break  
     }
-    //! BUG FIXED HOWEVER THIS LINE COMES UP WITH AN ERROR
-    cells[currentTetromino].classList.add(currentTetromino.name)  // <-- adds tetromino to new position
   }
 
     
