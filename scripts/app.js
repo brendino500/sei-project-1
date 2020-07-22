@@ -43,6 +43,36 @@
 // TODO *****************************************************************************************
 
 
+const cells = Array(220).fill('')
+const rows = []
+let count = 0
+cells.forEach(cell => {
+  if (count === 0) {
+    rows.push([cell])
+  }
+  rows[rows.length - 1].push(cell)
+  count++
+  if (count >= 9) {
+    count = 0
+  }
+})
+function isFullRow(row) {
+  return row.every(item => {
+    item.classList.contains('tetromino')
+  })
+}
+function clearRow(row) {
+  row.forEach(item => {
+    item.classList.remove('tetromino')
+  })
+}
+rows.forEach(row => {
+  if (isFullRow(row)) {
+    // * logic here to clear it
+    clearRow(row)
+  }
+})
+
 function init() {
   // * DOM ELEMENTS ****************************************************************************************************************************************
 
@@ -262,23 +292,23 @@ function init() {
   // CHECKS FOR FULL ROW AND CLEAR ROW   ******************************************************************************************
   // TODO CHECKS IF ROW IS FULL. IF SO REMOVE ROW AND MOVE ADJACENT ROWS DOWN.
   // !! EVERY RETURNS BOOLEAN
-  // function isRowFull() {
-  //   for (let i = 0; i <= rowNumber.length; i++) {
-  //     if (rowNumber[i].every(value => (cells[value].classList.contains('fixed-tetromino')))) {
-  //       return true
-  //     } else {
-  //       return false
-  //     }
-  //   }
-  // } 
+  function isRowFull() {
+    for (let i = 0; i <= rowNumber.length; i++) {
+      if (rowNumber[i].every(value => (cells[value].classList.contains('fixed-tetromino')))) {
+        return true
+      } else {
+        return false
+      }
+    }
+  } 
   
-  // function clearRow() {
-  //   if (isRowFull()) {
-  //     rowNumber.forEach(value => {
-  //       cells[value].classList.remove('fixed-tetromino')
-  //     })
-  //   }
-  // }
+  function clearRow() {
+    if (isRowFull()) {
+      rowNumber.forEach(value => {
+        cells[value].classList.remove('fixed-tetromino')
+      })
+    }
+  }
 
 
   // GAME FUNCTIONS  *******************************************************************************************************************
