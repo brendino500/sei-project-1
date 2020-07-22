@@ -275,7 +275,7 @@ function init() {
         cells[value + currentPosition].classList.add('fixed-tetromino')
       })
       clearInterval(timerId)                      
-      currentPosition = 0
+      currentPosition = 4
       getRandomTetromino()
       displayTetromino()
       startTimer()
