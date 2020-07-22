@@ -43,46 +43,64 @@
 // TODO *****************************************************************************************
 
 
-const cells = Array(220).fill('')
-const rows = []
-let count = 0
-cells.forEach(cell => {
-  if (count === 0) {
-    rows.push([cell])
-  }
-  rows[rows.length - 1].push(cell)
-  count++
-  if (count >= 9) {
-    count = 0
-  }
-})
-function isFullRow(row) {
-  return row.every(item => {
-    item.classList.contains('tetromino')
-  })
-}
-function clearRow(row) {
-  row.forEach(item => {
-    item.classList.remove('tetromino')
-  })
-}
-rows.forEach(row => {
-  if (isFullRow(row)) {
-    // * logic here to clear it
-    clearRow(row)
-  }
-})
+// const cells = Array(220).fill('')
+// const rows = []
+// let count = 0
+// cells.forEach(cell => {
+//   if (count === 0) {
+//     rows.push([cell])
+//   }
+//   rows[rows.length - 1].push(cell)
+//   count++
+//   if (count >= 9) {
+//     count = 0
+//   }
+// })
+// function isFullRow(row) {
+//   return row.every(item => {
+//     item.classList.contains('tetromino')
+//   })
+// }
+// function clearRow(row) {
+//   row.forEach(item => {
+//     item.classList.remove('tetromino')
+//   })
+// }
+// rows.forEach(row => {
+//   if (isFullRow(row)) {
+//     // * logic here to clear it
+//     clearRow(row)
+//   }
+// })
 
 function init() {
   // * DOM ELEMENTS ****************************************************************************************************************************************
 
   const grid = document.querySelector('.grid')
-  const cells = []     // <-- empty array for cells
+  const cells = []
 
 
   // * GRID VARIABLES ***********************************************************************************************************************************
 
   // ? 10 x 20  dimentions of grid
+
+  // const cells = Array(220).fill('')
+  // const rows = []
+  // let count = 0
+
+
+  // cells.forEach(cell => {
+  //   if (count === 0) {
+  //     rows.push([cell])
+  //   }
+  //   rows[rows.length - 1].push(cell)
+  //   count++
+  //   if (count >= 9) {
+  //     count = 0
+  //   }
+  // })
+  
+
 
   const width = 10
   const height = 22
@@ -159,7 +177,7 @@ function init() {
   // let dropSpeed = 1000
   let currentTetromino = null
   let timerId = null
-  let rowNumber = []
+  let rowNumber = [[210, 211, 212, 213, 214, 215, 216, 217, 218, 219]]
 
 
 
@@ -293,21 +311,21 @@ function init() {
   // TODO CHECKS IF ROW IS FULL. IF SO REMOVE ROW AND MOVE ADJACENT ROWS DOWN.
   // !! EVERY RETURNS BOOLEAN
   function isRowFull() {
-    for (let i = 0; i <= rowNumber.length; i++) {
+    for (let i = 0; i <= rowNumber.length - 1; i++) {
       if (rowNumber[i].every(value => (cells[value].classList.contains('fixed-tetromino')))) {
-        return true
+        clearRow(rowNumber[i])
       } else {
         return false
       }
     }
   } 
+
   
-  function clearRow() {
-    if (isRowFull()) {
-      rowNumber.forEach(value => {
-        cells[value].classList.remove('fixed-tetromino')
-      })
-    }
+  function clearRow(rowToClear) {
+    console.log(rowToClear)
+    rowToClear.forEach(value => {
+      cells[value].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
+    })
   }
 
 
@@ -330,8 +348,8 @@ function init() {
     } else {
       moveDown()
       playerScore += 1
-      console.log(playerScore)
     }
+    isRowFull()
   }
 
   // startTimer()
