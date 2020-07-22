@@ -57,7 +57,6 @@ function init() {
   const width = 10
   const height = 22
   const numberOfCells = width * height
-  let rowFull = []
 
   // * TETRIMINOS SHAPE  ****************************************************************************************************************************************
   // * 0 = start position.  1 = 90 deg clockwise.   2 = 180 deg.      3 = 270 deg.
@@ -134,6 +133,7 @@ function init() {
   // let dropSpeed = 1000
   let currentTetromino = null
   let timerId = null
+  let rowNumber = []
 
 
 
@@ -149,6 +149,7 @@ function init() {
   // checkObstacle() - check if next row has class 'fixed'
   // checkRight() - check if tetromino can move right
   // checkLeft() - check if tetromino can move left
+  // isRowFull() - 
   // moveLeft() - 
   // moveRight() - 
   // moveDown() - slow down
@@ -216,7 +217,7 @@ function init() {
   function checkObstacle() {
     let isObstacle = false
     currentTetromino[currentRotation].forEach(value => {
-      if (cells[value + width + currentPosition + 1].classList.contains('fixed-tetromino')) {
+      if (cells[value + width + currentPosition].classList.contains('fixed-tetromino')) {
         isObstacle = true
       }
     })
@@ -232,7 +233,6 @@ function init() {
     })
     return isTopRow
   }
-
 
   function checkRight() {
     if (currentTetromino[currentRotation].some(value => ((value + currentPosition + 1) % 10 === 0))) {
@@ -254,10 +254,26 @@ function init() {
     }
   }
 
-  // TODO CHECKS IF ROW IS FULL. IF SO REMOVE ROW AND MOVE ADJACENT ROWS DOWN.
-  function isRowFull() {
+  function canRotate() {
+    if (currentTetromino[currentRotation].some(value => ((value + currentPosition + 1) % 10 === 0)) || currentTetromino[currentRotation].some(value => ((value + currentPosition) % 10 === 0)))  {
+      return false
+    } else {
+      return true
     }
   }
+
+  // TODO CHECKS IF ROW IS FULL. IF SO REMOVE ROW AND MOVE ADJACENT ROWS DOWN.
+  // !! EVERY RETURNS BOOLEAN
+  function isRowFull() {
+    for (let i = 0; i <= 9; i++) {
+      if (rowNumber[i].every(value => (cells[value].classList.contains('fixed-tetromino')))) {
+        return true
+      } else {
+        return false
+      }
+    }
+  } 
+  
 
 
   // GAME FUNCTIONS  *****************************************************************************************************
@@ -268,7 +284,7 @@ function init() {
   function descendTetromino() {
     if (checkBottomRow() || checkObstacle() && checkTopRow()) {
       currentTetromino[currentRotation].forEach(value => {
-        cells[value + currentPosition + 1].classList.add('fixed-tetromino')
+        cells[value + currentPosition].classList.add('fixed-tetromino')
       })
       clearInterval(timerId)                      
       currentPosition = 3
@@ -337,13 +353,13 @@ function init() {
   function rotate() {
     removeTetromino()
     console.log(currentRotation)
-    if (currentRotation === 'deg0') {
+    if (currentRotation === 'deg0' && canRotate()) {
       return currentRotation = 'deg90'
-    } else if (currentRotation === 'deg90') {
+    } else if (currentRotation === 'deg90' && canRotate()) {
       return currentRotation = 'deg180'
-    } else if (currentRotation === 'deg180') {
+    } else if (currentRotation === 'deg180' && canRotate()) {
       return currentRotation = 'deg270'
-    } else if (currentRotation === 'deg270') {
+    } else if (currentRotation === 'deg270' && canRotate()) {
       return currentRotation = 'deg0'
     }
     displayTetromino()
@@ -356,9 +372,8 @@ function init() {
 
   //*  FAST DOWN
   //*   NEEDS TO CHECK IF DIVS WITH 'FIXEDTETROMINO' IN ADVANCED AND THEN PLACE SHAPE ON ROW ABOVE.
-  function fastDown() {
-
-  }
+  // function fastDown() {
+  // }
 
 
 
@@ -514,8 +529,6 @@ function init() {
 
 
 
-
-  
 }
 
 
