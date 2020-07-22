@@ -262,6 +262,8 @@ function init() {
     }
   }
 
+
+  // CHECKS FOR FULL ROW AND CLEAR ROW   ******************************************************************************************
   // TODO CHECKS IF ROW IS FULL. IF SO REMOVE ROW AND MOVE ADJACENT ROWS DOWN.
   // !! EVERY RETURNS BOOLEAN
   function isRowFull() {
@@ -274,13 +276,21 @@ function init() {
     }
   } 
   
+  function clearRow() {
+    if (isRowFull()) {
+      rowNumber[].forEach(value => {
+        cells[value].classList.remove('fixed-tetromino')
+      })
+    }
+  }
 
 
-  // GAME FUNCTIONS  *****************************************************************************************************
+  // GAME FUNCTIONS  *******************************************************************************************************************
   function startTimer() {
     timerId = setInterval(descendTetromino, 300)
   } 
 
+  // STARTS THE GAME ************************************
   function descendTetromino() {
     if (checkBottomRow() || checkObstacle() && checkTopRow()) {
       currentTetromino[currentRotation].forEach(value => {
@@ -300,8 +310,11 @@ function init() {
 
   startTimer()
 
-  // GAME ENDS FUNCTION. LINKS UP WITH checkTopRow(). IF THAT IS FULFILLED THEN THE SHAPES NEED TO STOP.
-  // POSSIBLY A WINDOW ALERT TO TELL PLAYER SCORE?
+
+  // END GAME FUNCTIONS *******************************************************************************************************
+
+  //* GAME ENDS FUNCTION. LINKS UP WITH checkTopRow(). IF THAT IS FULFILLED THEN THE SHAPES NEED TO STOP.
+  //* POSSIBLY A WINDOW ALERT TO TELL PLAYER SCORE?
   //! THIS DOES NOT WORK
   // function gameEnd() {
   //   if (checkTopRow()) {
@@ -312,11 +325,7 @@ function init() {
 
 
   // LINK UP ARROW KEYS FOR FUNCTIONALITY   ******************************************************************************************* 
-  // For now link up UP, DOWN, LEFT, RIGHT, SPACE (for fast down), ENTER (to play)
-  // ARROW DOWN - 40
-  // ARROW RIGHT - 39
-  // ARROWN LEFT - 37
-  // ARROW UP - 38
+  // TODO FUNCTIONALITY FOR THESE TWO KEYS
   // ENTER KEY - 13
   // SPACE KEY - 32
 
@@ -324,6 +333,7 @@ function init() {
   // * MANIPULATE THIS FUNCTION SO THAT EACH KEY HAS IT'S OWN FUNCTION
   // * SOME() METHOD TESTS WHETER AT LEAST ONE ELEMENT IN THE ARRAY PASSES THE TEST. RETURNS BOOLEAN
 
+  // GAME KEYS  **********************************************************************************************************************
   function moveLeft() { 
     if (checkLeft()) {
       console.log(checkLeft())
@@ -392,7 +402,7 @@ function init() {
       case 38:
         rotate()
         break
-      case 32:      //! <-- fast down
+      case 32:      //! <-- fast down.  SPACE BAR
         break
       default:
         console.log('invalid key')
@@ -400,7 +410,7 @@ function init() {
     }
   }
 
-    
+  
 
   // * EVENT LISTENER  ****************************************************************************************************************************************
   document.addEventListener('keyup', handleKeysUp)
