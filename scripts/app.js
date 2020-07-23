@@ -17,10 +17,10 @@ function init() {
 
   const grid = document.querySelector('.grid')
   const cells = []
-  const audio = document.querySelector('#audio')
   const highestScoreResults = document.querySelector('#highest-score')
   const playerCurrentScore = document.querySelector('#player-current-score')
   const playerCurrentLevel = document.querySelector('#current-level')
+  const audio = document.querySelector('#tetris-latin-jazz')
 
   // * GRID VARIABLES *********************************************************************************************************************
 
@@ -184,7 +184,8 @@ function init() {
   function checkObstacle(numberOfRowsBelow) {
     let isObstacle = false
     currentTetromino[currentRotation].forEach(value => {
-      if (cells[value + (width * numberOfRowsBelow) + currentPosition] && cells[value + width + currentPosition].classList.contains('fixed-tetromino')) {
+      const cellIndex = value + (width * numberOfRowsBelow) + currentPosition    // change to a number which refers to the cell array index
+      if (cells[cellIndex] && cells[cellIndex].classList.contains('fixed-tetromino')) {
         isObstacle = true
       }
     })
@@ -368,13 +369,16 @@ function init() {
     startTimer()
   }
 
-  // function shhh() {
+  function shhh() {
+    audio.muted = !audio.muted
+  } 
 
-  // } 
-
-  // function dropDaBeatz() {
-
-  // }
+  function dropDaBeatz() {
+    audio.src = '../music/Tetris-Latin-Jazz.wav'
+    audio.loop = true
+    audio.play()
+    console.log(audio.src)
+  }
 
   // KEYS E FUNCTION ****************************************************************************************************************************************
   function handleKeysUp(e) {
@@ -393,14 +397,14 @@ function init() {
         break
       case 13:
         enterKey()
+        dropDaBeatz()
         break
       case 32: 
         fastDown()     //! <-- fast down.  SPACE BAR
         break
-      // case 77:
-      //   dropDaBeatz()
-      //   shh()
-      //   break
+      case 77:    // M
+        shhh()
+        break
       default:
         console.log('invalid key')
         break  
