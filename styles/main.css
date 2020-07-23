@@ -85,47 +85,51 @@ body {
 
 .grid div.iTetromino {
   background-color: #E0BE40;
+  background: linear-gradient(90deg, rgba(159,134,40,1) 0%, rgba(224,190,64,1) 35%, rgba(244,213,101,1) 100%);
 
 } 
 
 .grid div.oTetromino {
   background-color: #9D2D84;
-
+  background: radial-gradient(circle, rgba(157,45,132,1) 0%, rgba(133,5,104,1) 100%);
   /* border: 1px #ABABAB; */
 }
 
 .grid div.tTetromino {
   background-color: #E040BC;
-
+  background: radial-gradient(circle, rgba(224,64,188,1) 0%, rgba(171,24,138,1) 100%);
   /* border: 1px #ABABAB; */
 }
 
 .grid div.sTetromino {
   background-color: #2D9D96;
-
+  background: radial-gradient(circle, rgba(45,157,150,1) 0%, rgba(2,129,121,1) 100%);
   /* border: 1px #ABABAB; */
 }
 
 .grid div.zTetromino {
   background-color: #40E0D0;
-
+  background: radial-gradient(circle, rgba(64,224,208,1) 0%, rgba(18,191,174,1) 100%);
   /* border: 1px #ABABAB; */
 }
 
 .grid div.jTetromino {
   background-color: #9D862D;
+  background: radial-gradient(circle, rgba(157,134,45,1) 0%, rgba(117,96,14,1) 100%);
   /* border: 1px #ABABAB; */
 }
 
 .grid div.lTetromino {
   background-color: #2D6D9D;
+  background: radial-gradient(circle, rgba(45,109,157,1) 0%, rgba(13,86,142,1) 100%);
   /* border: 1px #ABABAB; */
 }
 
 
 /* To keep the fixed tetromino the same colour, leave this empty  */
 .grid div.fixed-tetromino {    
-  background-color: goldenrod;
+  background: rgb(218,165,32);
+background: radial-gradient(circle, rgba(218,165,32,1) 0%, rgba(182,133,10,1) 100%);
 }
 
 

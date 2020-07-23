@@ -132,8 +132,8 @@ function init() {
   // changeSpeed() - checks if speed needs to increase
   // startTimer() - timer for function and speed. 
   // gameOver()
-  // playTheBeats() - plays music
-  // muteTheBeats() - stops music
+  // dropDaBeatz() - plays music
+  // shh() - stops music
   // updateScores() - DOM scores
 
 
@@ -358,11 +358,11 @@ function init() {
   // function fastDown() {
   // }
 
-  // function muteTheBeats() {
+  // function shhh() {
 
-  // }
+  // } 
 
-  // function playTheBeats() {
+  // function dropDaBeatz() {
 
   // }
 
