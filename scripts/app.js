@@ -1,5 +1,5 @@
 // TODO ***************************************************************************************
-// TODO START BUTTON. 
+//       START BUTTON. 
 // TODO   TIMER OF TETROMINOS.
 // TODO 
 // TODO SCORING SYSTEM
@@ -196,8 +196,6 @@ function init() {
       cells[value + currentPosition].classList.remove(currentTetromino.name)   
     })
   }
-  // getRandomTetromino()
-  // displayTetromino()
 
 
   // CHECKS FOR TETROMINO   ****************************************************************************************************
@@ -318,9 +316,6 @@ function init() {
     // console.log(`Current Level = ${currentLevel}`)
     console.log(`MultipleLines = ${multipleLines}`)
   }
-
-  // startTimer()
-
 
   // END GAME FUNCTIONS *******************************************************************************************************
 
