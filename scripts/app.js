@@ -124,7 +124,6 @@ function init() {
   // * GAME VARIABLES ***************************************************************************************************************
 
   let linesCleared = 0
-  let multipleLines = 0   // <-- multiplier for lines cleared
   let currentLevel = 0
   let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
   let playerScore = 0
@@ -265,13 +264,18 @@ function init() {
 
   // CHECKS FOR FULL ROW AND CLEAR ROW   ******************************************************************************************
   function isRowFull() {
+    let multipleLinesCount = 0
     for (let i = 0; i <= cells.length - 1; i++) {
       if (i % 10 === 0) {
         const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9]
         if (row.every(value => (cells[value].classList.contains('fixed-tetromino')))) {
+          multipleLinesCount++
           clearRow(row)
         }
       }
+    }
+    if (multipleLinesCount > 0) {
+      rowPoints(multipleLinesCount)
     }
   } 
   
@@ -281,7 +285,6 @@ function init() {
     })
     linesCleared++
     shiftGridDown(rowToClear[0])
-    console.log(`PlayerScore = ${playerScore}`)
   }
 
   function shiftGridDown(rowStartingIndex) {
@@ -297,7 +300,6 @@ function init() {
 
   //* GAME ENDS FUNCTION. LINKS UP WITH checkTopRow(). IF THAT IS FULFILLED THEN THE SHAPES NEED TO STOP.
   //* POSSIBLY A WINDOW ALERT TO TELL PLAYER SCORE?
-  //! THIS DOES NOT WORK
   function gameEnd() {
     window.alert('GAME OVER')
   }
@@ -305,7 +307,6 @@ function init() {
 
   // GAME FUNCTIONS  *******************************************************************************************************************
   function startTimer() {
-    console.log('timer started', dropSpeed)
     timerId = setInterval(descendTetromino, dropSpeed)
   } 
 
@@ -328,13 +329,10 @@ function init() {
       }
     } else {
       moveDown()
-      playerScore += 1
     }
     isRowFull()
     changeLevel()
     changeSpeed()
-
-    console.log(`changeSpeed = ${dropSpeed}`)
   }
 
 
@@ -351,7 +349,6 @@ function init() {
   // GAME KEYS  **********************************************************************************************************************
   function moveLeft() { 
     if (checkLeft()) {
-      console.log(checkLeft())
       removeTetromino()
       currentPosition--
       displayTetromino()
@@ -359,7 +356,6 @@ function init() {
   }
 
   function moveRight() {
-    console.log(checkRight())
     if (checkRight()) {
       removeTetromino()
       currentPosition++
@@ -379,7 +375,6 @@ function init() {
 
   function rotate() {
     removeTetromino()
-    console.log(currentRotation)
     if (currentRotation === 'deg0' && canRotate()) {
       return currentRotation = 'deg90'
     } else if (currentRotation === 'deg90' && canRotate()) {
@@ -525,7 +520,7 @@ function init() {
 
   // POINT SCORING    **********************************************************************************************************************************************
   // !! THIS NEEDS NEATENING UP. LOOK OVER THE CODE AND WORK OUT A MORE SIMPLE VERSION 
-  function rowPoints() {
+  function rowPoints(multipleLines) {
     if (currentLevel <= 1) {
       if (multipleLines === 1) {
         playerScore += 100
@@ -577,17 +572,17 @@ function init() {
         playerScore += 10000
       }
     }
+    updateScores()
   }
 
 
-  // STORING HIGH SCORE   **********************************************************************************************************************************************
+  // STORING HIGH SCORE *********************************************************************************************************************
+  // * LOCAL STORAGE
   function updateHighScore() {
     if (playerScore > highScore) {
       highScore = playerScore
     } 
   }
-
-
 
 
 
