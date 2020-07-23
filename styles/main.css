@@ -33,7 +33,7 @@ body {
   height: 50vh;
   display: flex;
   justify-content: center;
-  background-color: mediumorchid;
+  /* background-color: mediumorchid; */
 }
 
 .grid {
@@ -51,32 +51,30 @@ body {
   flex-grow: 1;
   height: 30px;
   width: 30px;
-  background: moccasin;
+  /* background: moccasin; */
 } 
 
 .content {
-  background-color: indianred;
+  /* background-color: indianred; */
   justify-content: space-between;
 }
 
 .title {
-  background-color: lightblue;
+  /* background-color: lightblue; */
 }
 
 .main-section {
-  background-color: lightseagreen;
+  /* background-color: lightseagreen; */
   display: flex;
 }
 
 .scores {
-  background-color: lightslategrey;
   flex-grow: 1;
   padding-top: 30%;
 }
 
 
 .instructions {
-  background-color: mistyrose;
   flex-grow: 1;
   padding-top: 25%
 }

@@ -118,8 +118,10 @@ function init() {
     deg270: [0, 1, 11, 21]
   }
 
+  // * LOCAL STORAGE **************************************************************************************************************
 
-  // * GAME VARIABLES ****************************************************************************************************************************************
+
+  // * GAME VARIABLES ***************************************************************************************************************
 
   let linesCleared = 0
   let multipleLines = 0   // <-- multiplier for lines cleared
@@ -136,7 +138,7 @@ function init() {
 
 
 
-  // * FUNCTIONS  ****************************************************************************************************************************************
+  // * FUNCTIONS  ********************************************************************************************************************
   // * FUNCTION NAMES SO FAR AND DESCRIPTION OF WHAT THEY DO
 
   // createGrid() - Creates tetris grid
@@ -439,7 +441,7 @@ function init() {
   }
 
   function handleKeysDown(e) {
-    if (e.keyCode) {
+    if (e.repeat) {
       switch (e.keyCode) {
         case 37:
           moveLeft()
@@ -492,23 +494,23 @@ function init() {
   function changeSpeed() {
     const currentSpeed = dropSpeed
     if (currentLevel === 0) {
-      dropSpeed = 800
+      dropSpeed = 900
     } else if (currentLevel === 1) {
-      dropSpeed = 650
+      dropSpeed = 800
     } else if (currentLevel === 2) {
-      dropSpeed = 500
+      dropSpeed = 650
     } else if (currentLevel === 3) {
-      dropSpeed = 400
+      dropSpeed = 450
     } else if (currentLevel === 4) {
       dropSpeed = 300
     } else if (currentLevel === 5) {
-      dropSpeed = 200
+      dropSpeed = 250
     } else if (currentLevel === 6) {
-      dropSpeed = 100
+      dropSpeed = 200
     } else if (currentLevel === 7) {
-      dropSpeed = 75
+      dropSpeed = 150
     } else {
-      dropSpeed = 50
+      dropSpeed = 100
     }
     if (dropSpeed !== currentSpeed) {
       clearInterval(timerId)
