@@ -270,6 +270,7 @@ function init() {
         }
       }
     }
+    changeLevel()
   } 
   
   function clearRow(rowToClear) {
@@ -449,7 +450,7 @@ function init() {
 
   // * SCORING LOGIC ****************************************************************************************************************************************
 
-  // ?? Level 0-1   1 line = 100  2 lines = 400   3 lines = 900   4 lines = 2000    10 cleared lines
+  // ?? Level 0-1   1 line = 100  2 lines = 400   3 lines = 900   4 lines = 2000    10 cleared lines  0-5 Lines = L10   6-10 = L1
   // ?? Level 2-3   1 line = 200  2 lines = 800   3 lines = 1800  4 lines = 4000    20 cleared lines
   // ?? Level 4-5   1 line = 300  2 lines = 1200  3 lines = 2700  4 lines = 6000    30 cleared lines
   // ?? Level 6-7   1 line = 400  2 lines = 1600  3 lines = 3600  4 lines = 8000    40 cleared lines
@@ -459,17 +460,7 @@ function init() {
 
   // CHANGING LEVELS   ***********************************************************************************************************************************
   function changeLevel() {
-    if (linesCleared <= 10) {
-      currentLevel++
-    } else if (linesCleared <= 20) {
-      currentLevel++
-    } else if (linesCleared <= 30) {
-      currentLevel++
-    } else if (linesCleared <= 40) {
-      currentLevel++
-    } else {
-      currentLevel++
-    }
+    currentLevel = Math.floor(linesCleared / 5)
   }
 
 
