@@ -468,22 +468,29 @@ function init() {
   // CHANGE OF SPEED FOR EACH LEVEL **********************************************************************************************************************************
   // MAKE INTO FUNCTION 
   function changeSpeed() {
-    if (currentLevel <= 1) {
+    const currentSpeed = dropSpeed
+    if (currentLevel === 0) {
       dropSpeed = 800
+    } else if (currentLevel === 1) {
+      dropSpeed = 220
     } else if (currentLevel === 2) {
-      dropSpeed = 650
-    } else if (currentLevel === 3) {
       dropSpeed = 500
+    } else if (currentLevel === 3) {
+      dropSpeed = 400
     } else if (currentLevel === 4) {
-      dropSpeed = 350
+      dropSpeed = 300
     } else if (currentLevel === 5) {
       dropSpeed = 200
     } else if (currentLevel === 6) {
-      dropSpeed = 150
-    } else if (currentLevel === 7) {
       dropSpeed = 100
+    } else if (currentLevel === 7) {
+      dropSpeed = 75
     } else {
       dropSpeed = 50
+    }
+    if (dropSpeed !== currentSpeed) {
+      clearInterval(timerId)
+      startTimer()
     }
   }
 
