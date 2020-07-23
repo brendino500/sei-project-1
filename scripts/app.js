@@ -4,7 +4,6 @@
 // TODO 
 // TODO *****************************************************************************************
 
-
 function init() {
   // * DOM ELEMENTS *************************************************************************************************************
 
@@ -16,8 +15,6 @@ function init() {
   const audio = document.querySelector('#tetris-latin-jazz')
 
   // * GRID VARIABLES *********************************************************************************************************************
-
-  // ? 10 x 20  dimentions of grid
   const width = 10
   const height = 22
   const numberOfCells = width * height
@@ -79,11 +76,7 @@ function init() {
     deg270: [0, 1, 11, 21]
   }
 
-  // * LOCAL STORAGE **************************************************************************************************************
-
-
   // * GAME VARIABLES ***************************************************************************************************************
-
   let linesCleared = 0
   let currentLevel = 0
   let highScore = window.localStorage.getItem('Highscore')      // <-- number needs to be saved somewhere?! lol if else to update highscore
@@ -128,8 +121,7 @@ function init() {
   // gameOver()
   // dropDaBeatz() - plays music
   // shh() - stops music
-  // updateScores() - DOM scores
-
+  // updateScores() - DOM scores / Local storage
 
 
   // CREATE GRID **************************************************************************************************************************
@@ -141,7 +133,6 @@ function init() {
       grid.appendChild(cell)
     }
   }
-
   createGrid()
 
   //  GAME FUNCTIONS    *******************************************************************************************************
@@ -386,7 +377,7 @@ function init() {
   // KEYS E FUNCTION ****************************************************************************************************************************************
   function handleKeysUp(e) {
     switch (e.keyCode) {
-      case 37:            // LEFT ARROD
+      case 37:            // LEFT ARROW
         moveLeft()
         break
       case 39:          // RIGHT ARROW
@@ -440,12 +431,11 @@ function init() {
   }
 
   
-  // * SCORING LOGIC ****************************************************************************************************************************************
+  // * SCORING LOGIC **************************************************************************************************************************
   // CHANGING LEVELS   ******************************************************************************************************
   function changeLevel() {
     currentLevel = Math.floor(linesCleared / 5)
   }
-
 
   // CHANGE OF SPEED FOR EACH LEVEL **********************************************************************************************
   function changeSpeed() {
@@ -538,7 +528,6 @@ function init() {
       highScore = playerScore
     } 
   }
-
 
   // * EVENT LISTENER  *******************************************************************************************************************************
   document.addEventListener('keyup', handleKeysUp, updateScores())
