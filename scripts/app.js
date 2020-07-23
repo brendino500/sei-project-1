@@ -297,7 +297,7 @@ function init() {
   //* POSSIBLY A WINDOW ALERT TO TELL PLAYER SCORE?
   //! THIS DOES NOT WORK
   function gameEnd() {
-    console.log('game over')
+    window.alert('GAME OVER')
   }
 
 
@@ -313,7 +313,6 @@ function init() {
       currentTetromino[currentRotation].forEach(value => {
         cells[value + currentPosition].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
         cells[value + currentPosition].classList.add('fixed-tetromino')
-        console.log(`Player Score = ${playerScore}`)
         updateScores()
       })
       clearInterval(timerId)                      
@@ -372,6 +371,7 @@ function init() {
       currentPosition += width
       displayTetromino()
     }
+    playerScore++
   }
 
   function rotate() {
