@@ -477,10 +477,15 @@ function init() {
     }
   }
 
+  function updateScores() {
+    playerCurrentScore.innerHTML = playerScore 
+    playerCurrentLevel.innerHTML = currentLevel
+  }
+
   
 
   // * EVENT LISTENER  ****************************************************************************************************************************************
-  document.addEventListener('keyup', handleKeysUp)
+  document.addEventListener('keyup', handleKeysUp, updateScores())
   document.addEventListener('keydown', handleKeysDown)
   
 
