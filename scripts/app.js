@@ -376,13 +376,13 @@ function init() {
   function rotate() {
     removeTetromino()
     if (currentRotation === 'deg0' && canRotate()) {
-      return currentRotation = 'deg90'
+      currentRotation = 'deg90'
     } else if (currentRotation === 'deg90' && canRotate()) {
-      return currentRotation = 'deg180'
+      currentRotation = 'deg180'
     } else if (currentRotation === 'deg180' && canRotate()) {
-      return currentRotation = 'deg270'
+      currentRotation = 'deg270'
     } else if (currentRotation === 'deg270' && canRotate()) {
-      return currentRotation = 'deg0'
+      currentRotation = 'deg0'
     }
     displayTetromino()
   }
