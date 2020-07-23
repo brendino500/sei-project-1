@@ -463,7 +463,7 @@ function init() {
     } else if (currentLevel === 7) {
       dropSpeed = 200
     } else {
-      dropSpeed = 100
+      dropSpeed = 160
     }
     if (dropSpeed !== currentSpeed) {
       clearInterval(timerId)
