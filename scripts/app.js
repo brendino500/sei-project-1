@@ -48,6 +48,7 @@ function init() {
 
   const grid = document.querySelector('.grid')
   const cells = []
+  const audio = document.querySelector('#audio')
 
 
   // * GRID VARIABLES ***********************************************************************************************************************************
@@ -161,6 +162,7 @@ function init() {
   // changeSpeed() - checks if speed needs to increase
   // startTimer() - timer for function and speed. 
   // gameEnd()
+  // playTheBeats() - plays music
 
 
 
@@ -333,6 +335,7 @@ function init() {
   // LINK UP ARROW KEYS FOR FUNCTIONALITY   ******************************************************************************************* 
   // TODO      FUNCTIONALITY FOR THESE TWO KEYS
   // SPACE KEY - 32
+  // M - 77
 
 
   // * MANIPULATE THIS FUNCTION SO THAT EACH KEY HAS IT'S OWN FUNCTION
@@ -391,7 +394,13 @@ function init() {
   // function fastDown() {
   // }
 
+  // function muteTheBeats() {
 
+  // }
+
+  // function playTheBeats() {
+
+  // }
 
   // KEYS E FUNCTION ****************************************************************************************************************************************
   function handleKeysUp(e) {
@@ -413,9 +422,19 @@ function init() {
         break
       case 32:      //! <-- fast down.  SPACE BAR
         break
+      // case 77:
+      //   playTheBeats()
+      //   muteTheBeats()
+      //   break
       default:
         console.log('invalid key')
         break  
+    }
+  }
+
+  function handleKeysDown(e) {
+    if (e.repeat) {
+      moveDown()
     }
   }
 
@@ -423,7 +442,8 @@ function init() {
 
   // * EVENT LISTENER  ****************************************************************************************************************************************
   document.addEventListener('keyup', handleKeysUp)
-
+  document.addEventListener('keydown', handleKeysDown)
+  
 
 
 
