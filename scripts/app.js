@@ -52,9 +52,6 @@ function init() {
   const highestScoreResults = document.querySelector('#highest-score')
   const playerCurrentScore = document.querySelector('#player-current-score')
   const playerCurrentLevel = document.querySelector('#current-level')
-  console.log(highestScoreResults)
-  console.log(playerCurrentScore)
-  console.log(playerCurrentLevel)
 
   // * GRID VARIABLES ***********************************************************************************************************************************
 

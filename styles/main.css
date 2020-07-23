@@ -56,6 +56,7 @@ body {
 
 .content {
   background-color: indianred;
+  justify-content: space-between;
 }
 
 .title {
@@ -70,12 +71,14 @@ body {
 .scores {
   background-color: lightslategrey;
   flex-grow: 1;
+  padding-top: 30%;
 }
 
 
 .instructions {
   background-color: mistyrose;
   flex-grow: 1;
+  padding-top: 25%
 }
 
 /* TETRIMINOS SHAPES  ******************************************/
@@ -124,4 +127,5 @@ body {
 .grid div.bug-tetromino {
   background-color: indianred;
 }
+
 
