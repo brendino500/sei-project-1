@@ -9,7 +9,6 @@
 // TODO   LOCALSTORAGE
 // TODO 
 // TODO 
-
 // TODO *****************************************************************************************
 
 
@@ -127,12 +126,12 @@ function init() {
   // spacebar() - fast down 
   // enterBtn() - starts game from keyboard - player input 
   // handleKeysUp() - specifies player keyboard events
-  // handleKeysDown90 - event to detect key HELD down
+  // handleKeysDown() - event to detect key HELD down
   // updateHighScore() - updates high score when PLAYER LOSES
   // changeLevel() - checks if level needs to change
   // changeSpeed() - checks if speed needs to increase
   // startTimer() - timer for function and speed. 
-  // gameEnd()
+  // gameOver()
   // playTheBeats() - plays music
   // muteTheBeats() - stops music
   // updateScores() - DOM scores
@@ -281,7 +280,7 @@ function init() {
       currentPosition = 3
       getRandomTetromino()
       if (checkTopRow()) {
-        gameEnd()
+        gameOver()
       } else {
         displayTetromino()
         startTimer()
@@ -295,7 +294,7 @@ function init() {
   }
 
   // END GAME FUNCTIONS *******************************************************************************************************
-  function gameEnd() {
+  function gameOver() {
     window.alert('GAME OVER')
   }
 
@@ -523,16 +522,9 @@ function init() {
   }
 
 
-
   // * EVENT LISTENER  ****************************************************************************************************************************************
   document.addEventListener('keyup', handleKeysUp, updateScores())
   document.addEventListener('keydown', handleKeysDown)
   
-
-
-
 }
-
-
-
 window.addEventListener('DOMContentLoaded', init)
