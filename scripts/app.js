@@ -374,6 +374,7 @@ function init() {
       displayTetromino()
     }
     playerScore++
+    updateScores()
   }
 
   function rotate() {
