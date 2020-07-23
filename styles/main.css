@@ -58,37 +58,37 @@ body {
 
 .grid div.iTetromino {
   background-color: #E0BE40;
-  border: 1px #ABABAB;
+  /* border: 1px #ABABAB; */
 } 
 
 .grid div.oTetromino {
   background-color: #9D2D84;
-  border: 1px #ABABAB;
+  /* border: 1px #ABABAB; */
 }
 
 .grid div.tTetromino {
   background-color: #E040BC;
-  border: 1px #ABABAB;
+  /* border: 1px #ABABAB; */
 }
 
 .grid div.sTetromino {
   background-color: #2D9D96;
-  border: 1px #ABABAB;
+  /* border: 1px #ABABAB; */
 }
 
 .grid div.zTetromino {
   background-color: #40E0D0;
-  border: 1px #ABABAB;
+  /* border: 1px #ABABAB; */
 }
 
 .grid div.jTetromino {
   background-color: #9D862D;
-  border: 1px #ABABAB;
+  /* border: 1px #ABABAB; */
 }
 
 .grid div.lTetromino {
   background-color: #2D6D9D;
-  border: 1px #ABABAB;
+  /* border: 1px #ABABAB; */
 }
 
 

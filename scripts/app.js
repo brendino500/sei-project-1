@@ -169,7 +169,7 @@ function init() {
     for (let i = 0; i < numberOfCells; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
-      cell.innerHTML = i        // *    <-- label the cells
+      // cell.innerHTML = i        // *    <-- label the cells
       grid.appendChild(cell)
     }
   }
@@ -276,7 +276,6 @@ function init() {
     })
     linesCleared++
     shiftGridDown(rowToClear[0])
-    rowPoints()
     console.log(`PlayerScore = ${playerScore}`)
   }
 
@@ -301,6 +300,7 @@ function init() {
       currentTetromino[currentRotation].forEach(value => {
         cells[value + currentPosition].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
         cells[value + currentPosition].classList.add('fixed-tetromino')
+        console.log(`Player Score = ${playerScore}`)
       })
       clearInterval(timerId)                      
       currentPosition = 3
@@ -312,7 +312,7 @@ function init() {
       playerScore += 1
     }
     isRowFull()
-    // console.log(`Player Score = ${playerScore}`)
+
     // console.log(`Current Level = ${currentLevel}`)
     console.log(`MultipleLines = ${multipleLines}`)
   }
