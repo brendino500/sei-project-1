@@ -126,7 +126,7 @@ function init() {
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
   let currentPosition = 3  // <-- Starting position for the top of the grid. Needs to descend. 
   let currentRotation = 'deg0'
-  // let dropSpeed = 1000
+  let dropSpeed = 800
   let currentTetromino = null
   let timerId = null
 
@@ -196,8 +196,8 @@ function init() {
       cells[value + currentPosition].classList.remove(currentTetromino.name)   
     })
   }
-  getRandomTetromino()
-  displayTetromino()
+  // getRandomTetromino()
+  // displayTetromino()
 
 
   // CHECKS FOR TETROMINO   ****************************************************************************************************
@@ -278,6 +278,8 @@ function init() {
     })
     linesCleared++
     shiftGridDown(rowToClear[0])
+    rowPoints()
+    console.log(`PlayerScore = ${playerScore}`)
   }
 
   function shiftGridDown(rowStartingIndex) {
@@ -292,7 +294,7 @@ function init() {
 
   // GAME FUNCTIONS  *******************************************************************************************************************
   function startTimer() {
-    timerId = setInterval(descendTetromino, 200)
+    timerId = setInterval(descendTetromino, dropSpeed)
   } 
 
   // STARTS THE GAME ************************************
@@ -314,7 +316,7 @@ function init() {
     isRowFull()
     // console.log(`Player Score = ${playerScore}`)
     // console.log(`Current Level = ${currentLevel}`)
-    console.log(`Lines Cleared = ${linesCleared}`)
+    console.log(`MultipleLines = ${multipleLines}`)
   }
 
   // startTimer()
@@ -383,10 +385,11 @@ function init() {
     displayTetromino()
   }
 
-  // function enterKey() {
-  //*   STARTS GAME
-  //*   WITH THE ENTER KEY IT WILL ENVOKE descendTetromino()
-  // }
+  function enterKey() {
+    getRandomTetromino()
+    displayTetromino()
+    startTimer()
+  }
 
   //*  FAST DOWN
   //*   NEEDS TO CHECK IF DIVS WITH 'FIXEDTETROMINO' IN ADVANCED AND THEN PLACE SHAPE ON ROW ABOVE.
@@ -411,7 +414,7 @@ function init() {
         rotate()
         break
       case 13:
-        startTimer()    //! <-- this works, but need to fix bug. Tetromino displays without pressing the enter key
+        enterKey()
         break
       case 32:      //! <-- fast down.  SPACE BAR
         break
@@ -459,21 +462,21 @@ function init() {
   // MAKE INTO FUNCTION 
   function changeSpeed() {
     if (currentLevel <= 1) {
-      dropSpeed = 1000
-    } else if (currentLevel === 2) {
-      dropSpeed = 900
-    } else if (currentLevel === 3) {
       dropSpeed = 800
-    } else if (currentLevel === 4) {
+    } else if (currentLevel === 2) {
       dropSpeed = 700
-    } else if (currentLevel === 5) {
+    } else if (currentLevel === 3) {
       dropSpeed = 600
-    } else if (currentLevel === 6) {
+    } else if (currentLevel === 4) {
       dropSpeed = 500
-    } else if (currentLevel === 7) {
+    } else if (currentLevel === 5) {
       dropSpeed = 400
-    } else {
+    } else if (currentLevel === 6) {
       dropSpeed = 300
+    } else if (currentLevel === 7) {
+      dropSpeed = 200
+    } else {
+      dropSpeed = 100
     }
   }
 
