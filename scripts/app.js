@@ -367,10 +367,10 @@ function init() {
     if (!checkObstacle() && !checkBottomRow()) {
       removeTetromino()
       currentPosition += width
+      playerScore++
       displayTetromino()
+      updateScores()
     }
-    playerScore++
-    updateScores()
   }
 
   function rotate() {
