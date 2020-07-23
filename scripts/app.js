@@ -1,50 +1,20 @@
 // TODO ***************************************************************************************
-//       START BUTTON. 
-//       TIMER OF TETROMINOS.
-// TODO 
-// TODO SCORING SYSTEM
-// TODO  IMPLEMENT SCORE SYSTEM. ADD IN CORRECT PLACES
-//       FOLLOW ORIGINAL SCORE SYSTEM
-//        AS EACH TETROMINO FALLS TO EACH ROW ADD 10 POINTS
-// TODO 
-//       CLASSES  FOR EACH TETROMINOS
-// TODO 
-//       GENERATE RANDOM TETROMINOS
-// TODO 
-//       ROTATION OF TETROMINOS
-// TODO 
-//       NEED TO DO CHECKS IF DIV BELOW HAS A FIXED TETRIMINO IN PLACE   .CONTAINS()
-//       POSSIBLY CHECK FOR DIV ON BOTTOM ROW?    .CONTAINS()
-// TODO 
-// TODO 
-//       MAKING THE TETOMINOS FALL DOW IN A STRAIGHT LINE WITH TIMINGS
-//         CAN ADD THE 10 POINTS PER LINE ONCE YOU FIGURE THIS OUT
-// TODO 
-// TODO DIFFERENT FUNCTIONS FOR DIFFERENT LEVELS?   RECURSION?
-// TODO   EASIER CONTROL/CODE FOR POINTS AND SPEED OF DESCENDING TETROMINOS
-// TODO  
-//      HOW TO STOP TETROMINO FILLING IN A CLASS     .CONTAINS()
-//         STOP ROTATION AT BORDER    
-// TODO 
-//      FIX THE BUG WHICH HIGHLIGHTS A SQUARE AT CELL 0 AND CHANGES COLOUR. THERE IS A FLOATER
-//        SQUARE WHICH FOLLOWS THE TETROMINO. --> currentPosition 
-// TODO 
-//       DO A CHECK FOR TOP ROW. AT THE MOMENT THE TETROMINOS WILL JUST FALL ONTOP. NEVER ENDING LOOP.
-//              THIS WILL END THE GAME.     .CONTAINS()
-// TODO
-//     CHECK IF BOTTOM ROW IS FULL - CHECK IF WHOLE ROW HAS 'fixed-tetromino'.    .every() 
-//       REMOVE ROW AND ADD A WHOLE NEW ROW AT THE TOP?
-//                 OR
-//       REMOVE 'fixed-tetromino' DIVS AND ALL DIVS ABOVE TO + width
 // TODO 
 // TODO  HOW TO DO A FAST DOWN. CHECK IF LOWER TETROMINOS HAVE A 'fixed-tetromino' AND DROP TO ROW ABOVE.
 // TODO 
+// TODO   STYLING
 // TODO 
+// TODO   MUSIC
+// TODO 
+// TODO   LOCALSTORAGE
+// TODO 
+// TODO 
+
 // TODO *****************************************************************************************
 
 
 function init() {
-  // * DOM ELEMENTS ****************************************************************************************************************************************
+  // * DOM ELEMENTS *************************************************************************************************************
 
   const grid = document.querySelector('.grid')
   const cells = []
@@ -53,15 +23,14 @@ function init() {
   const playerCurrentScore = document.querySelector('#player-current-score')
   const playerCurrentLevel = document.querySelector('#current-level')
 
-  // * GRID VARIABLES ***********************************************************************************************************************************
+  // * GRID VARIABLES *********************************************************************************************************************
 
   // ? 10 x 20  dimentions of grid
-
   const width = 10
   const height = 22
   const numberOfCells = width * height
 
-  // * TETRIMINOS SHAPE  ****************************************************************************************************************************************
+  // * TETRIMINOS SHAPE  ********************************************************************************************************************
   const iTetromino = {
     name: 'iTetromino', 
     deg0: [0, 1, 2, 3],
@@ -135,8 +104,6 @@ function init() {
   let timerId = null
 
 
-
-
   // * FUNCTIONS  ********************************************************************************************************************
   // * FUNCTION NAMES SO FAR AND DESCRIPTION OF WHAT THEY DO
 
@@ -159,13 +126,16 @@ function init() {
   // rotate() - rotate tetromino clockwise 90 deg
   // spacebar() - fast down 
   // enterBtn() - starts game from keyboard - player input 
-  // handleKeyUp() - specifies player keyboard events
+  // handleKeysUp() - specifies player keyboard events
+  // handleKeysDown90 - event to detect key HELD down
   // updateHighScore() - updates high score when PLAYER LOSES
   // changeLevel() - checks if level needs to change
   // changeSpeed() - checks if speed needs to increase
   // startTimer() - timer for function and speed. 
   // gameEnd()
   // playTheBeats() - plays music
+  // muteTheBeats() - stops music
+  // updateScores() - DOM scores
 
 
 
@@ -182,25 +152,24 @@ function init() {
   createGrid()
 
   //  GAME FUNCTIONS    *******************************************************************************************************
-  // GENERATE RANDOM TETRIMINO *************************************************************************************
+  // GENERATE RANDOM TETRIMINO 
   function getRandomTetromino() {
     currentTetromino = tetrominosArray[Math.floor(Math.random() * tetrominosArray.length)]
   }
 
-  // SHOW TETROMINO   ****************************************************************************************************************
+  // SHOW TETROMINO  
   function displayTetromino() {
     currentTetromino[currentRotation].forEach(value => {
       cells[value + currentPosition].classList.add(currentTetromino.name)
     })
   }
 
-  // REMOVE TETROMINO   ***************************************************************************************************************
+  // REMOVE TETROMINO  
   function removeTetromino() {
     currentTetromino[currentRotation].forEach(value => {
       cells[value + currentPosition].classList.remove(currentTetromino.name)   
     })
   }
-
 
   // CHECKS FOR TETROMINO   ****************************************************************************************************
   function checkBottomRow() {
@@ -261,7 +230,6 @@ function init() {
     }
   }
 
-
   // CHECKS FOR FULL ROW AND CLEAR ROW   ******************************************************************************************
   function isRowFull() {
     let multipleLinesCount = 0
@@ -296,15 +264,6 @@ function init() {
     }
   }
 
-  // END GAME FUNCTIONS *******************************************************************************************************
-
-  //* GAME ENDS FUNCTION. LINKS UP WITH checkTopRow(). IF THAT IS FULFILLED THEN THE SHAPES NEED TO STOP.
-  //* POSSIBLY A WINDOW ALERT TO TELL PLAYER SCORE?
-  function gameEnd() {
-    window.alert('GAME OVER')
-  }
-
-
   // GAME FUNCTIONS  *******************************************************************************************************************
   function startTimer() {
     timerId = setInterval(descendTetromino, dropSpeed)
@@ -335,9 +294,11 @@ function init() {
     changeSpeed()
   }
 
+  // END GAME FUNCTIONS *******************************************************************************************************
+  function gameEnd() {
+    window.alert('GAME OVER')
+  }
 
-
-  // LINK UP ARROW KEYS FOR FUNCTIONALITY   ******************************************************************************************* 
   // TODO      FUNCTIONALITY FOR THESE TWO KEYS
   // SPACE KEY - 32
   // M - 77
@@ -461,32 +422,14 @@ function init() {
   }
 
   
-
-  // * EVENT LISTENER  ****************************************************************************************************************************************
-  document.addEventListener('keyup', handleKeysUp, updateScores())
-  document.addEventListener('keydown', handleKeysDown)
-  
-
-
-
   // * SCORING LOGIC ****************************************************************************************************************************************
-
-  // ?? Level 0-1   1 line = 100  2 lines = 400   3 lines = 900   4 lines = 2000    10 cleared lines  0-5 Lines = L10   6-10 = L1
-  // ?? Level 2-3   1 line = 200  2 lines = 800   3 lines = 1800  4 lines = 4000    20 cleared lines
-  // ?? Level 4-5   1 line = 300  2 lines = 1200  3 lines = 2700  4 lines = 6000    30 cleared lines
-  // ?? Level 6-7   1 line = 400  2 lines = 1600  3 lines = 3600  4 lines = 8000    40 cleared lines
-  // ?? Level 8+    1 line = 500  2 lines = 2000  3 lines = 4500  4 lines = 10000   50 cleared lines
-  // ?? Clear 5 lines to get onto next level
-
-
-  // CHANGING LEVELS   ***********************************************************************************************************************************
+  // CHANGING LEVELS   ******************************************************************************************************
   function changeLevel() {
     currentLevel = Math.floor(linesCleared / 5)
   }
 
 
-  // CHANGE OF SPEED FOR EACH LEVEL **********************************************************************************************************************************
-  // MAKE INTO FUNCTION 
+  // CHANGE OF SPEED FOR EACH LEVEL **********************************************************************************************
   function changeSpeed() {
     const currentSpeed = dropSpeed
     if (currentLevel === 0) {
@@ -514,12 +457,7 @@ function init() {
     }
   }
 
-
-  // ROLLING NUMBER OF LINES CLEARED   ***********************************************************************************************************************************
-
-
   // POINT SCORING    **********************************************************************************************************************************************
-  // !! THIS NEEDS NEATENING UP. LOOK OVER THE CODE AND WORK OUT A MORE SIMPLE VERSION 
   function rowPoints(multipleLines) {
     if (currentLevel <= 1) {
       if (multipleLines === 1) {
@@ -584,6 +522,12 @@ function init() {
     } 
   }
 
+
+
+  // * EVENT LISTENER  ****************************************************************************************************************************************
+  document.addEventListener('keyup', handleKeysUp, updateScores())
+  document.addEventListener('keydown', handleKeysDown)
+  
 
 
 
