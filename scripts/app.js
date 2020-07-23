@@ -262,7 +262,7 @@ function init() {
   function checkObstacle() {
     let isObstacle = false
     currentTetromino[currentRotation].forEach(value => {
-      if (cells[value + width + currentPosition].classList.contains('fixed-tetromino')) {
+      if (cells[value + width + currentPosition] && cells[value + width + currentPosition].classList.contains('fixed-tetromino')) {
         isObstacle = true
       }
     })
@@ -312,7 +312,7 @@ function init() {
   // CHECKING EVERY ROW
   // ! BUG !!!!!!!!!!!!!!!
   function isRowFull() {
-    for (let i = cells.length - 1; i >= 0; i--) {
+    for (let i = 0; i <= cells.length - 1; i++) {
       if (i % 10 === 0) {
         const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9]
         if (row.every(value => (cells[value].classList.contains('fixed-tetromino')))) {
@@ -333,7 +333,6 @@ function init() {
   //! BUG !!!!!!!!!!!!!!!
   function shiftGridDown(rowStartingIndex) {
     for (let i = rowStartingIndex - 1; i >= 0; i--) {
-      const value = cells[i]
       if (cells[i].classList.contains('fixed-tetromino')) {
         cells[i].classList.remove('fixed-tetromino')
         cells[i + width].classList.add('fixed-tetromino')
@@ -351,7 +350,7 @@ function init() {
 
   // GAME FUNCTIONS  *******************************************************************************************************************
   function startTimer() {
-    timerId = setInterval(descendTetromino, 300)
+    timerId = setInterval(descendTetromino, 200)
   } 
 
   // STARTS THE GAME ************************************
