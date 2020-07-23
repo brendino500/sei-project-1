@@ -327,17 +327,25 @@ function init() {
     rowToClear.forEach(value => {
       cells[value].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
     })
-    shiftGridDown()
+    shiftGridDown(rowToClear[0])
   }
 
   //! BUG !!!!!!!!!!!!!!!
-  function shiftGridDown() {
-    cells.forEach((value, index) => {
-      if (cells[index].classList.contains('fixed-tetromino')) {
-        cells[index].classList.remove('fixed-tetromino')
-        cells[index + width].classList.add('fixed-tetromino')
+  function shiftGridDown(rowStartingIndex) {
+    for (let i = rowStartingIndex - 1; i >= 0; i--) {
+      const value = cells[i]
+      if (cells[i].classList.contains('fixed-tetromino')) {
+        cells[i].classList.remove('fixed-tetromino')
+        cells[i + width].classList.add('fixed-tetromino')
       }
-    })
+    // cells.forEach((value, index) => {
+    //   if (cells[index].classList.contains('fixed-tetromino')) {
+    //     debugger
+    //     cells[index].classList.remove('fixed-tetromino')
+    //     cells[index + width].classList.add('fixed-tetromino')
+    //   }
+    // })
+    }
   }
 
 

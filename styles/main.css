@@ -97,5 +97,7 @@ body {
   background-color: goldenrod
 }
 
-
+.grid div.bug-tetromino {
+  background-color: indianred;
+}
 
