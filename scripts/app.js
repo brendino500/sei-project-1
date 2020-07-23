@@ -1,6 +1,6 @@
 // TODO ***************************************************************************************
 //       START BUTTON. 
-// TODO   TIMER OF TETROMINOS.
+//       TIMER OF TETROMINOS.
 // TODO 
 // TODO SCORING SYSTEM
 // TODO  IMPLEMENT SCORE SYSTEM. ADD IN CORRECT PLACES
@@ -29,8 +29,8 @@
 //      FIX THE BUG WHICH HIGHLIGHTS A SQUARE AT CELL 0 AND CHANGES COLOUR. THERE IS A FLOATER
 //        SQUARE WHICH FOLLOWS THE TETROMINO. --> currentPosition 
 // TODO 
-// TODO DO A CHECK FOR TOP ROW. AT THE MOMENT THE TETROMINOS WILL JUST FALL ONTOP. NEVER ENDING LOOP.
-// TODO          THIS WILL END THE GAME.     .CONTAINS()
+//       DO A CHECK FOR TOP ROW. AT THE MOMENT THE TETROMINOS WILL JUST FALL ONTOP. NEVER ENDING LOOP.
+//              THIS WILL END THE GAME.     .CONTAINS()
 // TODO
 //     CHECK IF BOTTOM ROW IS FULL - CHECK IF WHOLE ROW HAS 'fixed-tetromino'.    .every() 
 //       REMOVE ROW AND ADD A WHOLE NEW ROW AT THE TOP?
@@ -183,8 +183,7 @@ function init() {
 
   createGrid()
 
-  //  GAME FUNCTIONS    *************************************************************************************************************
-
+  //  GAME FUNCTIONS    *******************************************************************************************************
   // GENERATE RANDOM TETRIMINO *************************************************************************************
   function getRandomTetromino() {
     currentTetromino = tetrominosArray[Math.floor(Math.random() * tetrominosArray.length)]
@@ -235,22 +234,6 @@ function init() {
     })
     return isTopRow
   }
-  
-      
-  //     some(value => (cells[value + currentPosition] > 30))) {
-  //     return false 
-  //   } else {
-  //     return true
-  //   }
-  // }
-
-
-  //   if (value + currentPosition > 0 ) {
-  //     isTopRow = true
-  //   }
-  // })
-  // return isTopRow
-
 
   function checkRight() {
     if (currentTetromino[currentRotation].some(value => ((value + currentPosition + 1) % 10 === 0))) {
@@ -318,7 +301,6 @@ function init() {
   //! THIS DOES NOT WORK
   function gameEnd() {
     console.log('game over')
-    
   }
 
 
@@ -335,6 +317,7 @@ function init() {
         cells[value + currentPosition].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
         cells[value + currentPosition].classList.add('fixed-tetromino')
         console.log(`Player Score = ${playerScore}`)
+        updateScores()
       })
       clearInterval(timerId)                      
       currentPosition = 3
@@ -614,15 +597,3 @@ function init() {
 
 
 window.addEventListener('DOMContentLoaded', init)
-
-// RECURSION
-
-// function countDownFrom(num) {
-//   console.log(num)
-//   if (num === 0) {
-//     return 
-//   }
-//   countDownFrom(num - 1)
-// }
-
-// countDownFrom(10)
