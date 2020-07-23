@@ -85,7 +85,7 @@ body {
 
 .grid div.iTetromino {
   background-color: #E0BE40;
-  background: linear-gradient(90deg, rgba(159,134,40,1) 0%, rgba(224,190,64,1) 35%, rgba(244,213,101,1) 100%);
+  background: radial-gradient(circle, rgba(224,190,64,1) 0%, rgba(223,183,36,1) 100%);
 
 } 
 

@@ -171,20 +171,20 @@ function init() {
   }
 
   // CHECKS FOR TETROMINO   ****************************************************************************************************
-  function checkBottomRow() {
+  function checkBottomRow(numberOfRowsBelow) {
     let isBottomRow = false
     currentTetromino[currentRotation].forEach(value => {
-      if (value + width + currentPosition > cells.length - 1) {
+      if (value + (width * numberOfRowsBelow) + currentPosition > cells.length - 1) {
         isBottomRow = true
       }
     })
     return isBottomRow
   }
 
-  function checkObstacle() {
+  function checkObstacle(numberOfRowsBelow) {
     let isObstacle = false
     currentTetromino[currentRotation].forEach(value => {
-      if (cells[value + width + currentPosition] && cells[value + width + currentPosition].classList.contains('fixed-tetromino')) {
+      if (cells[value + (width * numberOfRowsBelow) + currentPosition] && cells[value + width + currentPosition].classList.contains('fixed-tetromino')) {
         isObstacle = true
       }
     })
@@ -270,7 +270,7 @@ function init() {
 
   // STARTS THE GAME ************************************
   function descendTetromino() {
-    if (checkBottomRow() || checkObstacle()) {
+    if (checkBottomRow(1) || checkObstacle(1)) {
       currentTetromino[currentRotation].forEach(value => {
         cells[value + currentPosition].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
         cells[value + currentPosition].classList.add('fixed-tetromino')
@@ -324,12 +324,12 @@ function init() {
   }
 
   function moveDown() {
-    if (!checkObstacle() && !checkBottomRow()) {
+    if (!checkObstacle(1) && !checkBottomRow(1)) {
       removeTetromino()
       currentPosition += width
       playerScore++
       displayTetromino()
-      updateScores()
+      updateScores()      // Update the browser
     }
   }
 
@@ -347,16 +347,26 @@ function init() {
     displayTetromino()
   }
 
+  //*  FAST DOWN
+  //*   NEEDS TO CHECK IF DIVS WITH 'FIXEDTETROMINO' IN ADVANCED AND THEN PLACE SHAPE ON ROW ABOVE.
+  function fastDown() {
+    let numberOfRows = 0          // Will be the multiplier and number for scores by row
+    while (!checkBottomRow(numberOfRows) && !checkObstacle(numberOfRows)) {      //  Multiplying by width
+      numberOfRows++
+    }
+    numberOfRows--
+    removeTetromino()
+    currentPosition += (width * numberOfRows)
+    playerScore += numberOfRows
+    displayTetromino()
+    updateScores()  
+  }
+
   function enterKey() {
     getRandomTetromino()
     displayTetromino()
     startTimer()
   }
-
-  //*  FAST DOWN
-  //*   NEEDS TO CHECK IF DIVS WITH 'FIXEDTETROMINO' IN ADVANCED AND THEN PLACE SHAPE ON ROW ABOVE.
-  // function fastDown() {
-  // }
 
   // function shhh() {
 
@@ -384,11 +394,12 @@ function init() {
       case 13:
         enterKey()
         break
-      case 32:      //! <-- fast down.  SPACE BAR
+      case 32: 
+        fastDown()     //! <-- fast down.  SPACE BAR
         break
       // case 77:
-      //   playTheBeats()
-      //   muteTheBeats()
+      //   dropDaBeatz()
+      //   shh()
       //   break
       default:
         console.log('invalid key')
@@ -436,17 +447,17 @@ function init() {
     } else if (currentLevel === 1) {
       dropSpeed = 800
     } else if (currentLevel === 2) {
-      dropSpeed = 650
+      dropSpeed = 700
     } else if (currentLevel === 3) {
-      dropSpeed = 450
+      dropSpeed = 600
     } else if (currentLevel === 4) {
-      dropSpeed = 300
+      dropSpeed = 500
     } else if (currentLevel === 5) {
-      dropSpeed = 250
+      dropSpeed = 400
     } else if (currentLevel === 6) {
-      dropSpeed = 200
+      dropSpeed = 300
     } else if (currentLevel === 7) {
-      dropSpeed = 150
+      dropSpeed = 200
     } else {
       dropSpeed = 100
     }
