@@ -270,7 +270,6 @@ function init() {
         }
       }
     }
-    changeLevel()
   } 
   
   function clearRow(rowToClear) {
@@ -294,6 +293,7 @@ function init() {
 
   // GAME FUNCTIONS  *******************************************************************************************************************
   function startTimer() {
+    console.log('timer started', dropSpeed)
     timerId = setInterval(descendTetromino, dropSpeed)
   } 
 
@@ -315,9 +315,10 @@ function init() {
       playerScore += 1
     }
     isRowFull()
+    changeLevel()
+    changeSpeed()
 
-    // console.log(`Current Level = ${currentLevel}`)
-    console.log(`MultipleLines = ${multipleLines}`)
+    console.log(`changeSpeed = ${dropSpeed}`)
   }
 
   // END GAME FUNCTIONS *******************************************************************************************************
@@ -470,19 +471,19 @@ function init() {
     if (currentLevel <= 1) {
       dropSpeed = 800
     } else if (currentLevel === 2) {
-      dropSpeed = 700
+      dropSpeed = 650
     } else if (currentLevel === 3) {
-      dropSpeed = 600
-    } else if (currentLevel === 4) {
       dropSpeed = 500
+    } else if (currentLevel === 4) {
+      dropSpeed = 350
     } else if (currentLevel === 5) {
-      dropSpeed = 400
-    } else if (currentLevel === 6) {
-      dropSpeed = 300
-    } else if (currentLevel === 7) {
       dropSpeed = 200
-    } else {
+    } else if (currentLevel === 6) {
+      dropSpeed = 150
+    } else if (currentLevel === 7) {
       dropSpeed = 100
+    } else {
+      dropSpeed = 50
     }
   }
 
