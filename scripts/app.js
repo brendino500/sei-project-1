@@ -1,13 +1,6 @@
 // TODO ***************************************************************************************
 // TODO 
-// TODO  HOW TO DO A FAST DOWN. CHECK IF LOWER TETROMINOS HAVE A 'fixed-tetromino' AND DROP TO ROW ABOVE.
-// TODO 
 // TODO   STYLING
-// TODO 
-// TODO   MUSIC
-// TODO 
-// TODO   LOCALSTORAGE
-// TODO 
 // TODO 
 // TODO *****************************************************************************************
 
@@ -93,7 +86,7 @@ function init() {
 
   let linesCleared = 0
   let currentLevel = 0
-  let highScore = 0      // <-- number needs to be saved somewhere?! lol     if else to update highscore
+  let highScore = window.localStorage.getItem('Highscore')      // <-- number needs to be saved somewhere?! lol if else to update highscore
   let playerScore = 0
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
   let currentPosition = 3  // <-- Starting position for the top of the grid. Needs to descend. 
@@ -101,6 +94,7 @@ function init() {
   let dropSpeed = 800
   let currentTetromino = null
   let timerId = null
+  let isGamePlaying = false
 
 
   // * FUNCTIONS  ********************************************************************************************************************
@@ -296,16 +290,23 @@ function init() {
 
   // END GAME FUNCTIONS *******************************************************************************************************
   function gameOver() {
-    window.alert('GAME OVER')
+    window.alert('GAME OVER, LOSER!')
+    updateHighScore()
+    window.localStorage.setItem('Highscore', highScore)
+    cells.forEach(value => {
+      value.classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
+    })
+    isGamePlaying = false
+    playerScore = 0
+    currentPosition = 3
+    linesCleared = 0
+    currentLevel = 0
+    currentRotation = 'deg0'
+    dropSpeed = 800
+    currentTetromino = null
+    updateScores()  // DOM
+    audio.pause()
   }
-
-  // TODO      FUNCTIONALITY FOR THESE TWO KEYS
-  // SPACE KEY - 32
-  // M - 77
-
-
-  // * MANIPULATE THIS FUNCTION SO THAT EACH KEY HAS IT'S OWN FUNCTION
-  // * SOME() METHOD TESTS WHETER AT LEAST ONE ELEMENT IN THE ARRAY PASSES THE TEST. RETURNS BOOLEAN
 
   // GAME KEYS  **********************************************************************************************************************
   function moveLeft() { 
@@ -348,8 +349,6 @@ function init() {
     displayTetromino()
   }
 
-  //*  FAST DOWN
-  //*   NEEDS TO CHECK IF DIVS WITH 'FIXEDTETROMINO' IN ADVANCED AND THEN PLACE SHAPE ON ROW ABOVE.
   function fastDown() {
     let numberOfRows = 0          // Will be the multiplier and number for scores by row
     while (!checkBottomRow(numberOfRows) && !checkObstacle(numberOfRows)) {      //  Multiplying by width
@@ -363,10 +362,14 @@ function init() {
     updateScores()  
   }
 
-  function enterKey() {
-    getRandomTetromino()
-    displayTetromino()
-    startTimer()
+  function startGame() {
+    if (!isGamePlaying) {
+      isGamePlaying = true
+      getRandomTetromino()
+      displayTetromino()
+      startTimer()
+      dropDaBeatz()
+    }
   }
 
   function shhh() {
@@ -383,26 +386,25 @@ function init() {
   // KEYS E FUNCTION ****************************************************************************************************************************************
   function handleKeysUp(e) {
     switch (e.keyCode) {
-      case 37:
+      case 37:            // LEFT ARROD
         moveLeft()
         break
-      case 39:
+      case 39:          // RIGHT ARROW
         moveRight()
         break
-      case 40:
+      case 40:          // DOWN ARROW
         moveDown()
         break
-      case 38:
+      case 38:        // UP ARROW
         rotate()
         break
-      case 13:
-        enterKey()
-        dropDaBeatz()
+      case 13:        // ENTER KEY   START GAME
+        startGame()
         break
       case 32: 
-        fastDown()     //! <-- fast down.  SPACE BAR
+        fastDown()     // fast down.  SPACE BAR
         break
-      case 77:    // M
+      case 77:    //      KEY   M FOR MUTE/MUSIC
         shhh()
         break
       default:
@@ -433,6 +435,8 @@ function init() {
   function updateScores() {
     playerCurrentScore.innerHTML = playerScore 
     playerCurrentLevel.innerHTML = currentLevel
+    highestScoreResults.innerHTML = highScore === null ? 0 : highScore
+    console.log(`Highscore = ${highScore}`)
   }
 
   
@@ -527,7 +531,6 @@ function init() {
     updateScores()
   }
 
-
   // STORING HIGH SCORE *********************************************************************************************************************
   // * LOCAL STORAGE
   function updateHighScore() {
@@ -537,7 +540,7 @@ function init() {
   }
 
 
-  // * EVENT LISTENER  ****************************************************************************************************************************************
+  // * EVENT LISTENER  *******************************************************************************************************************************
   document.addEventListener('keyup', handleKeysUp, updateScores())
   document.addEventListener('keydown', handleKeysDown)
   
