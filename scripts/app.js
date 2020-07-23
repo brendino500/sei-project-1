@@ -32,46 +32,16 @@
 // TODO DO A CHECK FOR TOP ROW. AT THE MOMENT THE TETROMINOS WILL JUST FALL ONTOP. NEVER ENDING LOOP.
 // TODO          THIS WILL END THE GAME.     .CONTAINS()
 // TODO
-// TODO CHECK IF BOTTOM ROW IS FULL - CHECK IF WHOLE ROW HAS 'fixed-tetromino'.    .every() 
-// TODO   REMOVE ROW AND ADD A WHOLE NEW ROW AT THE TOP?
-// TODO             OR
-// TODO   REMOVE 'fixed-tetromino' DIVS AND ALL DIVS ABOVE TO + width
+//     CHECK IF BOTTOM ROW IS FULL - CHECK IF WHOLE ROW HAS 'fixed-tetromino'.    .every() 
+//       REMOVE ROW AND ADD A WHOLE NEW ROW AT THE TOP?
+//                 OR
+//       REMOVE 'fixed-tetromino' DIVS AND ALL DIVS ABOVE TO + width
 // TODO 
 // TODO  HOW TO DO A FAST DOWN. CHECK IF LOWER TETROMINOS HAVE A 'fixed-tetromino' AND DROP TO ROW ABOVE.
 // TODO 
 // TODO 
 // TODO *****************************************************************************************
 
-
-// const cells = Array(220).fill('')
-// const rows = []
-// let count = 0
-// cells.forEach(cell => {
-//   if (count === 0) {
-//     rows.push([cell])
-//   }
-//   rows[rows.length - 1].push(cell)
-//   count++
-//   if (count >= 9) {
-//     count = 0
-//   }
-// })
-// function isFullRow(row) {
-//   return row.every(item => {
-//     item.classList.contains('tetromino')
-//   })
-// }
-// function clearRow(row) {
-//   row.forEach(item => {
-//     item.classList.remove('tetromino')
-//   })
-// }
-// rows.forEach(row => {
-//   if (isFullRow(row)) {
-//     // * logic here to clear it
-//     clearRow(row)
-//   }
-// })
 
 function init() {
   // * DOM ELEMENTS ****************************************************************************************************************************************
@@ -309,8 +279,6 @@ function init() {
 
 
   // CHECKS FOR FULL ROW AND CLEAR ROW   ******************************************************************************************
-  // CHECKING EVERY ROW
-  // ! BUG !!!!!!!!!!!!!!!
   function isRowFull() {
     for (let i = 0; i <= cells.length - 1; i++) {
       if (i % 10 === 0) {
@@ -322,7 +290,6 @@ function init() {
     }
   } 
   
-  //! BUG !!!!!!!!!!!!!!!
   function clearRow(rowToClear) {
     rowToClear.forEach(value => {
       cells[value].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
@@ -330,20 +297,12 @@ function init() {
     shiftGridDown(rowToClear[0])
   }
 
-  //! BUG !!!!!!!!!!!!!!!
   function shiftGridDown(rowStartingIndex) {
     for (let i = rowStartingIndex - 1; i >= 0; i--) {
       if (cells[i].classList.contains('fixed-tetromino')) {
         cells[i].classList.remove('fixed-tetromino')
         cells[i + width].classList.add('fixed-tetromino')
       }
-    // cells.forEach((value, index) => {
-    //   if (cells[index].classList.contains('fixed-tetromino')) {
-    //     debugger
-    //     cells[index].classList.remove('fixed-tetromino')
-    //     cells[index + width].classList.add('fixed-tetromino')
-    //   }
-    // })
     }
   }
 
@@ -390,7 +349,6 @@ function init() {
 
   // LINK UP ARROW KEYS FOR FUNCTIONALITY   ******************************************************************************************* 
   // TODO      FUNCTIONALITY FOR THESE TWO KEYS
-  // ENTER KEY - 13
   // SPACE KEY - 32
 
 
