@@ -34,7 +34,6 @@ body {
   display: flex;
   justify-content: center;
   background-color: mediumorchid;
-  flex-grow: 2;
 }
 
 .grid {
@@ -50,10 +49,10 @@ body {
 .grid div {
   border: 1px solid lightgrey;
   flex-grow: 1;
-  height: 9%;
-  width: 9%;
+  height: 30px;
+  width: 30px;
   background: moccasin;
-}
+} 
 
 .content {
   background-color: indianred;

@@ -227,13 +227,15 @@ function init() {
   }
 
   function checkTopRow() {
-    if (currentTetromino[currentRotation].classList.contains('fixed-tetromino')) {
-      return true
-    } else {
-      return false
-    }
+    let isTopRow = false
+    currentTetromino[currentRotation].forEach(value => {
+      if (cells[value + currentPosition].classList.contains('fixed-tetromino')) {
+        isTopRow = true
+      }
+    })
+    return isTopRow
   }
-
+  
       
   //     some(value => (cells[value + currentPosition] > 30))) {
   //     return false 
@@ -309,15 +311,14 @@ function init() {
     }
   }
 
-    // END GAME FUNCTIONS *******************************************************************************************************
+  // END GAME FUNCTIONS *******************************************************************************************************
 
   //* GAME ENDS FUNCTION. LINKS UP WITH checkTopRow(). IF THAT IS FULFILLED THEN THE SHAPES NEED TO STOP.
   //* POSSIBLY A WINDOW ALERT TO TELL PLAYER SCORE?
   //! THIS DOES NOT WORK
   function gameEnd() {
-    if (!checkTopRow()) {
-      clearTimeout(timerId)
-    }
+    console.log('game over')
+    
   }
 
 
@@ -329,18 +330,21 @@ function init() {
 
   // STARTS THE GAME ************************************
   function descendTetromino() {
-    if (checkBottomRow() || checkObstacle() && checkTopRow()) {
+    if (checkBottomRow() || checkObstacle()) {
       currentTetromino[currentRotation].forEach(value => {
         cells[value + currentPosition].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
         cells[value + currentPosition].classList.add('fixed-tetromino')
         console.log(`Player Score = ${playerScore}`)
-        gameEnd()
       })
       clearInterval(timerId)                      
       currentPosition = 3
       getRandomTetromino()
-      displayTetromino()
-      startTimer()
+      if (checkTopRow()) {
+        gameEnd()
+      } else {
+        displayTetromino()
+        startTimer()
+      }
     } else {
       moveDown()
       playerScore += 1
