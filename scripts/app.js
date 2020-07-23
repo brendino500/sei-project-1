@@ -54,24 +54,6 @@ function init() {
 
   // ? 10 x 20  dimentions of grid
 
-  // const cells = Array(220).fill('')
-  // const rows = []
-  // let count = 0
-
-
-  // cells.forEach(cell => {
-  //   if (count === 0) {
-  //     rows.push([cell])
-  //   }
-  //   rows[rows.length - 1].push(cell)
-  //   count++
-  //   if (count >= 9) {
-  //     count = 0
-  //   }
-  // })
-  
-
-
   const width = 10
   const height = 22
   const numberOfCells = width * height
@@ -294,6 +276,7 @@ function init() {
     rowToClear.forEach(value => {
       cells[value].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
     })
+    linesCleared++
     shiftGridDown(rowToClear[0])
   }
 
@@ -329,6 +312,9 @@ function init() {
       playerScore += 1
     }
     isRowFull()
+    // console.log(`Player Score = ${playerScore}`)
+    // console.log(`Current Level = ${currentLevel}`)
+    console.log(`Lines Cleared = ${linesCleared}`)
   }
 
   // startTimer()
