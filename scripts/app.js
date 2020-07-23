@@ -222,14 +222,28 @@ function init() {
   }
 
   function checkTopRow() {
-    let isTopRow = false
-    currentTetromino[currentRotation].forEach(value => {
-      if (value + currentPosition > 0 ) {
-        isTopRow = true
-      }
-    })
-    return isTopRow
+    if (currentTetromino[currentRotation].classList.contains('fixed-tetromino')) {
+      return true
+    } else {
+      return false
+    }
   }
+
+      
+  //     some(value => (cells[value + currentPosition] > 30))) {
+  //     return false 
+  //   } else {
+  //     return true
+  //   }
+  // }
+
+
+  //   if (value + currentPosition > 0 ) {
+  //     isTopRow = true
+  //   }
+  // })
+  // return isTopRow
+
 
   function checkRight() {
     if (currentTetromino[currentRotation].some(value => ((value + currentPosition + 1) % 10 === 0))) {
@@ -290,6 +304,17 @@ function init() {
     }
   }
 
+    // END GAME FUNCTIONS *******************************************************************************************************
+
+  //* GAME ENDS FUNCTION. LINKS UP WITH checkTopRow(). IF THAT IS FULFILLED THEN THE SHAPES NEED TO STOP.
+  //* POSSIBLY A WINDOW ALERT TO TELL PLAYER SCORE?
+  //! THIS DOES NOT WORK
+  function gameEnd() {
+    if (!checkTopRow()) {
+      clearTimeout(timerId)
+    }
+  }
+
 
   // GAME FUNCTIONS  *******************************************************************************************************************
   function startTimer() {
@@ -304,6 +329,7 @@ function init() {
         cells[value + currentPosition].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
         cells[value + currentPosition].classList.add('fixed-tetromino')
         console.log(`Player Score = ${playerScore}`)
+        gameEnd()
       })
       clearInterval(timerId)                      
       currentPosition = 3
@@ -320,17 +346,6 @@ function init() {
 
     console.log(`changeSpeed = ${dropSpeed}`)
   }
-
-  // END GAME FUNCTIONS *******************************************************************************************************
-
-  //* GAME ENDS FUNCTION. LINKS UP WITH checkTopRow(). IF THAT IS FULFILLED THEN THE SHAPES NEED TO STOP.
-  //* POSSIBLY A WINDOW ALERT TO TELL PLAYER SCORE?
-  //! THIS DOES NOT WORK
-  // function gameEnd() {
-  //   if (checkTopRow()) {
-  //     timerId = clearTimeout()
-  //   }
-  // }
 
 
 
@@ -435,8 +450,21 @@ function init() {
   }
 
   function handleKeysDown(e) {
-    if (e.repeat) {
-      moveDown()
+    if (e.keyCode) {
+      switch (e.keyCode) {
+        case 37:
+          moveLeft()
+          break
+        case 39:
+          moveRight()
+          break
+        case 40: 
+          moveDown()
+          break
+        default:
+          console.log('invalid key')
+          break
+      }
     }
   }
 
@@ -472,7 +500,7 @@ function init() {
     if (currentLevel === 0) {
       dropSpeed = 800
     } else if (currentLevel === 1) {
-      dropSpeed = 220
+      dropSpeed = 650
     } else if (currentLevel === 2) {
       dropSpeed = 500
     } else if (currentLevel === 3) {

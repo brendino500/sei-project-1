@@ -19,8 +19,9 @@ font-family: 'Rubik', sans-serif;
 #2D6D9D
 
  */
-
-
+ * {
+  box-sizing: border-box;
+}
 
 body {
   background-color: #ABABAB;
@@ -32,6 +33,8 @@ body {
   height: 50vh;
   display: flex;
   justify-content: center;
+  background-color: mediumorchid;
+  flex-grow: 2;
 }
 
 .grid {
@@ -49,10 +52,32 @@ body {
   flex-grow: 1;
   height: 9%;
   width: 9%;
+  background: moccasin;
+}
+
+.content {
+  background-color: indianred;
+}
+
+.title {
+  background-color: lightblue;
+}
+
+.main-section {
+  background-color: lightseagreen;
+  display: flex;
+}
+
+.scores {
+  background-color: lightslategrey;
+  flex-grow: 1;
 }
 
 
-
+.instructions {
+  background-color: mistyrose;
+  flex-grow: 1;
+}
 
 /* TETRIMINOS SHAPES  ******************************************/
 
