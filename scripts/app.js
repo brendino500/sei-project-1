@@ -146,7 +146,7 @@ function init() {
     for (let i = 0; i < numberOfCellsMini; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
-      cell.innerHTML = i     // label the cells
+      // cell.innerHTML = i     // label the cells
       miniGrid.appendChild(cell)
     }
   }
