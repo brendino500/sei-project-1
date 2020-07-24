@@ -92,11 +92,13 @@ function init() {
   const tetrominosArray = [iTetromino, tTetromino, sTetromino, oTetromino, zTetromino, jTetromino, lTetromino]     // <-- different tetrominos
   let currentPosition = 3  // <-- Starting position for the top of the grid. Needs to descend. 
   let currentRotation = 'deg0'
-  let dropSpeed = 800
+  const defaultDropSpeed = 900
+  let dropSpeed = defaultDropSpeed
   let currentTetromino = null
   let timerId = null
   let isGamePlaying = false
-
+  let nextTetromino = getRandomTetromino()
+  const miniGridTetrominos = []
 
   // * FUNCTIONS  ********************************************************************************************************************
   // * FUNCTION NAMES SO FAR AND DESCRIPTION OF WHAT THEY DO
@@ -107,6 +109,7 @@ function init() {
   // descendTetromino() - tetromino moves down the grid   STARTS GAME
   // displayNextTetromino() - shows next tetromino on grid
   // getRandomTetromino() - gets random tetromino
+  // updateCurrentTetromino() - changes current tetromino
   // checkBottomRow() - check for bottom row
   // checkObstacle() - check if next row has class 'fixed'
   // checkRight() - check if tetromino can move right
@@ -138,7 +141,7 @@ function init() {
     for (let i = 0; i < numberOfCells; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
-      // cell.innerHTML = i        // *    <-- label the cells
+      cell.innerHTML = i        // *    <-- label the cells
       grid.appendChild(cell)
     }
   }
@@ -147,7 +150,7 @@ function init() {
   function createMiniGrid() {
     for (let i = 0; i < numberOfCellsMini; i++) {
       const cell = document.createElement('div')
-      cells.push(cell)
+      miniCells.push(cell)
       cell.innerHTML = i     // label the cells
       miniGrid.appendChild(cell)
     }
@@ -158,7 +161,13 @@ function init() {
   //  GAME FUNCTIONS    *******************************************************************************************************
   // GENERATE RANDOM TETRIMINO 
   function getRandomTetromino() {
-    currentTetromino = tetrominosArray[Math.floor(Math.random() * tetrominosArray.length)]
+    return tetrominosArray[Math.floor(Math.random() * tetrominosArray.length)]
+  }
+
+  function updateCurrentTetromino() {
+    currentTetromino = nextTetromino
+    nextTetromino = getRandomTetromino()
+    displayNextTetromino()
   }
 
   // SHOW TETROMINO  
@@ -174,6 +183,17 @@ function init() {
       cells[value + currentPosition].classList.remove(currentTetromino.name)   
     })
   }
+
+  // SHOWS UP NEXT TETROMINO ********************************************************************
+  function displayNextTetromino() {
+    //remove tetromino
+    debugger
+    nextTetromino['deg0'].forEach(value => {
+      miniCells[value].classList.add(currentTetromino.name)
+    })
+
+  }
+
 
   // CHECKS FOR TETROMINO   ****************************************************************************************************
   function checkBottomRow(numberOfRowsBelow) {
@@ -284,7 +304,7 @@ function init() {
       })
       clearInterval(timerId)                      
       currentPosition = 3
-      getRandomTetromino()
+      updateCurrentTetromino()
       if (checkTopRow()) {
         gameOver()
       } else {
@@ -297,11 +317,6 @@ function init() {
     isRowFull()
     changeLevel()
     changeSpeed()
-  }
-
-  // SHOWS UP NEXT TETROMINO ********************************************************************
-  function displayNextTetromino() {
-
   }
 
   // END GAME FUNCTIONS *******************************************************************************************************
@@ -318,7 +333,7 @@ function init() {
     linesCleared = 0
     currentLevel = 0
     currentRotation = 'deg0'
-    dropSpeed = 800
+    dropSpeed = defaultDropSpeed
     currentTetromino = null
     updateScores()  // DOM
     audio.pause()
@@ -381,7 +396,7 @@ function init() {
   function startGame() {
     if (!isGamePlaying) {
       isGamePlaying = true
-      getRandomTetromino()
+      updateCurrentTetromino()
       displayTetromino()
       startTimer()
       dropDaBeatz()
@@ -396,7 +411,6 @@ function init() {
     audio.src = '../music/Tetris-Latin-Jazz.wav'
     audio.loop = true
     audio.play()
-    console.log(audio.src)
   }
 
   // KEYS E FUNCTION ****************************************************************************************************************************************
@@ -452,7 +466,7 @@ function init() {
     playerCurrentScore.innerHTML = playerScore 
     playerCurrentLevel.innerHTML = currentLevel
     highestScoreResults.innerHTML = highScore === null ? 0 : highScore
-    console.log(`Highscore = ${highScore}`)
+    console.log(`speed ${dropSpeed}`)
   }
 
   
@@ -466,7 +480,7 @@ function init() {
   function changeSpeed() {
     const currentSpeed = dropSpeed
     if (currentLevel === 0) {
-      dropSpeed = 900
+      dropSpeed = defaultDropSpeed
     } else if (currentLevel === 1) {
       dropSpeed = 800
     } else if (currentLevel === 2) {

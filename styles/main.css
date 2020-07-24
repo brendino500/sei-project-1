@@ -84,7 +84,8 @@ body {
 }
 
 .title {
-  /* background-color: lightblue; */
+  font-size: large;
+  text-shadow: 3px 2px 5px rgba(255,255,255,0.71)
 }
 
 .main-section {
@@ -109,43 +110,43 @@ body {
 
 /* TETRIMINOS SHAPES  ******************************************/
 
-.grid div.iTetromino {
+.mini-grid div.iTetromino, .grid div.iTetromino {
   background-color: #E0BE40;
   background: radial-gradient(circle, rgba(224,190,64,1) 0%, rgba(223,183,36,1) 100%);
 
 } 
 
-.grid div.oTetromino {
+.mini-grid div.oTetromino, .grid div.oTetromino {
   background-color: #9D2D84;
   background: radial-gradient(circle, rgba(157,45,132,1) 0%, rgba(133,5,104,1) 100%);
   /* border: 1px #ABABAB; */
 }
 
-.grid div.tTetromino {
+.mini-grid div.tTetromino, .grid div.tTetromino {
   background-color: #E040BC;
   background: radial-gradient(circle, rgba(224,64,188,1) 0%, rgba(171,24,138,1) 100%);
   /* border: 1px #ABABAB; */
 }
 
-.grid div.sTetromino {
+.mini-grid div.sTetromino, .grid div.sTetromino {
   background-color: #2D9D96;
   background: radial-gradient(circle, rgba(45,157,150,1) 0%, rgba(2,129,121,1) 100%);
   /* border: 1px #ABABAB; */
 }
 
-.grid div.zTetromino {
+.mini-grid div.zTetromino, .grid div.zTetromino {
   background-color: #40E0D0;
   background: radial-gradient(circle, rgba(64,224,208,1) 0%, rgba(18,191,174,1) 100%);
   /* border: 1px #ABABAB; */
 }
 
-.grid div.jTetromino {
+.mini-grid div.jTetromino, .grid div.jTetromino {
   background-color: #9D862D;
   background: radial-gradient(circle, rgba(157,134,45,1) 0%, rgba(117,96,14,1) 100%);
   /* border: 1px #ABABAB; */
 }
 
-.grid div.lTetromino {
+.mini-grid div.lTetromino, .grid div.lTetromino {
   background-color: #2D6D9D;
   background: radial-gradient(circle, rgba(45,109,157,1) 0%, rgba(13,86,142,1) 100%);
   /* border: 1px #ABABAB; */
