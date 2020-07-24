@@ -58,19 +58,24 @@ body {
   height: 20vh;
   background-color: hotpink;
   display: flex;
+  justify-content: center;
 }
 
 .mini-grid {
-  background-color: wheat;
+  align-items: center;
   display: flex;
-  height: 50px;
-  width: 50px;
   flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  height: 125px;
+  width: 125px;
+  background-color: wheat;
 }
 
 .mini-grid div {
-  border: 1px solid red
-  background: aqua
+  border: red solid 1px;
+  height: 30px;
+  width: 30px;
 }
 
 .content {
