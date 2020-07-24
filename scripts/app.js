@@ -43,7 +43,7 @@ function init() {
     deg90: [1, 11, 12, 21],
     deg180: [10, 11, 12, 21],
     deg270: [1, 10, 11, 21],
-    miniGrid: [4, 5, 6, 7]
+    miniGrid: [1, 4, 5, 6]
   }
 
   const sTetromino = {
@@ -52,7 +52,7 @@ function init() {
     deg90: [1, 11, 12, 22],
     deg180: [1, 2, 10, 11],
     deg270: [1, 11, 12, 22],
-    miniGrid: [4, 5, 6, 7]
+    miniGrid: [1, 2, 4, 5]
   }
 
   const oTetromino = {
@@ -61,7 +61,7 @@ function init() {
     deg90: [1, 2, 11, 12],
     deg180: [1, 2, 11, 12],
     deg270: [1, 2, 11, 12],
-    miniGrid: [4, 5, 6, 7]
+    miniGrid: [1, 2, 5, 6]
   }
 
   const zTetromino = {
@@ -70,7 +70,7 @@ function init() {
     deg90: [2, 11, 12, 21],
     deg180: [0, 1, 11, 12],
     deg270: [2, 11, 12, 21],
-    miniGrid: [4, 5, 6, 7]
+    miniGrid: [5, 6, 9, 10]
   }
 
   const jTetromino = { 
@@ -79,7 +79,7 @@ function init() {
     deg90: [1, 2, 11, 21],
     deg180: [10, 11, 12, 22],
     deg270: [1, 11, 21, 20],
-    miniGrid: [4, 5, 6, 7]
+    miniGrid: [2, 6, 9, 10]
   }
 
   const lTetromino = {      
@@ -88,7 +88,7 @@ function init() {
     deg90: [1, 11, 21, 22],
     deg180: [10, 11, 12, 20],
     deg270: [0, 1, 11, 21],
-    miniGrid: [4, 5, 6, 7]
+    miniGrid: [1, 5, 9, 10]
   }
 
   // * GAME VARIABLES ***************************************************************************************************************
@@ -197,7 +197,7 @@ function init() {
       value.classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
     })
     nextTetromino['miniGrid'].forEach(value => {
-      miniCells[value].classList.add(currentTetromino.name)
+      miniCells[value].classList.add(nextTetromino.name)
     })
 
   }
