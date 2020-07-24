@@ -33,7 +33,8 @@ function init() {
     deg0: [0, 1, 2, 3],
     deg90: [2, 12, 22, 32],
     deg180: [20, 21, 22, 23],
-    deg270: [1, 11, 21, 31]
+    deg270: [1, 11, 21, 31],
+    miniGrid: [4, 5, 6, 7]
   }
 
   const tTetromino = {
@@ -41,7 +42,8 @@ function init() {
     deg0: [1, 10, 11, 12],
     deg90: [1, 11, 12, 21],
     deg180: [10, 11, 12, 21],
-    deg270: [1, 10, 11, 21]
+    deg270: [1, 10, 11, 21],
+    miniGrid: [4, 5, 6, 7]
   }
 
   const sTetromino = {
@@ -49,7 +51,8 @@ function init() {
     deg0: [1, 2, 10, 11],
     deg90: [1, 11, 12, 22],
     deg180: [1, 2, 10, 11],
-    deg270: [1, 11, 12, 22]
+    deg270: [1, 11, 12, 22],
+    miniGrid: [4, 5, 6, 7]
   }
 
   const oTetromino = {
@@ -57,7 +60,8 @@ function init() {
     deg0: [1, 2, 11, 12],
     deg90: [1, 2, 11, 12],
     deg180: [1, 2, 11, 12],
-    deg270: [1, 2, 11, 12]
+    deg270: [1, 2, 11, 12],
+    miniGrid: [4, 5, 6, 7]
   }
 
   const zTetromino = {
@@ -65,7 +69,8 @@ function init() {
     deg0: [0, 1, 11, 12],
     deg90: [2, 11, 12, 21],
     deg180: [0, 1, 11, 12],
-    deg270: [2, 11, 12, 21]
+    deg270: [2, 11, 12, 21],
+    miniGrid: [4, 5, 6, 7]
   }
 
   const jTetromino = { 
@@ -73,7 +78,8 @@ function init() {
     deg0: [0, 10, 11, 12],
     deg90: [1, 2, 11, 21],
     deg180: [10, 11, 12, 22],
-    deg270: [1, 11, 21, 20]
+    deg270: [1, 11, 21, 20],
+    miniGrid: [4, 5, 6, 7]
   }
 
   const lTetromino = {      
@@ -81,7 +87,8 @@ function init() {
     deg0: [2, 10, 11, 12],
     deg90: [1, 11, 21, 22],
     deg180: [10, 11, 12, 20],
-    deg270: [0, 1, 11, 21]
+    deg270: [0, 1, 11, 21],
+    miniGrid: [4, 5, 6, 7]
   }
 
   // * GAME VARIABLES ***************************************************************************************************************
@@ -98,7 +105,7 @@ function init() {
   let timerId = null
   let isGamePlaying = false
   let nextTetromino = getRandomTetromino()
-  const miniGridTetrominos = []
+
 
   // * FUNCTIONS  ********************************************************************************************************************
   // * FUNCTION NAMES SO FAR AND DESCRIPTION OF WHAT THEY DO
@@ -186,9 +193,10 @@ function init() {
 
   // SHOWS UP NEXT TETROMINO ********************************************************************
   function displayNextTetromino() {
-    //remove tetromino
-    debugger
-    nextTetromino['deg0'].forEach(value => {
+    miniCells.forEach(value => {
+      value.classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
+    })
+    nextTetromino['miniGrid'].forEach(value => {
       miniCells[value].classList.add(currentTetromino.name)
     })
 
