@@ -24,9 +24,15 @@ font-family: 'Rubik', sans-serif;
 }
 
 body {
+  max-width: 873px;
   background-color: #ABABAB;
   font-family: 'Rubik', sans-serif;
   text-align: center;
+  margin: auto;
+}
+
+.title {
+  padding: 20px;
 }
 
 .grid-wrapper {
@@ -94,6 +100,7 @@ body {
   margin: 10px;
   flex-grow: 1;
   padding-top: 20%;
+  /* border: #d9d9d9 solid 2px; */
 }
 
 .instructions-text {

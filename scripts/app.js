@@ -147,7 +147,7 @@ function init() {
       grid.appendChild(cell)
     }
   }
-  createGrid()
+
 
   function createMiniGrid() {
     for (let i = 0; i < numberOfCellsMini; i++) {
@@ -157,8 +157,6 @@ function init() {
       miniGrid.appendChild(cell)
     }
   }
-  createMiniGrid()
-
 
   //  GAME FUNCTIONS    *******************************************************************************************************
   // GENERATE RANDOM TETRIMINO 
@@ -274,16 +272,16 @@ function init() {
       }
     }
     if (multipleLinesCount > 0) {
-      rowPoints(multipleLinesCount)
+      rowPoints(multipleLinesCount)   // count of lines cleared
     }
   } 
   
-  function clearRow(rowToClear) {
+  function clearRow(rowToClear) {    //row array from isRowFull()
     rowToClear.forEach(value => {
       cells[value].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
     })
     linesCleared++
-    shiftGridDown(rowToClear[0])
+    shiftGridDown(rowToClear[0])   // shifting down from above starting index of that row. 
   }
 
   function shiftGridDown(rowStartingIndex) {
@@ -302,7 +300,7 @@ function init() {
 
   // STARTS THE GAME ************************************
   function descendTetromino() {
-    if (checkBottomRow(1) || checkObstacle(1)) {
+    if (checkBottomRow(1) || checkObstacle(1)) {  // 1 - checking number of rows below
       currentTetromino[currentRotation].forEach(value => {
         cells[value + currentPosition].classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
         cells[value + currentPosition].classList.add('fixed-tetromino')
@@ -314,14 +312,15 @@ function init() {
       if (checkTopRow()) {
         gameOver()
       } else {
+        currentRotation = 'deg0'
         displayTetromino()
         startTimer()
       }
     } else {
       moveDown()
     }
-    isRowFull()
-    changeLevel()
+    isRowFull()    // checks and updates
+    changeLevel()  
     changeSpeed()
   }
 
@@ -392,7 +391,7 @@ function init() {
     while (!checkBottomRow(numberOfRows) && !checkObstacle(numberOfRows)) {      //  Multiplying by width
       numberOfRows++
     }
-    numberOfRows--
+    numberOfRows--    // need to do one above the obstacle row
     removeTetromino()
     currentPosition += (width * numberOfRows)
     playerScore += numberOfRows
@@ -578,5 +577,8 @@ function init() {
   document.addEventListener('keyup', handleKeysUp, updateScores())
   document.addEventListener('keydown', handleKeysDown)
   
+
+  createGrid()
+  createMiniGrid()
 }
 window.addEventListener('DOMContentLoaded', init)
