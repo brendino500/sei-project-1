@@ -112,7 +112,7 @@ body {
 
 .mini-grid div.iTetromino, .grid div.iTetromino {
   background-color: #E0BE40;
-  background: radial-gradient(circle, rgba(224,190,64,1) 0%, rgba(223,183,36,1) 100%);
+  background: radial-gradient(circle, rgba(233,203,90,1) 0%, rgba(221,174,0,1) 100%);
 
 } 
 
