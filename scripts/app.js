@@ -116,6 +116,7 @@ function init() {
   // descendTetromino() - tetromino moves down the grid   STARTS GAME
   // displayNextTetromino() - shows next tetromino on grid
   // getRandomTetromino() - gets random tetromino
+  // removeMiniTetromino() - remove tetromino from mini grid
   // updateCurrentTetromino() - changes current tetromino
   // checkBottomRow() - check for bottom row
   // checkObstacle() - check if next row has class 'fixed'
@@ -191,15 +192,18 @@ function init() {
     })
   }
 
-  // SHOWS UP NEXT TETROMINO ********************************************************************
-  function displayNextTetromino() {
+  function removeMiniTetromino() {
     miniCells.forEach(value => {
       value.classList.remove('fixed-tetromino', 'iTetromino', 'lTetromino', 'oTetromino', 'zTetromino', 'jTetromino', 'sTetromino', 'tTetromino')
     })
+  }
+
+  // SHOWS UP NEXT TETROMINO ********************************************************************
+  function displayNextTetromino() {
+    removeMiniTetromino()
     nextTetromino['miniGrid'].forEach(value => {
       miniCells[value].classList.add(nextTetromino.name)
     })
-
   }
 
 
@@ -345,6 +349,7 @@ function init() {
     currentTetromino = null
     updateScores()  // DOM
     audio.pause()
+    removeMiniTetromino()
   }
 
   // GAME KEYS  **********************************************************************************************************************
