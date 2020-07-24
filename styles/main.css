@@ -98,13 +98,11 @@ body {
 }
 
 .instructions-text {
-  padding-top: 10%;
 }
 
 
 .instructions-and-mini-grid {
   flex-grow: 1;
-  padding-top: 5%;
   text-align: center;
   margin: 10px;
 }

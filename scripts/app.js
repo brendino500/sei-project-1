@@ -8,8 +8,9 @@ function init() {
   // * DOM ELEMENTS *************************************************************************************************************
 
   const grid = document.querySelector('.grid')
-  const miniGrid = document.querySelector('.mini-grid')
   const cells = []
+  const miniGrid = document.querySelector('.mini-grid')
+  const miniCells = []
   const highestScoreResults = document.querySelector('#highest-score')
   const playerCurrentScore = document.querySelector('#player-current-score')
   const playerCurrentLevel = document.querySelector('#current-level')
@@ -133,7 +134,7 @@ function init() {
 
 
   // CREATE GRID **************************************************************************************************************************
-  function createGrid() {  // <-- creating cells
+  function createGrid() {
     for (let i = 0; i < numberOfCells; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
@@ -147,11 +148,12 @@ function init() {
     for (let i = 0; i < numberOfCellsMini; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
-      // cell.innerHTML = i     // label the cells
+      cell.innerHTML = i     // label the cells
       miniGrid.appendChild(cell)
     }
   }
   createMiniGrid()
+
 
   //  GAME FUNCTIONS    *******************************************************************************************************
   // GENERATE RANDOM TETRIMINO 
