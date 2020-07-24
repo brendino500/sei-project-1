@@ -414,7 +414,7 @@ function init() {
   } 
 
   function dropDaBeatz() {
-    audio.src = './music/Tetris-Latin-Jazz.wav'
+    // audio.src = './music/Tetris-Latin-Jazz.wav'
     audio.loop = true
     audio.play()
   }
