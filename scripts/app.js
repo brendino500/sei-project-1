@@ -70,7 +70,7 @@ function init() {
     deg90: [2, 11, 12, 21],
     deg180: [0, 1, 11, 12],
     deg270: [2, 11, 12, 21],
-    miniGrid: [5, 6, 9, 10]
+    miniGrid: [1, 2, 6, 7]
   }
 
   const jTetromino = { 
@@ -79,7 +79,7 @@ function init() {
     deg90: [1, 2, 11, 21],
     deg180: [10, 11, 12, 22],
     deg270: [1, 11, 21, 20],
-    miniGrid: [2, 6, 9, 10]
+    miniGrid: [1, 5, 6, 7]
   }
 
   const lTetromino = {      
