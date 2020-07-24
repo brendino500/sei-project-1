@@ -54,6 +54,25 @@ body {
   /* background: moccasin; */
 } 
 
+.mini-grid-wrapper {
+  height: 20vh;
+  background-color: hotpink;
+  display: flex;
+}
+
+.mini-grid {
+  background-color: wheat;
+  display: flex;
+  height: 50px;
+  width: 50px;
+  flex-wrap: wrap;
+}
+
+.mini-grid div {
+  border: 1px solid red
+  background: aqua
+}
+
 .content {
   /* background-color: indianred; */
   justify-content: space-between;

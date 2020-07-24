@@ -8,6 +8,7 @@ function init() {
   // * DOM ELEMENTS *************************************************************************************************************
 
   const grid = document.querySelector('.grid')
+  const miniGrid = document.querySelector('.mini-grid')
   const cells = []
   const highestScoreResults = document.querySelector('#highest-score')
   const playerCurrentScore = document.querySelector('#player-current-score')
@@ -15,9 +16,15 @@ function init() {
   const audio = document.querySelector('#tetris-latin-jazz')
 
   // * GRID VARIABLES *********************************************************************************************************************
+  //MAIN GRID
   const width = 10
   const height = 22
   const numberOfCells = width * height
+
+  // MINI GRID
+  const miniWidth = 4
+  const miniHeight = 4
+  const numberOfCellsMini = miniWidth * miniHeight
 
   // * TETRIMINOS SHAPE  ********************************************************************************************************************
   const iTetromino = {
@@ -134,6 +141,16 @@ function init() {
     }
   }
   createGrid()
+
+  function createMiniGrid() {
+    for (let i = 0; i < numberOfCellsMini; i++) {
+      const cell = document.createElement('div')
+      cells.push(cell)
+      cell.innerHTML = i     // label the cells
+      miniGrid.appendChild(cell)
+    }
+  }
+  createMiniGrid()
 
   //  GAME FUNCTIONS    *******************************************************************************************************
   // GENERATE RANDOM TETRIMINO 
