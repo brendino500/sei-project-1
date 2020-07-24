@@ -44,15 +44,13 @@ body {
   justify-content: center;
   height: 300px;
   width: 300px;
-  /* flex-grow: 1; */
   margin: 10px;
 }
 
 .grid div {
   border: 1px solid lightgrey;
   height: 30px;
-  width: 30px;
-  /* background: moccasin; */
+  width: 30px; 
 } 
 
 .mini-grid-wrapper {

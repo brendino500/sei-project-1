@@ -1,9 +1,3 @@
-// TODO ***************************************************************************************
-// TODO 
-// TODO   STYLING
-// TODO 
-// TODO *****************************************************************************************
-
 function init() {
   // * DOM ELEMENTS *************************************************************************************************************
 
@@ -479,7 +473,6 @@ function init() {
     playerCurrentScore.innerHTML = playerScore 
     playerCurrentLevel.innerHTML = currentLevel
     highestScoreResults.innerHTML = highScore === null ? 0 : highScore
-    console.log(`speed ${dropSpeed}`)
   }
 
   
@@ -505,11 +498,11 @@ function init() {
     } else if (currentLevel === 5) {
       dropSpeed = 400
     } else if (currentLevel === 6) {
-      dropSpeed = 300
+      dropSpeed = 350
     } else if (currentLevel === 7) {
-      dropSpeed = 200
+      dropSpeed = 300
     } else {
-      dropSpeed = 160
+      dropSpeed = 250
     }
     if (dropSpeed !== currentSpeed) {
       clearInterval(timerId)
