@@ -104,6 +104,7 @@ function init() {
   // displayTetromino() - gets tetromino on grid
   // removeTetromino() - removes tetromino
   // descendTetromino() - tetromino moves down the grid   STARTS GAME
+  // displayNextTetromino() - shows next tetromino on grid
   // getRandomTetromino() - gets random tetromino
   // checkBottomRow() - check for bottom row
   // checkObstacle() - check if next row has class 'fixed'
@@ -294,6 +295,11 @@ function init() {
     isRowFull()
     changeLevel()
     changeSpeed()
+  }
+
+  // SHOWS UP NEXT TETROMINO ********************************************************************
+  function displayNextTetromino() {
+
   }
 
   // END GAME FUNCTIONS *******************************************************************************************************
