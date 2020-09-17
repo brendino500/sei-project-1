@@ -10,7 +10,7 @@ function init() {
   const playerCurrentLevel = document.querySelector('#current-level')
   const audio = document.querySelector('#tetris-latin-jazz')
 
-  // * GRID VARIABLES *********************************************************************************************************************
+  // * GRID VARIABLES ****************************************************************************************************************
   //MAIN GRID
   const width = 10
   const height = 22
@@ -21,7 +21,7 @@ function init() {
   const miniHeight = 4
   const numberOfCellsMini = miniWidth * miniHeight
 
-  // * TETRIMINOS SHAPE  ********************************************************************************************************************
+  // * TETRIMINOS SHAPE  *****************************************************************************************************************
   const iTetromino = {
     name: 'iTetromino', 
     deg0: [0, 1, 2, 3],
@@ -100,45 +100,9 @@ function init() {
   let isGamePlaying = false
   let nextTetromino = getRandomTetromino()
 
-
   // * FUNCTIONS  ********************************************************************************************************************
-  // * FUNCTION NAMES SO FAR AND DESCRIPTION OF WHAT THEY DO
 
-  // createGrid() - Creates tetris grid
-  // displayTetromino() - gets tetromino on grid
-  // removeTetromino() - removes tetromino
-  // descendTetromino() - tetromino moves down the grid   STARTS GAME
-  // displayNextTetromino() - shows next tetromino on grid
-  // getRandomTetromino() - gets random tetromino
-  // removeMiniTetromino() - remove tetromino from mini grid
-  // updateCurrentTetromino() - changes current tetromino
-  // checkBottomRow() - check for bottom row
-  // checkObstacle() - check if next row has class 'fixed'
-  // checkRight() - check if tetromino can move right
-  // checkLeft() - check if tetromino can move left
-  // isRowFull() - 
-  // clearRow() -
-  // shiftGridDown() - moves the remaining tetrominos down the grid
-  // moveLeft() - 
-  // moveRight() - 
-  // moveDown() - slow down
-  // fastDown() - appears right at bottom of grid where it will fit
-  // rotate() - rotate tetromino clockwise 90 deg
-  // spacebar() - fast down 
-  // enterBtn() - starts game from keyboard - player input 
-  // handleKeysUp() - specifies player keyboard events
-  // handleKeysDown() - event to detect key HELD down
-  // updateHighScore() - updates high score when PLAYER LOSES
-  // changeLevel() - checks if level needs to change
-  // changeSpeed() - checks if speed needs to increase
-  // startTimer() - timer for function and speed. 
-  // gameOver()
-  // dropDaBeatz() - plays music
-  // shh() - stops music
-  // updateScores() - DOM scores / Local storage
-
-
-  // CREATE GRID **************************************************************************************************************************
+  // CREATE GRID *********************************************************************************************************************
   function createGrid() {
     for (let i = 0; i < numberOfCells; i++) {
       const cell = document.createElement('div')
@@ -475,13 +439,13 @@ function init() {
   }
 
   
-  // * SCORING LOGIC **************************************************************************************************************************
-  // CHANGING LEVELS   ******************************************************************************************************
+  // * SCORING LOGIC *******************************************************************************************
+  // CHANGING LEVELS   *********************************************************************************************
   function changeLevel() {
     currentLevel = Math.floor(linesCleared / 5)
   }
 
-  // CHANGE OF SPEED FOR EACH LEVEL **********************************************************************************************
+  // CHANGE OF SPEED FOR EACH LEVEL *******************************************************************************************
   function changeSpeed() {
     const currentSpeed = dropSpeed
     if (currentLevel === 0) {
@@ -509,7 +473,7 @@ function init() {
     }
   }
 
-  // POINT SCORING    **********************************************************************************************************************************************
+  // POINT SCORING    **********************************************************************************************
   function rowPoints(multipleLines) {
     if (currentLevel <= 1) {
       if (multipleLines === 1) {
@@ -565,7 +529,7 @@ function init() {
     updateScores()
   }
 
-  // STORING HIGH SCORE *********************************************************************************************************************
+  // STORING HIGH SCORE ********************************************************************************************
   // * LOCAL STORAGE
   function updateHighScore() {
     if (playerScore > highScore) {
@@ -573,7 +537,7 @@ function init() {
     } 
   }
 
-  // * EVENT LISTENER  *******************************************************************************************************************************
+  // * EVENT LISTENER  ***********************************************************************************************
   document.addEventListener('keyup', handleKeysUp, updateScores())
   document.addEventListener('keydown', handleKeysDown)
   
