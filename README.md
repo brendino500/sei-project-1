@@ -8,7 +8,7 @@ This was my first project at General Assembly Software Engineering Immersive cou
 
 Tetris is a tile matching videogame made in 1984 by Alexey Pajitov, a Russian software engineer. The aim of the game is to clear as many full rows from a grid as possible by randomly selected falling tetrominos. As the player increases the score, the speed of the falling tetromino increases therefore making the game gradually harder. 
 
-## Timeframe
+## :mantelpiece_clock: Timeframe
 7 days
 ​
 ## Technologies Used
@@ -20,7 +20,7 @@ Tetris is a tile matching videogame made in 1984 by Alexey Pajitov, a Russian so
 
 ---
 
-## Technical Requirements
+## :technologist: Technical Requirements
 * The game should stop if a Tetrimino fills the highest row of the game board
 * The player should be able to rotate each Tetrimino about its own axis
 * If a line is completed it should be removed and the pieces above should take its place
@@ -33,12 +33,18 @@ Tetris is a tile matching videogame made in 1984 by Alexey Pajitov, a Russian so
 
 ---
 
-## Game Instructions 
+## :joystick: Game Instructions 
 
+* :arrow_up: Rotate 90° clockwise
+* :arrow_right: Move right
+* :arrow_left: Move left
+* :arrow_down: Move down one square
+* **space bar** for a fast down
+* **M** key to mute the music
 
 ---
 
-## Challenges
+## :muscle: Challenges
 
 
 
