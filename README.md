@@ -53,7 +53,7 @@ Tetris is a tile matching videogame made in 1984 by Alexey Pajitov, a Russian so
 ## :muscle: Challenges
 
 
-* I also wanted to recreate the **mini grid featuring the next random tetromino** that will be played. The challenge was to place that tetromino in a separate grid and use that shape to add to the main playing grid.
+* I wanted to recreate the **mini grid featuring the next random tetromino** that will be played. The challenge was to place that tetromino in a separate grid and use that shape to add to the main playing grid.
 * I also wanted the use the **fast down** functionality which the original game has as well. 
 
 
