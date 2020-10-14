@@ -5,7 +5,9 @@
 
 ## :rocket: Overview
 
-​
+Play my game [here](https://brendino500.github.io/sei-project-1/)
+​<br />
+​<br />
 This was my first project at General Assembly Software Engineering Immersive course. This was a project created from vanilla JavaScript and it was the first project I had created and deployed. I chose Tetris as it was a game I loved playing as a child. **I also wanted to develop a game which had challenging game logic.**
 
 Tetris is a tile matching videogame made in 1984 by Alexey Pajitov, a Russian software engineer. The aim of the game is to clear as many full rows from a grid as possible by randomly selected falling tetrominos. As the player increases the score, the speed of the falling tetromino increases therefore making the game gradually harder.
