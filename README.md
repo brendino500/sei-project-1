@@ -5,7 +5,7 @@
 
 ## :rocket: Overview
 
-Play my game [here](https://brendino500.github.io/sei-project-1/)
+Play my game [here](https://sei-project1-tetris.netlify.app/)
 ​<br />
 ​<br />
 This was my first project at General Assembly Software Engineering Immersive course. This was a project created from vanilla JavaScript and it was the first project I had created and deployed. I chose Tetris as it was a game I loved playing as a child. **I also wanted to develop a game which had challenging game logic.**
